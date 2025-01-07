@@ -2,7 +2,9 @@
 
 ## Database Schema Design
 
-`<https://dbdiagram.io/d/EquiTrack-Diagram-67214afcb4216d5a28a5ac50>`
+![db-schema]
+
+[db-schema]: ./images/EquiTrack-Diagram.png
 
 ## API Documentation
 
