@@ -1,8 +1,8 @@
-# `<EliteBnB>`
+# `<EquiTrack>`
 
 ## Database Schema Design
 
-`<https://dbdiagram.io/d/BnB-Diagram-67228f2b2c337ee119ef742e>`
+`<https://dbdiagram.io/d/EquiTrack-Diagram-67214afcb4216d5a28a5ac50>`
 
 ## API Documentation
 
@@ -224,16 +224,16 @@ user's information.
     }
     ```
 
-## SPOTS
+## INVESTMENTS
 
-### Get all Spots
+### Get all Investments
 
-Returns all the spots.
+Returns all the investments.
 
 * Require Authentication: false
 * Request
   * Method: GET
-  * Route path: /spots
+  * Route path: /investments
   * Body: none
 
 * Successful Response
@@ -244,36 +244,32 @@ Returns all the spots.
 
     ```json
     {
-      "Spots": [
+      "Investments": [
         {
           "id": 1,
           "ownerId": 1,
-          "address": "123 Disney Lane",
-          "city": "San Francisco",
-          "state": "California",
-          "country": "United States of America",
-          "lat": 37.7645358,
-          "lng": -122.4730327,
-          "name": "App Academy",
-          "description": "Place where web developers are created",
-          "price": 123,
+          "investment_name": "new property",
+          "type": "Real Estate",
+          "amount": 200000,
+          "ROR": 1.5,
+          "length": "24 months",
+          "risk_percentage": 10.2,
+          "projection": 10511,
           "createdAt": "2021-11-19 20:39:36",
-          "updatedAt": "2021-11-19 20:39:36",
-          "avgRating": 4.5,
-          "previewImage": "image url"
+          "updatedAt": "2021-11-19 20:39:36"
         }
       ]
     }
     ```
 
-### Get all Spots owned by the Current User
+### Get all Investments owned by the Current User
 
-Returns all the spots owned (created) by the current user.
+Returns all the investments owned (created) by the current user.
 
 * Require Authentication: true
 * Request
   * Method: GET
-  * Route path: /users/:userId/spots
+  * Route path: /users/:userId/investments
   * Body: none
 
 * Successful Response
@@ -284,36 +280,32 @@ Returns all the spots owned (created) by the current user.
 
     ```json
     {
-      "Spots": [
-        {
+      "Investments": [
+       {
           "id": 1,
           "ownerId": 1,
-          "address": "123 Disney Lane",
-          "city": "San Francisco",
-          "state": "California",
-          "country": "United States of America",
-          "lat": 37.7645358,
-          "lng": -122.4730327,
-          "name": "App Academy",
-          "description": "Place where web developers are created",
-          "price": 123,
+          "investment_name": "new property",
+          "type": "Real Estate",
+          "amount": 200000,
+          "ROR": "1.5%",
+          "length": "24 months",
+          "risk_percentage": 10.2,
+          "projection": 10511,
           "createdAt": "2021-11-19 20:39:36",
-          "updatedAt": "2021-11-19 20:39:36",
-          "avgRating": 4.5,
-          "previewImage": "image url"
+          "updatedAt": "2021-11-19 20:39:36"
         }
       ]
     }
     ```
 
-### Get details of a Spot from an id
+### Get details of an Investment from an id
 
-Returns the details of a spot specified by its id.
+Returns the details of an investment specified by its id.
 
 * Require Authentication: false
 * Request
   * Method: GET
-  * Route path: /spots/:spotId
+  * Route path: /investments/:investmentId
   * Body: none
 
 * Successful Response
@@ -322,44 +314,24 @@ Returns the details of a spot specified by its id.
     * Content-Type: application/json
   * Body:
 
-    ```json
-    {
-      "id": 1,
-      "ownerId": 1,
-      "address": "123 Disney Lane",
-      "city": "San Francisco",
-      "state": "California",
-      "country": "United States of America",
-      "lat": 37.7645358,
-      "lng": -122.4730327,
-      "name": "App Academy",
-      "description": "Place where web developers are created",
-      "price": 123,
-      "createdAt": "2021-11-19 20:39:36",
-      "updatedAt": "2021-11-19 20:39:36" ,
-      "numReviews": 5,
-      "avgStarRating": 4.5,
-      "SpotImages": [
+      ```json
         {
           "id": 1,
-          "url": "image url",
-          "preview": true
-        },
-        {
-          "id": 2,
-          "url": "image url",
-          "preview": false
+          "ownerId": 1,
+          "investment_name": "new property",
+          "type": "Real Estate",
+          "amount": 200000,
+          "ROR": "1.5%",
+          "length": "24 months",
+          "risk_percentage": 10.2,
+          "projection": 10511,
+          "createdAt": "2021-11-19 20:39:36",
+          "updatedAt": "2021-11-19 20:39:36"
         }
-      ],
-      "Owner": {
-        "id": 1,
-        "firstName": "John",
-        "lastName": "Smith"
-      }
-    }
-    ```
+      ```
+     
 
-* Error response: Couldn't find a Spot with the specified id
+* Error response: Couldn't find an Investment with the specified id
   * Status Code: 404
   * Headers:
     * Content-Type: application/json
@@ -367,34 +339,29 @@ Returns the details of a spot specified by its id.
 
     ```json
     {
-      "message": "Spot couldn't be found"
+      "message": "Investment couldn't be found"
     }
     ```
 
-### Create a Spot
+### Create an Investment
 
-Creates and returns a new spot.
+Creates and returns a new investment.
 
 * Require Authentication: true
 * Request
   * Method: POST
-  * Route path: /spots/create
+  * Route path: /investments/create
   * Headers:
     * Content-Type: application/json
   * Body:
 
     ```json
-    {
-      "address": "123 Disney Lane",
-      "city": "San Francisco",
-      "state": "California",
-      "country": "United States of America",
-      "lat": 37.7645358,
-      "lng": -122.4730327,
-      "name": "App Academy",
-      "description": "Place where web developers are created",
-      "price": 123
-    }
+      {
+        "investment_name": "new property",
+        "type": "Real Estate",
+        "amount": 200000,
+        "length": "24 months"
+      }
     ```
 
 * Successful Response
@@ -404,18 +371,78 @@ Creates and returns a new spot.
   * Body:
 
     ```json
+      {
+        "id": 1,
+        "ownerId": 1,
+        "investment_name": "new property",
+        "type": "Real Estate",
+        "amount": 200000,
+        "ROR": "1.5%",
+        "length": "24 months",
+        "risk_percentage": 10.2,
+        "projection": 10511,
+        "createdAt": "2021-11-19 20:39:36",
+        "updatedAt": "2021-11-19 20:39:36"
+      }
+    ```
+
+* Error Response: Body validation errors
+  * Status Code: 400
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Bad Request", // (or "Validation error" if generated by Sequelize),
+      "errors": {
+        "investment_name": "Investment name is required",
+        "type": "Investment type is required",
+        "amount": "Investment amount is required",
+        "length": "Investment length is required"
+      }
+    }
+    ```
+
+### Edit an Investment
+
+Updates and returns an existing Investment.
+
+* Require Authentication: true
+* Require proper authorization: Investment must belong to the current user
+* Request
+  * Method: PUT
+  * Route path: users/:userId/investments/:investmentId/edit
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "investment_name": "new property",
+      "type": "Real Estate",
+      "amount": 200000,
+      "length": "24 months"
+    }
+    ```
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
     {
       "id": 1,
       "ownerId": 1,
-      "address": "123 Disney Lane",
-      "city": "San Francisco",
-      "state": "California",
-      "country": "United States of America",
-      "lat": 37.7645358,
-      "lng": -122.4730327,
-      "name": "App Academy",
-      "description": "Place where web developers are created",
-      "price": 123,
+      "investment_name": "new property",
+      "type": "Real Estate",
+      "amount": 200000,
+      "ROR": "1.5%",
+      "length": "24 months",
+      "risk_percentage": 10.2,
+      "projection": 10511,
       "createdAt": "2021-11-19 20:39:36",
       "updatedAt": "2021-11-19 20:39:36"
     }
@@ -431,54 +458,15 @@ Creates and returns a new spot.
     {
       "message": "Bad Request", // (or "Validation error" if generated by Sequelize),
       "errors": {
-        "address": "Street address is required",
-        "city": "City is required",
-        "state": "State is required",
-        "country": "Country is required",
-        "lat": "Latitude must be within -90 and 90",
-        "lng": "Longitude must be within -180 and 180",
-        "name": "Name must be less than 50 characters",
-        "description": "Description is required",
-        "price": "Price per day must be a positive number"
+        "investment_name": "Investment name is required",
+        "type": "Investment type is required",
+        "amount": "Investment amount is required",
+        "length": "Investment length is required"
       }
     }
     ```
 
-### Add an Image to a Spot based on the Spot's id
-
-Create and return a new image for a spot specified by id.
-
-* Require Authentication: true
-* Require proper authorization: Spot must belong to the current user
-* Request
-  * Method: PATCH
-  * Route path: /spots/:spotId/addImg
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "url": "image url",
-      "preview": true
-    }
-    ```
-
-* Successful Response
-  * Status Code: 201
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "id": 1,
-      "url": "image url",
-      "preview": true
-    }
-    ```
-
-* Error response: Couldn't find a Spot with the specified id
+* Error response: Couldn't find an Investment with the specified id
   * Status Code: 404
   * Headers:
     * Content-Type: application/json
@@ -486,105 +474,19 @@ Create and return a new image for a spot specified by id.
 
     ```json
     {
-      "message": "Spot couldn't be found"
+      "message": "Investment couldn't be found"
     }
     ```
 
-### Edit a Spot
-
-Updates and returns an existing spot.
-
-* Require Authentication: true
-* Require proper authorization: Spot must belong to the current user
-* Request
-  * Method: PUT
-  * Route path: users/:userId/spots/:spotId/edit
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "address": "123 Disney Lane",
-      "city": "San Francisco",
-      "state": "California",
-      "country": "United States of America",
-      "lat": 37.7645358,
-      "lng": -122.4730327,
-      "name": "App Academy",
-      "description": "Place where web developers are created",
-      "price": 123
-    }
-    ```
-
-* Successful Response
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "id": 1,
-      "ownerId": 1,
-      "address": "123 Disney Lane",
-      "city": "San Francisco",
-      "state": "California",
-      "country": "United States of America",
-      "lat": 37.7645358,
-      "lng": -122.4730327,
-      "name": "App Academy",
-      "description": "Place where web developers are created",
-      "price": 123,
-      "createdAt": "2021-11-19 20:39:36",
-      "updatedAt": "2021-11-20 10:06:40"
-    }
-    ```
-
-* Error Response: Body validation errors
-  * Status Code: 400
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "message": "Bad Request", // (or "Validation error" if generated by Sequelize),
-      "errors": {
-        "address": "Street address is required",
-        "city": "City is required",
-        "state": "State is required",
-        "country": "Country is required",
-        "lat": "Latitude must be within -90 and 90",
-        "lng": "Longitude must be within -180 and 180",
-        "name": "Name must be less than 50 characters",
-        "description": "Description is required",
-        "price": "Price per day must be a positive number"
-      }
-    }
-    ```
-
-* Error response: Couldn't find a Spot with the specified id
-  * Status Code: 404
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "message": "Spot couldn't be found"
-    }
-    ```
-
-### Delete a Spot
+### Delete an Investment
 
 Deletes an existing spot.
 
 * Require Authentication: true
-* Require proper authorization: Spot must belong to the current user
+* Require proper authorization: Investment must belong to the current user
 * Request
   * Method: DELETE
-  * Route path: /users/:userId/spots/:spotId/delete
+  * Route path: /investments/:investmentId/delete
   * Body: none
 
 * Successful Response
@@ -599,7 +501,7 @@ Deletes an existing spot.
     }
     ```
 
-* Error response: Couldn't find a Spot with the specified id
+* Error response: Couldn't find an Investment with the specified id
   * Status Code: 404
   * Headers:
     * Content-Type: application/json
@@ -607,20 +509,20 @@ Deletes an existing spot.
 
     ```json
     {
-      "message": "Spot couldn't be found"
+      "message": "Investment couldn't be found"
     }
     ```
 
-## REVIEWS
+## ASSETS
 
-### Get all Reviews of the Current User
+### Get all Assets of the Current User
 
-Returns all the reviews written by the current user.
+Returns all the assets written by the current user.
 
 * Require Authentication: true
 * Request
   * Method: GET
-  * Route path: /users/:userId/reviews
+  * Route path: /users/:userId/assets
   * Body: none
 
 * Successful Response
@@ -631,796 +533,63 @@ Returns all the reviews written by the current user.
 
     ```json
     {
-      "Reviews": [
-        {
-          "id": 1,
-          "userId": 1,
-          "spotId": 1,
-          "review": "This was an awesome spot!",
-          "stars": 5,
-          "createdAt": "2021-11-19 20:39:36",
-          "updatedAt": "2021-11-19 20:39:36" ,
-          "User": {
-            "id": 1,
-            "firstName": "John",
-            "lastName": "Smith"
-          },
-          "Spot": {
-            "id": 1,
-            "ownerId": 1,
-            "address": "123 Disney Lane",
-            "city": "San Francisco",
-            "state": "California",
-            "country": "United States of America",
-            "lat": 37.7645358,
-            "lng": -122.4730327,
-            "name": "App Academy",
-            "price": 123,
-            "previewImage": "image url"
-          },
-          "ReviewImages": [
-            {
-              "id": 1,
-              "url": "image url"
-            }
-          ]
-        }
-      ]
-    }
-    ```
-
-### Get all Reviews by a Spot's id
-
-Returns all the reviews that belong to a spot specified by id.
-
-* Require Authentication: false
-* Request
-  * Method: GET
-  * Route path: /spots/:spotId/reviews
-  * Body: none
-
-* Successful Response
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "Reviews": [
-        {
-          "id": 1,
-          "userId": 1,
-          "spotId": 1,
-          "review": "This was an awesome spot!",
-          "stars": 5,
-          "createdAt": "2021-11-19 20:39:36",
-          "updatedAt": "2021-11-19 20:39:36" ,
-          "User": {
-            "id": 1,
-            "firstName": "John",
-            "lastName": "Smith"
-          },
-          "ReviewImages": [
-            {
-              "id": 1,
-              "url": "image url"
-            }
-          ],
-        }
-      ]
-    }
-    ```
-
-* Error response: Couldn't find a Spot with the specified id
-  * Status Code: 404
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "message": "Spot couldn't be found"
-    }
-    ```
-
-### Create a Review for a Spot based on the Spot's id
-
-Create and return a new review for a spot specified by id.
-
-* Require Authentication: true
-* Request
-  * Method: POST
-  * Route path: /spots/:spotId/review/create
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "review": "This was an awesome spot!",
-      "stars": 5,
-    }
-    ```
-
-* Successful Response
-  * Status Code: 201
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "id": 1,
-      "userId": 1,
-      "spotId": 1,
-      "review": "This was an awesome spot!",
-      "stars": 5,
-      "createdAt": "2021-11-19 20:39:36",
-      "updatedAt": "2021-11-19 20:39:36"
-    }
-    ```
-
-* Error Response: Body validation errors
-  * Status Code: 400
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "message": "Bad Request", // (or "Validation error" if generated by Sequelize),
-      "errors": {
-        "review": "Review text is required",
-        "stars": "Stars must be an integer from 1 to 5",
-      }
-    }
-    ```
-
-* Error response: Couldn't find a Spot with the specified id
-  * Status Code: 404
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "message": "Spot couldn't be found"
-    }
-    ```
-
-* Error response: Review from the current user already exists for the Spot
-  * Status Code: 500
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "message": "User already has a review for this spot"
-    }
-    ```
-
-### Add an Image to a Review based on the Review's id
-
-Create and return a new image for a review specified by id.
-
-* Require Authentication: true
-* Require proper authorization: Review must belong to the current user
-* Request
-  * Method: POST
-  * Route path:/reviews/:reviewId/addImg
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "url": "image url"
-    }
-    ```
-
-* Successful Response
-  * Status Code: 201
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "id": 1,
-      "url": "image url"
-    }
-    ```
-
-* Error response: Couldn't find a Review with the specified id
-  * Status Code: 404
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "message": "Review couldn't be found"
-    }
-    ```
-
-* Error response: Cannot add any more images because there is a maximum of 10
-  images per resource
-  * Status Code: 403
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "message": "Maximum number of images for this resource was reached"
-    }
-    ```
-
-### Edit a Review
-
-Update and return an existing review.
-
-* Require Authentication: true
-* Require proper authorization: Review must belong to the current user
-* Request
-  * Method: PATCH
-  * Route path: /reviews/:reviewId/edit
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "review": "This was an awesome spot!",
-      "stars": 5,
-    }
-    ```
-
-* Successful Response
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "id": 1,
-      "userId": 1,
-      "spotId": 1,
-      "review": "This was an awesome spot!",
-      "stars": 5,
-      "createdAt": "2021-11-19 20:39:36",
-      "updatedAt": "2021-11-20 10:06:40"
-    }
-    ```
-
-* Error Response: Body validation errors
-  * Status Code: 400
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "message": "Bad Request", // (or "Validation error" if generated by Sequelize),
-      "errors": {
-        "review": "Review text is required",
-        "stars": "Stars must be an integer from 1 to 5",
-      }
-    }
-    ```
-
-* Error response: Couldn't find a Review with the specified id
-  * Status Code: 404
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "message": "Review couldn't be found"
-    }
-    ```
-
-### Delete a Review
-
-Delete an existing review.
-
-* Require Authentication: true
-* Require proper authorization: Review must belong to the current user
-* Request
-  * Method: DELETE
-  * Route path: /users/:userId/reviews/:reviewId/delete
-  * Body: none
-
-* Successful Response
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "message": "Successfully deleted"
-    }
-    ```
-
-* Error response: Couldn't find a Review with the specified id
-  * Status Code: 404
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "message": "Review couldn't be found"
-    }
-    ```
-
-## BOOKINGS
-
-### Get all of the Current User's Bookings
-
-Return all the bookings that the current user has made.
-
-* Require Authentication: true
-* Request
-  * Method: GET
-  * Route path: /users/:userId/bookings
-  * Body: none
-
-* Successful Response
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "Bookings": [
-        {
-          "id": 1,
-          "spotId": 1,
-          "Spot": {
-            "id": 1,
-            "ownerId": 1,
-            "address": "123 Disney Lane",
-            "city": "San Francisco",
-            "state": "California",
-            "country": "United States of America",
-            "lat": 37.7645358,
-            "lng": -122.4730327,
-            "name": "App Academy",
-            "price": 123,
-            "previewImage": "image url"
-          },
-          "userId": 2,
-          "startDate": "2021-11-19",
-          "endDate": "2021-11-20",
-          "createdAt": "2021-11-19 20:39:36",
-          "updatedAt": "2021-11-19 20:39:36"
-        }
-      ]
-    }
-    ```
-
-### Get all Bookings for a Spot based on the Spot's id
-
-Return all the bookings for a spot specified by id.
-
-* Require Authentication: true
-* Request
-  * Method: GET
-  * Route path: /spots/:spotId/bookings
-  * Body: none
-
-* Successful Response: If you ARE NOT the owner of the spot.
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "Bookings": [
-        {
-          "spotId": 1,
-          "startDate": "2021-11-19",
-          "endDate": "2021-11-20"
-        }
-      ]
-    }
-    ```
-
-* Successful Response: If you ARE the owner of the spot.
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "Bookings": [
-        {
-          "User": {
-            "id": 2,
-            "firstName": "John",
-            "lastName": "Smith"
-          },
-          "id": 1,
-          "spotId": 1,
-          "userId": 2,
-          "startDate": "2021-11-19",
-          "endDate": "2021-11-20",
-          "createdAt": "2021-11-19 20:39:36",
-          "updatedAt": "2021-11-19 20:39:36"
-        }
-      ]
-    }
-    ```
-
-* Error response: Couldn't find a Spot with the specified id
-  * Status Code: 404
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "message": "Spot couldn't be found"
-    }
-    ```
-
-### Create a Booking from a Spot based on the Spot's id
-
-Create and return a new booking from a spot specified by id.
-
-* Require Authentication: true
-* Require proper authorization: Spot must NOT belong to the current user
-* Request
-  * Method: POST
-  * Route path: /spots/:spotId/bookings/create
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "startDate": "2021-11-19",
-      "endDate": "2021-11-20"
-    }
-    ```
-
-* Successful Response
-  * Status Code: 201
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "id": 1,
-      "spotId": 1,
-      "userId": 2,
-      "startDate": "2021-11-19",
-      "endDate": "2021-11-20",
-      "createdAt": "2021-11-19 20:39:36",
-      "updatedAt": "2021-11-19 20:39:36"
-    }
-    ```
-
-* Error response: Body validation errors
-  * Status Code: 400
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "message": "Bad Request", // (or "Validation error" if generated by Sequelize),
-      "errors": {
-        "startDate": "startDate cannot be in the past",
-        "endDate": "endDate cannot be on or before startDate"
-      }
-    }
-    ```
-
-* Error response: Couldn't find a Spot with the specified id
-  * Status Code: 404
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "message": "Spot couldn't be found"
-    }
-    ```
-
-* Error response: Booking conflict
-  * Status Code: 403
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "message": "Sorry, this spot is already booked for the specified dates",
-      "errors": {
-        "startDate": "Start date conflicts with an existing booking",
-        "endDate": "End date conflicts with an existing booking"
-      }
-    }
-    ```
-
-### Edit a Booking
-
-Update and return an existing booking.
-
-* Require Authentication: true
-* Require proper authorization: Booking must belong to the current user
-* Request
-  * Method: PATCH
-  * Route path: /bookings/:bookingId/edit
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "startDate": "2021-11-19",
-      "endDate": "2021-11-20"
-    }
-    ```
-
-* Successful Response
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "id": 1,
-      "spotId": 1,
-      "userId": 2,
-      "startDate": "2021-11-19",
-      "endDate": "2021-11-20",
-      "createdAt": "2021-11-19 20:39:36",
-      "updatedAt": "2021-11-20 10:06:40"
-    }
-    ```
-
-* Error response: Body validation errors
-  * Status Code: 400
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "message": "Bad Request", // (or "Validation error" if generated by Sequelize),
-      "errors": {
-        "startDate": "startDate cannot be in the past",
-        "endDate": "endDate cannot be on or before startDate"
-      }
-    }
-    ```
-
-* Error response: Couldn't find a Booking with the specified id
-  * Status Code: 404
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "message": "Booking couldn't be found"
-    }
-    ```
-
-* Error response: Can't edit a booking that's past the end date
-  * Status Code: 403
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "message": "Past bookings can't be modified"
-    }
-    ```
-
-* Error response: Booking conflict
-  * Status Code: 403
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "message": "Sorry, this spot is already booked for the specified dates",
-      "errors": {
-        "startDate": "Start date conflicts with an existing booking",
-        "endDate": "End date conflicts with an existing booking"
-      }
-    }
-    ```
-
-### Delete a Booking
-
-Delete an existing booking.
-
-* Require Authentication: true
-* Require proper authorization: Booking must belong to the current user or the
-  Spot must belong to the current user
-* Request
-  * Method: DELETE
-  * Route path: bookings/:bookingId/delete
-  * Body: none
-
-* Successful Response
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "message": "Successfully deleted"
-    }
-    ```
-
-* Error response: Couldn't find a Booking with the specified id
-  * Status Code: 404
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "message": "Booking couldn't be found"
-    }
-    ```
-
-* Error response: Bookings that have been started can't be deleted
-  * Status Code: 403
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "message": "Bookings that have been started can't be deleted"
-    }
-    ```
-
-## IMAGES
-
-### Delete a Spot Image
-
-Delete an existing image for a Spot.
-
-* Require Authentication: true
-* Require proper authorization: Spot must belong to the current user
-* Request
-  * Method: DELETE
-  * Route path: /spots/:spotId/img/:imgId
-  * Body: none
-
-* Successful Response
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "message": "Successfully deleted"
-    }
-    ```
-
-* Error response: Couldn't find a Spot Image with the specified id
-  * Status Code: 404
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "message": "Spot Image couldn't be found"
-    }
-    ```
-
-### Delete a Review Image
-
-Delete an existing image for a Review.
-
-* Require Authentication: true
-* Require proper authorization: Review must belong to the current user
-* Request
-  * Method: DELETE
-  * Route path: /reviews/:reviewId/img/:imgId
-  * Body: none
-
-* Successful Response
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "message": "Successfully deleted"
-    }
-    ```
-
-* Error response: Couldn't find a Review Image with the specified id
-  * Status Code: 404
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "message": "Review Image couldn't be found"
-    }
-    ```
-
-## Add Query Filters to Get All Spots
-
-Return spots filtered by query parameters.
-
-* Require Authentication: false
-* Request
-  * Method: GET
-  * Route path: /spots
-  * Query Parameters
-    * page: integer, minimum: 1, default: 1
-    * size: integer, minimum: 1, maximum: 20, default: 20
-    * minLat: decimal, optional
-    * maxLat: decimal, optional
-    * minLng: decimal, optional
-    * maxLng: decimal, optional
-    * minPrice: decimal, optional, minimum: 0
-    * maxPrice: decimal, optional, minimum: 0
-  * Body: none
-
-* Successful Response
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "Spots": [
+      "Assets": [
         {
           "id": 1,
           "ownerId": 1,
-          "address": "123 Disney Lane",
-          "city": "San Francisco",
-          "state": "California",
-          "country": "United States of America",
-          "lat": 37.7645358,
-          "lng": -122.4730327,
-          "name": "App Academy",
-          "description": "Place where web developers are created",
-          "price": 123,
+          "asset_name": "Computer",
+          "type": "Tech",
+          "amount": 200000,
+          "net_assets": 2500,
+          "net_deficiency": 0,
           "createdAt": "2021-11-19 20:39:36",
-          "updatedAt": "2021-11-19 20:39:36",
-          "avgRating": 4.5,
-          "previewImage": "image url"
+          "updatedAt": "2021-11-19 20:39:36"
         }
-      ],
-      "page": 2,
-      "size": 20
+      ]
     }
     ```
 
-* Error Response: Query parameter validation errors
+### Create an Asset for a User based on the User's id
+
+Create and return a new asset for a user specified by id.
+
+* Require Authentication: true
+* Request
+  * Method: POST
+  * Route path: /users/:userId/assets/create
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "asset_name": "Computer",
+      "type": "Tech",
+      "amount": 2000,
+    }
+    ```
+
+* Successful Response
+  * Status Code: 201
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "id": 1,
+      "ownerId": 1,
+      "asset_name": "Computer",
+      "type": "Tech",
+      "amount": 2000,
+      "net_assets": 2500,
+      "net_deficiency": 0,
+      "createdAt": "2021-11-19 20:39:36",
+      "updatedAt": "2021-11-19 20:39:36"
+    }
+    ```
+
+* Error Response: Body validation errors
   * Status Code: 400
   * Headers:
     * Content-Type: application/json
@@ -1430,14 +599,336 @@ Return spots filtered by query parameters.
     {
       "message": "Bad Request", // (or "Validation error" if generated by Sequelize),
       "errors": {
-        "page": "Page must be greater than or equal to 1",
-        "size": "Size must be between 1 and 20",
-        "maxLat": "Maximum latitude is invalid",
-        "minLat": "Minimum latitude is invalid",
-        "minLng": "Maximum longitude is invalid",
-        "maxLng": "Minimum longitude is invalid",
-        "minPrice": "Minimum price must be greater than or equal to 0",
-        "maxPrice": "Maximum price must be greater than or equal to 0"
+        "asset_name": "Asset name is required",
+        "type": "Asset type is required",
+        "amount": "Asset amount is required",
       }
+    }
+    ```
+
+* Error response: Couldn't find a User with the specified id
+  * Status Code: 404
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "User couldn't be found"
+    }
+    ```
+
+### Edit a Asset
+
+Update and return an existing asset.
+
+* Require Authentication: true
+* Require proper authorization: Asset must belong to the current user
+* Request
+  * Method: PATCH
+  * Route path: /assets/:assetId/edit
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "asset_name": "Computer",
+      "type": "Tech",
+      "amount": 2000,
+    }
+    ```
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+     "id": 1,
+      "ownerId": 1,
+      "asset_name": "Computer",
+      "type": "Tech",
+      "amount": 2000,
+      "net_assets": 2500,
+      "net_deficiency": 0,
+      "createdAt": "2021-11-19 20:39:36",
+      "updatedAt": "2021-11-19 20:39:36"
+    }
+    ```
+
+* Error Response: Body validation errors
+  * Status Code: 400
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Bad Request", // (or "Validation error" if generated by Sequelize),
+      "errors": {
+        "asset_name": "Asset name is required",
+        "type": "Asset type is required",
+        "amount": "Asset amount is required",
+      }
+    }
+    ```
+
+* Error response: Couldn't find a Review with the specified id
+  * Status Code: 404
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Asset couldn't be found"
+    }
+    ```
+
+### Delete a Asset
+
+Delete an existing asset.
+
+* Require Authentication: true
+* Require proper authorization: Asset must belong to the current user
+* Request
+  * Method: DELETE
+  * Route path: /assets/:assetId/delete
+  * Body: none
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Successfully deleted"
+    }
+    ```
+
+* Error response: Couldn't find a Review with the specified id
+  * Status Code: 404
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Asset couldn't be found"
+    }
+    ```
+
+## LIABILITIES
+
+### Get all of the Current User's Liabilities
+
+Return all the liabilities that the current user has made.
+
+* Require Authentication: true
+* Request
+  * Method: GET
+  * Route path: /users/:userId/liabilities
+  * Body: none
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "Liabilities": [
+        {
+          "id": 1,
+          "ownerId": 1,
+          "liability_name": "Shoes",
+          "type": "Clothing",
+          "amount": 500,
+          "net_assets": 2500,
+          "net_deficiency": 0,
+          "createdAt": "2021-11-19 20:39:36",
+          "updatedAt": "2021-11-19 20:39:36"
+        }
+      ]
+    }
+    ```
+
+### Create a Liability for a User based on the User's id
+
+Create and return a new liability from a user specified by id.
+
+* Require Authentication: true
+* Request
+  * Method: POST
+  * Route path: /users/:userId/liabilities/create
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "liability_name": "Computer",
+      "type": "Tech",
+      "amount": 2000,
+    }
+    ```
+
+* Successful Response
+  * Status Code: 201
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "id": 1,
+      "ownerId": 1,
+      "liability_name": "Shoes",
+      "type": "Clothing",
+      "amount": 500,
+      "net_assets": 2500,
+      "net_deficiency": 0,
+      "createdAt": "2021-11-19 20:39:36",
+      "updatedAt": "2021-11-19 20:39:36"
+    }
+    ```
+
+* Error response: Body validation errors
+  * Status Code: 400
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Bad Request", // (or "Validation error" if generated by Sequelize),
+      "errors": {
+        "liability_name": "Liability name is required",
+        "type": "Liability type is required",
+        "amount": "Liability amount is required",
+      }
+    }
+    ```
+
+* Error response: Couldn't find a Spot with the specified id
+  * Status Code: 404
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "User couldn't be found"
+    }
+    ```
+
+### Edit a Liability
+
+Update and return an existing liability.
+
+* Require Authentication: true
+* Require proper authorization: Liability must belong to the current user
+* Request
+  * Method: PATCH
+  * Route path: /liabilities/:liabilityId/edit
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "liability_name": "Computer",
+      "type": "Tech",
+      "amount": 2000,
+    }
+    ```
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "id": 1,
+      "ownerId": 1,
+      "liability_name": "Shoes",
+      "type": "Clothing",
+      "amount": 500,
+      "net_assets": 2500,
+      "net_deficiency": 0,
+      "createdAt": "2021-11-19 20:39:36",
+      "updatedAt": "2021-11-19 20:39:36"
+    }
+    ```
+
+* Error response: Body validation errors
+  * Status Code: 400
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+     "message": "Bad Request", // (or "Validation error" if generated by Sequelize),
+      "errors": {
+        "liability_name": "Liability name is required",
+        "type": "Liability type is required",
+        "amount": "Liability amount is required",
+      }
+    }
+    ```
+
+* Error response: Couldn't find a Booking with the specified id
+  * Status Code: 404
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Liability couldn't be found"
+    }
+    ```
+
+### Delete a Liability
+
+Delete an existing liability.
+
+* Require Authentication: true
+* Require proper authorization: Liability must belong to the current user 
+* Request
+  * Method: DELETE
+  * Route path: /liabilities/:liabilityId/delete
+  * Body: none
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Successfully deleted"
+    }
+    ```
+
+* Error response: Couldn't find a Liability with the specified id
+  * Status Code: 404
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Liability couldn't be found"
     }
     ```
