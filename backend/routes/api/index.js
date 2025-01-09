@@ -2,6 +2,9 @@
 const router = require('express').Router();
 const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
+const investmentsRouter = require('./investments.js');
+const assetsRouter = require('./assets.js');
+const liabilitiesRouter = require('./liabilities.js')
 const { restoreUser } = require('../../utils/auth.js');
 
 router.use(restoreUser);
@@ -9,6 +12,12 @@ router.use(restoreUser);
 router.use('/session', sessionRouter);
 
 router.use('/users', usersRouter);
+
+router.use('/investments', investmentsRouter);
+
+router.use('/assets', assetsRouter);
+
+router.use('/liabilities', liabilitiesRouter);
 
 // backend/routes/api/index.js
 // ...

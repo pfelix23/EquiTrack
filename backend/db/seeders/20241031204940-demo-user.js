@@ -13,21 +13,22 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.bulkInsert('Users',[
       {
-        email: 'demo@user.io',
-        username: 'Demo-lition',
-        hashedPassword: bcrypt.hashSync('password')
+        username: 'johnDoe',
+        firstName: 'John',
+        lastName: 'Doe',
+        email: 'johndoe@example.com',
+        hashedPassword: bcrypt.hashSync('password'),
+      
       },
       {
-        email: 'user1@user.io',
-        username: 'FakeUser1',
+        username: 'janeSmith',
+        firstName: 'Jane',
+        lastName: 'Smith',
+        email: 'janesmith@example.com',
         hashedPassword: bcrypt.hashSync('password2')
-      },
-      {
-        email: 'user2@user.io',
-        username: 'FakeUser2',
-        hashedPassword: bcrypt.hashSync('password3')
+      
       }
-    ], { validate: true });
+    ], {});
   },
     /**
      * Add seed commands here.

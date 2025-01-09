@@ -3,7 +3,7 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { User } = require('../../db/models');
+const { User, Investment } = require('../../db/models');
 const router = express.Router();
 
 const { check } = require('express-validator');
@@ -56,5 +56,20 @@ router.post(
       });
     }
   );
+
+router.get('/:userId/investments', requireAuth, async(req, res) => {
+  const userId = req.params.userId
+  const investments = await Investment.findAll({
+    where: {
+      ownerId: userId
+    }
+  })
+  
+  if(req.user.id == userId) {
+    return res.status(200).json({
+      Investments: investments
+  })}
+
+})
 
 module.exports = router;
