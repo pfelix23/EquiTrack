@@ -228,42 +228,6 @@ user's information.
 
 ## INVESTMENTS
 
-### Get all Investments
-
-Returns all the investments.
-
-* Require Authentication: false
-* Request
-  * Method: GET
-  * Route path: /investments
-  * Body: none
-
-* Successful Response
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "Investments": [
-        {
-          "id": 1,
-          "ownerId": 1,
-          "investment_name": "new property",
-          "type": "Real Estate",
-          "amount": 200000,
-          "ROR": 1.5,
-          "length": "24 months",
-          "risk_percentage": 10.2,
-          "projection": 10511,
-          "createdAt": "2021-11-19 20:39:36",
-          "updatedAt": "2021-11-19 20:39:36"
-        }
-      ]
-    }
-    ```
-
 ### Get all Investments owned by the Current User
 
 Returns all the investments owned (created) by the current user.
@@ -271,7 +235,7 @@ Returns all the investments owned (created) by the current user.
 * Require Authentication: true
 * Request
   * Method: GET
-  * Route path: /users/:userId/investments
+  * Route path: /investments
   * Body: none
 
 * Successful Response
@@ -414,7 +378,7 @@ Updates and returns an existing Investment.
 * Require proper authorization: Investment must belong to the current user
 * Request
   * Method: PUT
-  * Route path: users/:userId/investments/:investmentId/edit
+  * Route path: /investments/:investmentId/edit
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -524,7 +488,7 @@ Returns all the assets written by the current user.
 * Require Authentication: true
 * Request
   * Method: GET
-  * Route path: /users/:userId/assets
+  * Route path: /assets
   * Body: none
 
 * Successful Response
@@ -551,14 +515,57 @@ Returns all the assets written by the current user.
     }
     ```
 
-### Create an Asset for a User based on the User's id
+### Get details of an Asset from an id
 
-Create and return a new asset for a user specified by id.
+Returns the details of an asset specified by its id.
+
+* Require Authentication: false
+* Request
+  * Method: GET
+  * Route path: /assets/:assetId
+  * Body: none
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+      ```json
+        {
+          "id": 1,
+          "ownerId": 1,
+          "asset_name": "Computer",
+          "type": "Tech",
+          "amount": 2000,
+          "net_assets": 2500,
+          "net_deficiency": 0,
+          "createdAt": "2021-11-19 20:39:36",
+          "updatedAt": "2021-11-19 20:39:36"
+        }
+      ```
+     
+
+* Error response: Couldn't find an Asset with the specified id
+  * Status Code: 404
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Asset couldn't be found"
+    }
+    ```
+
+### Create an Asset for a User 
+
+Create and return a new asset for a user .
 
 * Require Authentication: true
 * Request
   * Method: POST
-  * Route path: /users/:userId/assets/create
+  * Route path: /assets/create
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -734,7 +741,7 @@ Return all the liabilities that the current user has made.
 * Require Authentication: true
 * Request
   * Method: GET
-  * Route path: /users/:userId/liabilities
+  * Route path: /liabilities
   * Body: none
 
 * Successful Response
@@ -761,6 +768,49 @@ Return all the liabilities that the current user has made.
     }
     ```
 
+### Get details of an Liability from an id
+
+Returns the details of an liability specified by its id.
+
+* Require Authentication: false
+* Request
+  * Method: GET
+  * Route path: /liabilities/:liabilityId
+  * Body: none
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+      ```json
+        {
+          "id": 1,
+          "ownerId": 1,
+          "liability_name": "Shoes",
+          "type": "Clothing",
+          "amount": 500,
+          "net_assets": 2500,
+          "net_deficiency": 0,
+          "createdAt": "2021-11-19 20:39:36",
+          "updatedAt": "2021-11-19 20:39:36"
+        }
+      ```
+     
+
+* Error response: Couldn't find an Liability with the specified id
+  * Status Code: 404
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Liability couldn't be found"
+    }
+    ```
+
 ### Create a Liability for a User based on the User's id
 
 Create and return a new liability from a user specified by id.
@@ -768,7 +818,7 @@ Create and return a new liability from a user specified by id.
 * Require Authentication: true
 * Request
   * Method: POST
-  * Route path: /users/:userId/liabilities/create
+  * Route path: /liabilities/create
   * Headers:
     * Content-Type: application/json
   * Body:

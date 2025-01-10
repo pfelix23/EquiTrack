@@ -3,7 +3,7 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { User, Investment } = require('../../db/models');
+const { User } = require('../../db/models');
 const router = express.Router();
 
 const { check } = require('express-validator');
@@ -57,18 +57,87 @@ router.post(
     }
   );
 
-router.get('/:userId/investments', requireAuth, async(req, res) => {
-  const userId = req.params.userId
-  const investments = await Investment.findAll({
+router.get('/:userId', requireAuth, async (req, res) => {
+    const user = await User.findByPk(req.user.id)
+    const token = req.cookies
+
+    if(!user) {
+      res.status(404).json({
+        message: "User couldn't be found"
+      })
+    };
+
+    if(!token) {
+      return res.json({
+        user: null
+      })
+    };
+
+    res.json({
+      user: user
+    })
+
+});
+
+router.put('/:userId/edit', requireAuth, async (req, res) => {
+    const { email, password, username, firstName, lastName } = req.body;
+
+    try {
+    if(!email || !password || !username || !firstName || !lastName) {
+      return res.status(400).json({
+        message: "Bad Request",
+        errors: {
+            email: "User email is required",
+            password: "User password is required",
+            username: "User username is required",
+            firstName: "User firstName is required",
+            lastName: "User lastName is required"
+        }
+    })
+  };
+
+    const hashedPassword = bcrypt.hashSync(password);
+
+    await User.update({email, username, firstName, lastName, hashedPassword}, {
     where: {
-      ownerId: userId
+      id: req.user.id
+    }
+
+  });
+
+  const updatedUser = await User.findByPk(req.user.id);
+
+  return res.status(200).json(updatedUser);
+} catch (err) {
+  return res.status(500).json({
+    message: 'Error updating user', err
+  })
+}
+
+})
+
+router.delete('/:userId/delete', requireAuth, async (req, res) => {
+  const user = await User.findByPk(req.user.id);
+
+  try{
+  if(!user) {
+    return res.status(404).json({
+        message: "User couldn't be found"
+    })
+  };
+
+  User.destroy({
+    where: {
+      id: user.id
     }
   })
-  
-  if(req.user.id == userId) {
-    return res.status(200).json({
-      Investments: investments
-  })}
+
+  return res.status(200).json({
+    message: 'Successfully deleted'
+  })
+} catch(err) {
+  res.status(500).json({message: 'Error deleting user', err})
+}
 
 })
 
