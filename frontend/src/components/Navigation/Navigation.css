@@ -1,0 +1,95 @@
+#Modals {
+    display: flex;
+    justify-content: space-between;
+    background-color: #125943;
+    height: 7vh;
+}
+
+#a-tags {
+    margin-left: 20px;
+    display: flex;  
+}
+
+#a-tags > a {
+    padding: 5px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#Modals > img:hover {
+    cursor: pointer;
+}
+
+#buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#signup-button {
+    margin: 5px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #112d66;
+    height: 30px;
+    width: 132px;
+    font-family: 'Roboto';
+    font-size: small;        
+}
+
+#signup-button:hover {
+    cursor: pointer;
+    background-color: #173268
+}
+
+#login-button {
+    margin: 5px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #112d66;
+    height: 30px;
+    width: 132px;
+    font-family: 'Roboto';
+    font-size: small;    
+}
+
+#login-button:hover {
+    cursor: pointer;
+    background-color: #173268;
+}
+
+.addition_nav {
+    border-bottom: solid #A7B0CA 1px;
+    height: 10vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.logo {
+    height: 10vh;
+    width: 10vw;
+}
+
+.nav-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-2 > div {
+    margin: 10px;
+    font-family: 'Roboto';
+    font-weight: bold;
+    padding: 2px 10px;
+}
+
+.nav-2 > div:hover {
+    cursor: pointer;
+}
