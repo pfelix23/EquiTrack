@@ -1,14 +1,19 @@
 import { useNavigate } from "react-router-dom";
+import { FaPlus } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { csrfFetch } from "../../store/csrf";
 import { useModal } from "../../context/Modal";
+import { Bar, Line, Doughnut, PolarArea } from 'react-chartjs-2';
+import { Chart as ChartJS } from "chart.js/auto";
+import './InvestmentsPage.css'
 
-function InvestmentPage() {
+function InvestmentsPage() {
     const [investments, setInvestments] = useState();
     const [errors, setErrors] = useState();
     const { closeModal } = useModal();
     const sessionUser = useSelector((state) => state.session.user);
+    const navigate = useNavigate();
 
     useEffect(() => {
         csrfFetch('/api/investments')
@@ -22,26 +27,137 @@ function InvestmentPage() {
             }
         })
     },[errors])
-   console.log(investments)
+
+    const investmentData = {
+        labels: investments?.map(investment => investment.investment_name),
+        datasets: [
+            {
+                label: 'Investments',
+                data: investments?.map(investment => investment.amount),
+                fill: true,
+                tension: 0.1,
+                backgroundColor:'#125943'
+            }
+        ]
+    };
+
+    const RORData = {
+        labels: investments?.map(investment => investment.investment_name),
+        datasets: [
+            {
+                label: 'ROR',
+                data: investments?.map(investment => investment.ROR),
+                fill: false,
+                tension: 0.1,
+                backgroundColor:'#125943'
+            }
+        ]
+    };
+
+    const riskPercentageData = {
+        labels: investments?.map(investment => investment.investment_name),
+        datasets: [
+            {
+                label: 'Risk Percentage',
+                data: investments?.map(investment => investment.risk_percentage),
+                fill: false,
+                tension: 0.1,
+                backgroundColor:['#125943', '#112d66']
+            }
+        ]
+    };
+
+    const projectionData = {
+        labels: investments?.map(investment => investment.investment_name),
+        datasets: [
+            {
+                label: 'Projections',
+                data: investments?.map(investment => investment.projection),
+                fill: false,
+                tension: 0.1,
+                backgroundColor:['#125943', '#112d66']
+            }
+        ]
+    };
+   
+    const options = {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'bottom',
+          },
+          tooltip: {
+            callbacks: {
+              label: function (tooltipItem) {
+                const investment = investments[tooltipItem.dataIndex]; 
+                return `${investment.type}: $${tooltipItem.raw}`; 
+              },
+            },
+          },
+        },
+      };
+
+      const optionsPercentage = {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'bottom',
+          },
+          tooltip: {
+            callbacks: {
+              label: function (tooltipItem) {
+                const investment = investments[tooltipItem.dataIndex]; 
+                return `${investment.type}: ${tooltipItem.raw}%`; 
+              },
+            },
+          },
+        },
+      };
+      
     
     return (
-        <div>
-            <div>
+        <div className="root-div">
+            <div className="investment-parent-div">
+            <div className="new-investment-button"><FaPlus /> &nbsp;New Investment </div>
+            <div className="investment-child-div">
                 {investments?.map((investment) => {
-                    return(<section  key={investment.id}> 
-                        <h2>{investment.investment_name}</h2>
-                        <p>{investment.type}</p>
-                        <p>{investment.amount}</p>
-                        <p>{investment.ROR}</p>
-                        <p>{investment.length}</p>
-                        <p>{investment.risk_percentage}</p>
-                        <p>{investment.projection}</p>
+                    return(<section id="investments" key={investment.id}> 
+                        <p onClick={() => navigate(`/investments/${investment.id}`)}>{investment.investment_name}</p>
                         </section>
                     )
                 })}
+                </div>
             </div>
+            {investments?.length > 0 && (
+                    <div className="chart-style">
+                        <div>
+                        <div id="chart-div">Investment Amount</div>
+                        <div className="chart">
+                        <Bar data={investmentData} options={options}/>
+                        </div>
+                        </div>
+                        <div>
+                        <div id="chart-div"> Monthly ROR</div>
+                        <div className="chart">
+                        <Line data={RORData} options={optionsPercentage} />
+                        </div>
+                        </div>
+                        <div>
+                        <div id="chart-div">Investment Projection</div>
+                        <div className="chart">
+                        <Doughnut data={projectionData} options={options} />
+                        </div>
+                        </div>
+                        <div>
+                        <div id="chart-div">Risk Percentage</div>
+                        <div className="chart">
+                        <PolarArea data={riskPercentageData} options={optionsPercentage} />
+                        </div>
+                        </div>
+                    </div>
+                )}
         </div>
     )
 }
 
-export default InvestmentPage
+export default InvestmentsPage

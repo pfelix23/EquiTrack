@@ -51,16 +51,16 @@ router.post('/create', requireAuth, async (req, res) => {
     
     
     if(type === 'S&P 500')
-        investment = await Investment.create({ownerId: parseInt(req.user.id), investment_name, type, amount, length, risk_percentage: 17.5, projection: (amount*(.118 / 12)) * parseInt(length) + amount, ROR: parseFloat((.118 / 12).toFixed(5))});
+        investment = await Investment.create({ownerId: parseInt(req.user.id), investment_name, type, amount, length, risk_percentage: 17.5, projection: (amount*(.118 / 12)) * parseInt(length) , ROR: parseFloat((.118 / 12).toFixed(5))});
         
     else if (type ==='US Small-Cap')
-        investment = await Investment.create({ownerId: parseInt(req.user.id), investment_name, type, amount, length, risk_percentage: 17, projection: (amount*(.094 / 12)) * parseInt(length) + amount, ROR: parseFloat((.094 / 12).toFixed(5))});
+        investment = await Investment.create({ownerId: parseInt(req.user.id), investment_name, type, amount, length, risk_percentage: 17, projection: (amount*(.094 / 12)) * parseInt(length) , ROR: parseFloat((.094 / 12).toFixed(5))});
         
     else if (type ==='Real-Estate')
-        investment = await Investment.create({ownerId: parseInt(req.user.id), investment_name, type, amount, length, risk_percentage: 7.5, projection: (amount*(.10 / 12)) * parseInt(length) + amount, ROR: parseFloat((.10 / 12).toFixed(5))});
+        investment = await Investment.create({ownerId: parseInt(req.user.id), investment_name, type, amount, length, risk_percentage: 7.5, projection: (amount*(.10 / 12)) * parseInt(length) , ROR: parseFloat((.10 / 12).toFixed(5))});
         
     else if (type ==='Bond')
-        investment = await Investment.create({ownerId: parseInt(req.user.id), investment_name, type, amount, length, risk_percentage: 4, projection: (amount*(.03 / 12)) * parseInt(length) + amount, ROR: parseFloat((.03 / 12).toFixed(5))});
+        investment = await Investment.create({ownerId: parseInt(req.user.id), investment_name, type, amount, length, risk_percentage: 4, projection: (amount*(.03 / 12)) * parseInt(length) , ROR: parseFloat((.03 / 12).toFixed(5))});
             
     return res.status(201).json(investment)
 })
@@ -98,25 +98,25 @@ router.put('/:investmentId/edit', requireAuth, async (req, res) => {
     
     
     if(type === 'S&P 500')
-        editedInvestment = await Investment.update({ownerId: req.user.id, investment_name, type, amount,length, risk_percentage: 17.5, projection: (amount*(.118 / 12)) * parseInt(length) + amount, ROR: parseFloat((.118 / 12).toFixed(5))}, 
+        editedInvestment = await Investment.update({ownerId: req.user.id, investment_name, type, amount,length, risk_percentage: 17.5, projection: (amount*(.118 / 12)) * parseInt(length) , ROR: parseFloat((.118 / 12).toFixed(5))}, 
     {where: {
             id: investmentId
         }});
         
     else if (type ==='US Small-Cap')
-        editedInvestment = await Investment.update({ownerId: req.user.id, investment_name, type, amount,length, risk_percentage: 17, projection: (amount*(.094 / 12)) * parseInt(length) + amount, ROR: parseFloat((.094 / 12).toFixed(5))}, 
+        editedInvestment = await Investment.update({ownerId: req.user.id, investment_name, type, amount,length, risk_percentage: 17, projection: (amount*(.094 / 12)) * parseInt(length) , ROR: parseFloat((.094 / 12).toFixed(5))}, 
     {where: {
             id: investmentId
         }});
         
     else if (type ==='Real-Estate')
-        editedInvestment = await Investment.update({ownerId: req.user.id, investment_name, type, amount,length, risk_percentage: 7.5, projection: (amount*(.10 / 12)) * parseInt(length) + amount, ROR: parseFloat((.10 / 12).toFixed(5))}, 
+        editedInvestment = await Investment.update({ownerId: req.user.id, investment_name, type, amount,length, risk_percentage: 7.5, projection: (amount*(.10 / 12)) * parseInt(length) , ROR: parseFloat((.10 / 12).toFixed(5))}, 
     {where: {
             id: investmentId
         }});
         
     else if (type ==='Bond')
-        editedInvestment = await Investment.update({ownerId: req.user.id,investment_name,type,amount,length, risk_percentage: 4, projection: (amount*(.03 / 12)) * parseInt(length) + amount, ROR: parseFloat((.03 / 12).toFixed(5))}, 
+        editedInvestment = await Investment.update({ownerId: req.user.id,investment_name,type,amount,length, risk_percentage: 4, projection: (amount*(.03 / 12)) * parseInt(length) , ROR: parseFloat((.03 / 12).toFixed(5))}, 
     {where: {
             id: investmentId
         }});

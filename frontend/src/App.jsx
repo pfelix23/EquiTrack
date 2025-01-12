@@ -3,7 +3,8 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import * as sessionActions from './store/session';
 import Navigation from './components/Navigation/Navigation';
-import InvestmentPage from './components/InvestmentsPage/InvestmentsPage';
+import InvestmentsPage from './components/InvestmentsPage/InvestmentsPage';
+import SingleInvestmentPage from './components/SingleInvestmentPage/SingleInvestmentPage';
 
 function Layout() {
   const dispatch = useDispatch();
@@ -33,7 +34,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/investments',
-        element: <InvestmentPage />
+        element: <InvestmentsPage />
+      },
+      {
+        path: '/investments/:investmentId',
+        element: <SingleInvestmentPage />
       }
     ]
   },

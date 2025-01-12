@@ -1,18 +1,21 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import ProfileButton from './ProfileButton';
 import LoginFormModal from '..//LoginFormModal/LoginFormModal';
 import SignupFormModal from '../SignupFormModal/SignupFormModal';
 import { useModal } from '../../context/Modal';
 import { TfiLinkedin } from "react-icons/tfi";
 import { IoLogoGithub } from "react-icons/io5";
 import { BsFilePdf } from "react-icons/bs";
+import * as sessionActions from '../../store/session'
+import { RiProfileFill } from "react-icons/ri";
 import './Navigation.css'
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
   const navigate = useNavigate();
   const { closeModal, setModalContent } = useModal();
+  const dispatch = useDispatch();
+  
   const handleLogin = () => {
     setModalContent(<LoginFormModal closeModal={closeModal} /> )
   }
@@ -21,10 +24,34 @@ function Navigation({ isLoaded }) {
     setModalContent(<SignupFormModal closeModal={closeModal} /> )
   }
 
+  const logout = (e) => {
+    e.preventDefault();
+    dispatch(sessionActions.logout());
+    navigate('/')
+  };
+
+  const className = () => {
+    if(sessionUser) {
+      return 'nav-2'
+    } else return 'nav-3'
+  }
+
+
   const sessionLinks = sessionUser ? (
-    <li>
-      <ProfileButton user={sessionUser} />
-    </li>
+    <div id='Modals'>
+      <div id="a-tags">
+      <a href="https://www.linkedin.com/in/peter-felix-3b038a174/"><TfiLinkedin style={{height:'19px', width:'19px'}} />
+      </a>
+      <a href="https://github.com/pfelix23"><IoLogoGithub style={{height:'19px', width:'19px'}} />
+      </a>
+      <a href=""><BsFilePdf  style={{height:'19px', width:'19px'}}/>
+      </a>
+      </div>
+      <div id="button">
+      <button id="logout-button" onClick={logout}>Logout</button>
+      <button id='profile-button'>Profile</button>
+      </div>
+    </div>
   ) : (
     <div id='Modals'>
       <div id="a-tags">
@@ -36,8 +63,8 @@ function Navigation({ isLoaded }) {
       </a>
       </div>
       <div id="buttons">
-      <div id="login-button" onClick={() => handleLogin()}>EquiTrack Login</div>
-      <div id="signup-button" onClick={() => handleSignup()}>EquiTrack Signup</div>
+      <button id="login-button" onClick={() => handleLogin()}>EquiTrack Login</button>
+      <button id="signup-button" onClick={() => handleSignup()}>EquiTrack Signup</button>
       </div>
     </div>
   );
@@ -45,9 +72,15 @@ function Navigation({ isLoaded }) {
   return (
     <div>
       {isLoaded && sessionLinks}
-      <div className='addition_nav'>
-        <img className='logo' src="/EquiTrack_Logo.jpg" alt="EquiTrack" />
-        <div className='nav-2'>
+      <div className='additional_nav'>
+        <img onClick={() => navigate('/')} className='logo' src="/EquiTrack_Logo.jpg" alt="EquiTrack" />
+        <div className={className()}>
+          {sessionUser && (
+          <>
+          <div>Assets</div>
+          <div>Liabilities</div>
+          <div onClick={() => navigate('/investments')}>Investments</div>
+          </>)}
           <div onClick={() => navigate('/')}>Home</div>
           <div>Company</div>
           <div>Mission</div>
