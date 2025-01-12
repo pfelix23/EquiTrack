@@ -5,6 +5,7 @@ import * as sessionActions from './store/session';
 import Navigation from './components/Navigation/Navigation';
 import InvestmentsPage from './components/InvestmentsPage/InvestmentsPage';
 import SingleInvestmentPage from './components/SingleInvestmentPage/SingleInvestmentPage';
+import UserProfilePage from './components/UserProfilePage/UserProfilePage';
 
 function Layout() {
   const dispatch = useDispatch();
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: '/investments/:investmentId',
         element: <SingleInvestmentPage />
+      },
+      {
+        path: '/user',
+        element: <UserProfilePage />
       }
     ]
   },

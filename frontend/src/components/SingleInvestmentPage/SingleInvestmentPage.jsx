@@ -102,7 +102,41 @@ function SingleInvestmentPage() {
         plugins: {
             legend: {
                 position: 'bottom'
-            }
+            },
+            tooltip: {
+                callbacks: {
+                  label: function (tooltipItem) {
+                    const investment = investments[tooltipItem.dataIndex]; 
+                    return `${investment.type}: $${tooltipItem.raw}`; 
+                  },
+                },
+              },
+        }
+      };
+
+      const percentageOptions = {
+        responsive: true,
+        scales: {
+          x: {
+            barPercentage: 0.4,
+            categoryPercentage: 0.8
+          },
+          y: {
+            beginAtZero: true
+          }       
+        },
+        plugins: {
+            legend: {
+                position: 'bottom'
+            },
+            tooltip: {
+                callbacks: {
+                  label: function (tooltipItem) {
+                    const investment = investments[tooltipItem.dataIndex]; 
+                    return `${investment.type}: ${tooltipItem.raw}%`; 
+                  },
+                },
+              },
         }
       };
 
@@ -130,7 +164,7 @@ function SingleInvestmentPage() {
                         </div>
                         <div className="single-chart">
                         <div id="single-chart-div">{investment.investment_name} Monthly Return & Risk-Percentage</div>
-                        <Bar style={{paddingBottom: '10px'}} data={percentageData} options={options}/>
+                        <Bar style={{paddingBottom: '10px'}} data={percentageData} options={percentageOptions}/>
                         </div>
                         </div>                        
                     </div>

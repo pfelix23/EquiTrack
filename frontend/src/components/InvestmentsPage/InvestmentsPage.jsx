@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { FaPlus } from "react-icons/fa";
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
 import { csrfFetch } from "../../store/csrf";
 import { useModal } from "../../context/Modal";
 import { Bar, Line, Doughnut, PolarArea } from 'react-chartjs-2';
@@ -12,7 +11,6 @@ function InvestmentsPage() {
     const [investments, setInvestments] = useState();
     const [errors, setErrors] = useState();
     const { closeModal } = useModal();
-    const sessionUser = useSelector((state) => state.session.user);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -26,7 +24,7 @@ function InvestmentsPage() {
                 console.error(errors)
             }
         })
-    },[errors])
+    },[errors, closeModal])
 
     const investmentData = {
         labels: investments?.map(investment => investment.investment_name),

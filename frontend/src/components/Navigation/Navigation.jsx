@@ -7,7 +7,6 @@ import { TfiLinkedin } from "react-icons/tfi";
 import { IoLogoGithub } from "react-icons/io5";
 import { BsFilePdf } from "react-icons/bs";
 import * as sessionActions from '../../store/session'
-import { RiProfileFill } from "react-icons/ri";
 import './Navigation.css'
 
 function Navigation({ isLoaded }) {
@@ -49,7 +48,7 @@ function Navigation({ isLoaded }) {
       </div>
       <div id="button">
       <button id="logout-button" onClick={logout}>Logout</button>
-      <button id='profile-button'>Profile</button>
+      <button id='profile-button' onClick={() => navigate('/user')}>Profile</button>
       </div>
     </div>
   ) : (
