@@ -1,15 +1,29 @@
 import './UserProfilePage.css';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from 'react';
 import { useModal } from '../../context/Modal';
+import { csrfFetch } from '../../store/csrf';
+import * as usersActions from '../../store/users'
+import { useNavigate } from 'react-router-dom';
+import DeleteUserModal from '../DeleteUserModal/DeleteUserModal';
 
 function UserProfilePage () {
     const [errors, setErrors] = useState();
     const [investments, setInvestments] = useState();
     const [assets, setAssets] = useState();
     const [liabilities, setLiabilities] = useState();
+    const [isEditing, setIsEditing] = useState(false);
+    const [isEditing1, setIsEditing1] = useState(false);
+    const [isEditing2, setIsEditing2] = useState(false);
+    const [isEditing3, setIsEditing3] = useState(false);
+    const [firstName, setFirstName] = useState();
+    const [lastName, setLastName] = useState();
+    const [username, setUsername] = useState();
+    const [email, setEmail] = useState();
     const { closeModal, setModalContent } = useModal();
     const user = useSelector(state => state.session.user);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     
     useEffect(() => {
         csrfFetch('/api/investments')
@@ -23,6 +37,15 @@ function UserProfilePage () {
             }
         })
     },[errors, closeModal]);
+
+    useEffect(() => {
+        if(user) {
+            setFirstName(user?.firstName)
+            setLastName(user?.lastName)
+            setEmail(user?.email)
+            setUsername(user?.username)
+        }
+    }, [])
 
     useEffect(() => {
         csrfFetch('/api/assets')
@@ -60,32 +83,133 @@ function UserProfilePage () {
         else return `Net Assets: ${assets[0]?.net_assets}`
     }
 
+    const handleEditClick = (e) => {
+        e.preventDefault();
+        if(isEditing) {
+            dispatch(usersActions.editUser(user.id, {
+                firstName,
+                lastName,
+                username,
+                email
+            }))
+            .then(() => navigate('/user'))
+            .catch( async (res) => {
+                const data = await res.json();
+                if(data && data.errors) {
+                    setErrors(data.errors);
+                    console.error(errors)
+                }
+            })
+        } setIsEditing(!isEditing)
+    };
+
+    const handleEditClick1 = (e) => {
+        e.preventDefault();
+        if(isEditing1) {
+            dispatch(usersActions.editUser(user.id, {
+                firstName,
+                lastName,
+                username,
+                email
+            }))
+            .then(() => navigate('/user'))
+            .catch( async (res) => {
+                const data = await res.json();
+                if(data && data.errors) {
+                    setErrors(data.errors);
+                    console.error(errors)
+                }
+            })
+        } setIsEditing1(!isEditing1)
+    };
+
+    const handleEditClick2 = (e) => {
+        e.preventDefault();
+        if(isEditing2) {
+            dispatch(usersActions.editUser(user.id, {
+                firstName,
+                lastName,
+                username,
+                email
+            }))
+            .then(() => navigate('/user'))
+            .catch( async (res) => {
+                const data = await res.json();
+                if(data && data.errors) {
+                    setErrors(data.errors);
+                    console.error(errors)
+                }
+            })
+        } setIsEditing2(!isEditing2)
+    };
+
+    const handleEditClick3 = (e) => {
+        e.preventDefault();
+        if(isEditing3) {
+            dispatch(usersActions.editUser(user.id, {
+                firstName,
+                lastName,
+                username,
+                email
+            }))
+            .then(() => navigate('/user'))
+            .catch( async (res) => {
+                const data = await res.json();
+                if(data && data.errors) {
+                    setErrors(data.errors);
+                    console.error(errors)
+                }
+            })
+        } setIsEditing3(!isEditing3)
+    };
+
+    const handleDeleteUser = (e) => {
+        e.preventDefault();
+        setModalContent(<DeleteUserModal userId={user?.id} closeModal={closeModal}/>)
+    }
+
     return (
-        <div id='userForm-Container'>
+        <div id='userForm-container'>
             <form action="" >
                 <label htmlFor="">
                     First Name:
+                    <div>
                     <input type="text" 
-                    value={user?.firstName}
-                    /> <button>Edit</button>
+                    value={firstName}
+                    disabled={!isEditing}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    /> <button className='edit-button'onClick={handleEditClick} >{isEditing === false ? 'Edit' : 'Save'}</button>
+                    </div>
                 </label>
                 <label htmlFor="">
                     Last Name:
+                    <div>
                     <input type="text"
-                    value={user?.lastName}
-                    />
+                    value={lastName}
+                    disabled={!isEditing1}
+                    onChange={(e) => setLastName(e.target.value)}
+                    /> <button className='edit-button' onClick={handleEditClick1} >{isEditing1 === false ? 'Edit' : 'Save'}</button>
+                    </div>
                 </label>
                 <label htmlFor="">
                     Username:
+                    <div>
                     <input type="text"
-                    value={user?.username}
-                    />
+                    value={username}
+                    disabled={!isEditing2}
+                    onChange={(e) => setUsername(e.target.value)}
+                    /> <button className='edit-button'onClick={handleEditClick2} >{isEditing2 === false ? 'Edit' : 'Save'}</button>
+                    </div>
                 </label>
                 <label htmlFor="">
                     Email:
+                    <div>
                     <input type="text"
-                    value={user?.email}
-                    />
+                    value={email}
+                    disabled={!isEditing3}
+                    onChange={(e) => setEmail(e.target.value)}
+                    /> <button className='edit-button'onClick={handleEditClick3} >{isEditing3 === false ? 'Edit' : 'Save'}</button>
+                    </div>
                 </label>
                 <label htmlFor="">Total Investments: {investments?.length}</label>
                 <label htmlFor="">Net Investments: ${investmentsTotal}</label>
@@ -93,7 +217,8 @@ function UserProfilePage () {
                 <label htmlFor="">Assets Amount: ${assetsTotal}</label>
                 <label htmlFor="">Total Liabilities: {liabilities?.length}</label>
                 <label htmlFor="">Liabilities Amount: ${liabilitiesTotal}</label>
-                <label htmlFor="">{netLabelValue()}</label>
+                <label htmlFor="">{netLabelValue()}</label> 
+                <button id='delete-button' onClick={handleDeleteUser}>Delete Account</button>
             </form>
 
         </div>

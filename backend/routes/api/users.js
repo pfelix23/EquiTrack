@@ -80,15 +80,14 @@ router.get('/:userId', requireAuth, async (req, res) => {
 });
 
 router.put('/:userId/edit', requireAuth, async (req, res) => {
-    const { email, password, username, firstName, lastName } = req.body;
+    const { email, username, firstName, lastName } = req.body;
 
     try {
-    if(!email || !password || !username || !firstName || !lastName) {
+    if(!email || !username || !firstName || !lastName) {
       return res.status(400).json({
         message: "Bad Request",
         errors: {
             email: "User email is required",
-            password: "User password is required",
             username: "User username is required",
             firstName: "User firstName is required",
             lastName: "User lastName is required"
@@ -96,9 +95,7 @@ router.put('/:userId/edit', requireAuth, async (req, res) => {
     })
   };
 
-    const hashedPassword = bcrypt.hashSync(password);
-
-    await User.update({email, username, firstName, lastName, hashedPassword}, {
+    await User.update({email, username, firstName, lastName}, {
     where: {
       id: req.user.id
     }
