@@ -5,6 +5,9 @@ import { useState, useEffect } from "react";
 import { csrfFetch } from "../../store/csrf";
 import { useModal } from "../../context/Modal";
 import { Bar } from 'react-chartjs-2';
+import NewInvestmentModal from "../NewInvestmentModal/NewInvestmentModal";
+import EditInvestmentModal from "../EditInvestmentModal/EditInvestmentModal";
+import DeleteUserInvestmentModal from "../DeleteUserInvestmentModal/DeleteUserInvestmentModal";
 import './SingleInvestmentPage.css'
 
 function SingleInvestmentPage() {
@@ -39,7 +42,11 @@ function SingleInvestmentPage() {
                 console.error(errors)
             }
         })
-    },[errors]);
+    },[errors, closeModal, investmentId]);
+
+    useEffect(() => {
+      if(!investmentId) navigate('/investments')
+    },[closeModal, investmentId])
 
     const dollarData = {
         labels: [investment?.investment_name],
@@ -89,63 +96,78 @@ function SingleInvestmentPage() {
 
    
     const options = {
-        responsive: true,
-        scales: {
-          x: {
-            barPercentage: 0.4,
-            categoryPercentage: 0.8
-          },
-          y: {
-            beginAtZero: true
-          }       
+      responsive: true,
+      scales: {
+        x: {
+          barPercentage: 0.4,
+          categoryPercentage: 0.8
         },
-        plugins: {
-            legend: {
-                position: 'bottom'
-            },
-            tooltip: {
-                callbacks: {
-                  label: function (tooltipItem) {
-                    const investment = investments[tooltipItem.dataIndex]; 
-                    return `${investment.type}: $${tooltipItem.raw}`; 
-                  },
+        y: {
+          beginAtZero: true
+        }       
+      },
+      plugins: {
+          legend: {
+              position: 'bottom'
+          },
+          tooltip: {
+              callbacks: {
+                label: function (tooltipItem) {
+                  const investment = investments[tooltipItem.dataIndex]; 
+                  return `${investment.type}: $${tooltipItem.raw}`; 
                 },
               },
+            },
         }
       };
 
-      const percentageOptions = {
-        responsive: true,
-        scales: {
-          x: {
-            barPercentage: 0.4,
-            categoryPercentage: 0.8
-          },
-          y: {
-            beginAtZero: true
-          }       
+    const percentageOptions = {
+      responsive: true,
+      scales: {
+        x: {
+          barPercentage: 0.4,
+          categoryPercentage: 0.8
         },
-        plugins: {
-            legend: {
-                position: 'bottom'
-            },
-            tooltip: {
-                callbacks: {
-                  label: function (tooltipItem) {
-                    const investment = investments[tooltipItem.dataIndex]; 
-                    return `${investment.type}: ${tooltipItem.raw}%`; 
-                  },
+        y: {
+          beginAtZero: true
+        }       
+      },
+      plugins: {
+          legend: {
+              position: 'bottom'
+          },
+          tooltip: {
+              callbacks: {
+                label: function (tooltipItem) {
+                  const investment = investments[tooltipItem.dataIndex]; 
+                  return `${investment.type}: ${tooltipItem.raw}%`; 
                 },
               },
+            },
         }
       };
+
+    const handleNewInvestment = (e) => {
+      e.preventDefault();
+      setModalContent(<NewInvestmentModal closeModal={closeModal}/>)
+    }
+
+    const handleDeleteInvestment = (e) => {
+      e.preventDefault();
+      setModalContent(<DeleteUserInvestmentModal investmentId={investmentId} closeModal={closeModal}/>)
+    }
+
+    const handleEditInvestment = (e) => {
+      e.preventDefault();
+      setModalContent(<EditInvestmentModal closeModal={closeModal} investment={investment}/>)
+    }
 
 
 
     return (
         <div className="single-root-div">
             <div className="single-investment-parent-div">
-            <div className="new-investment-button"><FaPlus /> &nbsp;New Investment </div>
+            <div className="new-investment-button" onClick={handleNewInvestment}><FaPlus /> &nbsp;New Investment </div>
             <div className="single-investment-child-div">
                 {investments?.map((investment) => {
                     return(<section id="investments" key={investment.id}> 
@@ -157,6 +179,12 @@ function SingleInvestmentPage() {
             </div>
             {investment?.length > 0 && (
                     <div className="single-chart-style">
+                      <h1 className="h1">{investment.investment_name} Information
+                        <div>
+                        <button className="single-investment-edit" onClick={handleEditInvestment}>edit</button>
+                        <button className="single-investment-delete" onClick={handleDeleteInvestment}>delete</button>
+                        </div>
+                      </h1>
                         <div className="single-chart-container">
                         <div className="single-chart">
                         <div id="single-chart-div">{investment.investment_name} Amount & Projections</div>

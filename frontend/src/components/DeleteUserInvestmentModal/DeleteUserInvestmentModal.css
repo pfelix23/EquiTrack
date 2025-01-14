@@ -37,7 +37,9 @@
 .delete-account-container {
     height: fit-content;
     width: 26vw;
-    height: 36vh;
+    height: 39vh;
+    border: solid black 3px;
+    border-radius: 8px;
 }
 
 .delete-account-button-container {

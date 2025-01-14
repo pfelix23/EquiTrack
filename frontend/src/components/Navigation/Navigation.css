@@ -47,6 +47,7 @@
     font-size: small; 
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;   
     outline: none;
+    border: none;
 }
 
 #logout-button:hover {
@@ -66,6 +67,7 @@
     font-family: 'Roboto';
     font-size: small;  
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; 
+    border: none;
 }
 
 #profile-button:hover {
@@ -84,7 +86,8 @@
     width: 132px;
     font-family: 'Roboto';
     font-size: small;  
-    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;       
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    border: none;       
 }
 
 #signup-button:hover {
@@ -104,6 +107,7 @@
     font-family: 'Roboto';
     font-size: small;    
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; 
+    border: none;
 }
 
 #login-button:hover {

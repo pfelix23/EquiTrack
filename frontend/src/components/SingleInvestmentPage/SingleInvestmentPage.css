@@ -39,7 +39,7 @@
     flex-direction: column;
     border-radius: 12px;
     margin: 5px;
-    width: 10.1vw;
+    width: 13.1vw;
 }
 
 .single-new-investment-button {
@@ -104,4 +104,49 @@
 
 .single-chart-container {
     display: flex;
+    margin-top: -23%;
+}
+
+.h1 {
+    width: 92.9%;
+    display: flex;
+    justify-content: space-between;
+    height: 70px;
+    font-family: "Roboto";
+    border-bottom: solid rgb(199, 199, 199) 1px;
+    margin-top: -.6%;
+    font-weight: 700;
+    border-bottom-right-radius: -10px;
+    border-bottom-left-radius: -10px;
+
+}
+
+.single-investment-edit {
+    width: 55px;
+    padding: 2px;
+    font-family: "Roboto";
+    margin: 2px;
+    border: none;
+    background-color: #001f5e;
+    color: white;
+    font-weight: 350;
+}
+
+.single-investment-edit:hover {
+    cursor: pointer;
+}
+
+.single-investment-delete {
+    width: 55px;
+    padding: 2px;
+    font-family: "Roboto";
+    margin: 2px;
+    background-color: grey;
+    border: none;
+    color: white;
+    font-weight: 350;
+}
+
+.single-investment-delete:hover {
+    cursor: pointer;
 }

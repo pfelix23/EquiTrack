@@ -72,7 +72,7 @@ function Navigation({ isLoaded }) {
     <div>
       {isLoaded && sessionLinks}
       <div className='additional_nav'>
-        <img onClick={() => navigate('/')} className='logo' src="/EquiTrack_Logo.jpg" alt="EquiTrack" />
+        <img onClick={() => navigate('/')} className='logo' src="/logo_2.png" alt="EquiTrack" />
         <div className={className()}>
           {sessionUser && (
           <>

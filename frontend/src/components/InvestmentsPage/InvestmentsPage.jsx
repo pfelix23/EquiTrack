@@ -2,15 +2,16 @@ import { useNavigate } from "react-router-dom";
 import { FaPlus } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import { csrfFetch } from "../../store/csrf";
-import { useModal } from "../../context/Modal";
 import { Bar, Line, Doughnut, PolarArea } from 'react-chartjs-2';
+import { useModal } from "../../context/Modal";
+import NewInvestmentModal from "../NewInvestmentModal/NewInvestmentModal";
 import { Chart as ChartJS } from "chart.js/auto";
 import './InvestmentsPage.css'
 
 function InvestmentsPage() {
     const [investments, setInvestments] = useState();
     const [errors, setErrors] = useState();
-    const { closeModal } = useModal();
+    const { closeModal, setModalContent } = useModal();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -111,12 +112,17 @@ function InvestmentsPage() {
           },
         },
       };
+
+      const handleNewInvestment = (e) => {
+    
+        setModalContent(<NewInvestmentModal closeModal={closeModal}/>)
+      }
       
     
     return (
         <div className="root-div">
             <div className="investment-parent-div">
-            <div className="new-investment-button"><FaPlus /> &nbsp;New Investment </div>
+            <button className="new-investment-button" onClick={handleNewInvestment}><FaPlus /> &nbsp;New Investment</button>
             <div className="investment-child-div">
                 {investments?.map((investment) => {
                     return(<section id="investments" key={investment.id}> 

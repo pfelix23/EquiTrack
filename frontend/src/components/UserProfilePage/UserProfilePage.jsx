@@ -5,7 +5,7 @@ import { useModal } from '../../context/Modal';
 import { csrfFetch } from '../../store/csrf';
 import * as usersActions from '../../store/users'
 import { useNavigate } from 'react-router-dom';
-import DeleteUserModal from '../DeleteUserModal/DeleteUserModal';
+import DeleteUserInvestmentModal from '../DeleteUserInvestmentModal/DeleteUserInvestmentModal';
 
 function UserProfilePage () {
     const [errors, setErrors] = useState();
@@ -37,16 +37,16 @@ function UserProfilePage () {
             }
         })
     },[errors, closeModal]);
-
+    
     useEffect(() => {
         if(user) {
             setFirstName(user?.firstName)
             setLastName(user?.lastName)
             setEmail(user?.email)
             setUsername(user?.username)
-        }
-    }, [])
-
+        } else navigate('/')
+    }, [closeModal, navigate, user])
+    
     useEffect(() => {
         csrfFetch('/api/assets')
         .then(res => res.json())
@@ -165,8 +165,9 @@ function UserProfilePage () {
 
     const handleDeleteUser = (e) => {
         e.preventDefault();
-        setModalContent(<DeleteUserModal userId={user?.id} closeModal={closeModal}/>)
+        setModalContent(<DeleteUserInvestmentModal userId={user?.id} closeModal={closeModal}/>)
     }
+
 
     return (
         <div id='userForm-container'>

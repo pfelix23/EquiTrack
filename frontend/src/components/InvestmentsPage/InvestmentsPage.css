@@ -43,6 +43,10 @@
     margin-top: 5px;
 }
 
+.new-investment-button:hover {
+    cursor: pointer;
+}
+
 .investment-child-div {
     display: flex;
     flex-direction: column;
