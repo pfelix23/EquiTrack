@@ -70,7 +70,7 @@ router.put('/:investmentId/edit', requireAuth, async (req, res) => {
     const investment = await Investment.findByPk(investmentId);
     const { investment_name, type, amount, length } = req.body;
 
-    if(!investmentId) {
+    if(!investment) {
         return res.status(404).json({
             message: "Investment couldn't be found"
         })
@@ -94,38 +94,43 @@ router.put('/:investmentId/edit', requireAuth, async (req, res) => {
         })
     };
 
-    let editedInvestment;
+    let risk_percentage, projection, ROR;
     
+    if(type === 'S&P 500') {
+        risk_percentage = 17.5;
+        projection = (amount*(.118 / 12)) * parseInt(length);
+        ROR = parseFloat((.118 / 12).toFixed(5));
+    } else if (type ==='US Small-Cap') {
+        risk_percentage = 17; 
+        projection = (amount*(.094 / 12)) * parseInt(length);
+        ROR = parseFloat((.094 / 12).toFixed(5));
+    } else if (type ==='Real-Estate') {
+        risk_percentage = 7.5; 
+        projection = (amount*(.10 / 12)) * parseInt(length);
+        ROR = parseFloat((.10 / 12).toFixed(5));
+    } else if (type ==='Bond') {
+        risk_percentage = 4; 
+        projection = (amount*(.03 / 12)) * parseInt(length);
+        ROR = parseFloat((.03 / 12).toFixed(5))
+    } else {
+        return res.status(400).json({
+            message: 'Bad Request',
+            errors: {
+                type: "Investment type is required"
+            }
+        })
+    }
     
-    if(type === 'S&P 500')
-        editedInvestment = await Investment.update({ownerId: req.user.id, investment_name, type, amount,length, risk_percentage: 17.5, projection: (amount*(.118 / 12)) * parseInt(length) , ROR: parseFloat((.118 / 12).toFixed(5))}, 
+    await Investment.update({ownerId: req.user.id, investment_name, type, amount, length, risk_percentage, projection, ROR },
     {where: {
-            id: investmentId
-        }});
-        
-    else if (type ==='US Small-Cap')
-        editedInvestment = await Investment.update({ownerId: req.user.id, investment_name, type, amount,length, risk_percentage: 17, projection: (amount*(.094 / 12)) * parseInt(length) , ROR: parseFloat((.094 / 12).toFixed(5))}, 
-    {where: {
-            id: investmentId
-        }});
-        
-    else if (type ==='Real-Estate')
-        editedInvestment = await Investment.update({ownerId: req.user.id, investment_name, type, amount,length, risk_percentage: 7.5, projection: (amount*(.10 / 12)) * parseInt(length) , ROR: parseFloat((.10 / 12).toFixed(5))}, 
-    {where: {
-            id: investmentId
-        }});
-        
-    else if (type ==='Bond')
-        editedInvestment = await Investment.update({ownerId: req.user.id,investment_name,type,amount,length, risk_percentage: 4, projection: (amount*(.03 / 12)) * parseInt(length) , ROR: parseFloat((.03 / 12).toFixed(5))}, 
-    {where: {
-            id: investmentId
-        }});
+        id: investmentId
+    }})
 
     const newInvestment = await Investment.findByPk(investmentId)
 
     return res.status(200).json(newInvestment)
-
 })
+
 
 router.delete('/:investmentId/delete', requireAuth, async (req, res) => {
     const investmentId = req.params.investmentId;
