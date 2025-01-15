@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Asset.belongsToMany(models.User, {through: models.Liability, foreignKey: 'assetId'})
+      // Asset.belongsToMany(models.User, {through: models.Liability, foreignKey: 'assetId'})
       Asset.belongsTo(models.User, {as: "Owner", foreignKey: 'ownerId', onDelete: 'CASCADE'})
       Asset.belongsTo(models.Investment, {foreignKey: 'investmentId', onDelete: 'CASCADE'})
 

@@ -114,7 +114,7 @@ function SingleInvestmentPage() {
               callbacks: {
                 label: function (tooltipItem) {
                   const investment = investments[tooltipItem.dataIndex]; 
-                  return `${investment.type}: $${tooltipItem.raw}`; 
+                  return `${investment.type}: $${tooltipItem.raw.toLocaleString()}`; 
                 },
               },
             },

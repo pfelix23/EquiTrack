@@ -1,4 +1,4 @@
-.single-chart-style {
+.single-asset-style {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
@@ -6,14 +6,14 @@
     padding: 10px;
 }
 
-.single-root-div {
+.single-root-asset-div {
     display: flex;
     margin-top: 20px;
     background-color: #f3f3f3;
     height: 100vh;
 }
 
-.single-chart {
+.single-asset {
     width: 40vw;
     height: 40vh;
     display: flex;
@@ -23,9 +23,9 @@
     padding: 5px;
     box-sizing: border-box;
     flex-direction: column;
-    border-left: #A7B0CA solid 1px;
-    border-right: #A7B0CA solid 1px;
-    border-bottom: #A7B0CA solid 1px;
+    border-left: #112d66 solid 1px;
+    border-right: #112d66 solid 1px;
+    border-bottom: #112d66 solid 1px;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
     margin-left: 10px;
@@ -34,7 +34,7 @@
 
 }
 
-.single-investment-parent-div {
+.single-asset-parent-div {
     display: flex;
     flex-direction: column;
     border-radius: 12px;
@@ -42,7 +42,7 @@
     width: 13.1vw;
 }
 
-.single-new-investment-button {
+.single-new-asset-button {
     color: white;
     display: flex;
     justify-content: center;
@@ -55,7 +55,7 @@
     margin-top: 5px;
 }
 
-.single-investment-child-div {
+.single-asset-child-div {
     display: flex;
     flex-direction: column;
     background-color: white;
@@ -63,7 +63,7 @@
     box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
 }
 
-#investments {
+#assets {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -76,7 +76,7 @@
     font-weight: 450;
 }
 
-#investments:hover {
+#assets:hover {
     cursor: pointer;
     color: #3b5b9b;
 }
@@ -87,9 +87,9 @@
     background-color: #f3f3f3;
 }
 
-#single-chart-div {
+#single-asset-div {
     width: 40vw;
-    background-color: #A7B0CA;
+    background-color: #112d66;
     font-family: 'Roboto';
     font-weight: bold;
     display: flex;
@@ -100,9 +100,10 @@
     border-top-right-radius: 10px;
     padding-top: 5px;
     padding-bottom: 5px;
+    color: white;
 }
 
-.single-chart-container {
+.single-asset-container {
     display: flex;
     margin-top: -23%;
 }
@@ -121,7 +122,7 @@
 
 }
 
-.single-investment-edit {
+.single-asset-edit {
     width: 55px;
     padding: 2px;
     font-family: "Roboto";
@@ -132,11 +133,11 @@
     font-weight: 400;
 }
 
-.single-investment-edit:hover {
+.single-asset-edit:hover {
     cursor: pointer;
 }
 
-.single-investment-delete {
+.single-asset-delete {
     width: 55px;
     padding: 2px;
     font-family: "Roboto";
@@ -147,6 +148,6 @@
     font-weight: 400;
 }
 
-.single-investment-delete:hover {
+.single-asset-delete:hover {
     cursor: pointer;
 }

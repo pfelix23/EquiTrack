@@ -89,7 +89,7 @@ function InvestmentsPage() {
             callbacks: {
               label: function (tooltipItem) {
                 const investment = investments[tooltipItem.dataIndex]; 
-                return `${investment.type}: $${tooltipItem.raw}`; 
+                return `${investment.type}: $${tooltipItem.raw.toLocaleString()}`; 
               },
             },
           },
@@ -113,7 +113,7 @@ function InvestmentsPage() {
         },
       };
 
-      const handleNewInvestment = (e) => {
+      const handleNewInvestment = () => {
     
         setModalContent(<NewInvestmentModal closeModal={closeModal}/>)
       }

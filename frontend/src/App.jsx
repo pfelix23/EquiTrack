@@ -6,6 +6,8 @@ import Navigation from './components/Navigation/Navigation';
 import InvestmentsPage from './components/InvestmentsPage/InvestmentsPage';
 import SingleInvestmentPage from './components/SingleInvestmentPage/SingleInvestmentPage';
 import UserProfilePage from './components/UserProfilePage/UserProfilePage';
+import AssetsPage from './components/AssetsPage/AssetsPage';
+import SingleAssetPage from './components/SingleAssetPage/SingleAssetPage';
 
 function Layout() {
   const dispatch = useDispatch();
@@ -44,6 +46,14 @@ const router = createBrowserRouter([
       {
         path: '/user',
         element: <UserProfilePage />
+      },
+      {
+        path: '/assets',
+        element: <AssetsPage />
+      },
+      {
+        path: '/assets/:assetId',
+        element: <SingleAssetPage />
       }
     ]
   },

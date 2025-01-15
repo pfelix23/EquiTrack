@@ -76,7 +76,7 @@ function Navigation({ isLoaded }) {
         <div className={className()}>
           {sessionUser && (
           <>
-          <div>Assets</div>
+          <div onClick={() => navigate('/assets')}>Assets</div>
           <div>Liabilities</div>
           <div onClick={() => navigate('/investments')}>Investments</div>
           </>)}

@@ -81,7 +81,7 @@ function NewInvestmentModal() {
                     required
                 /> 
                 </label>
-                <button type="submit" className='create-investment-button'>Create</button>
+                <button type="submit" className='create-investment-button'>Create Investment</button>
             </form>
         </div>
     )

@@ -36,12 +36,12 @@ router.post('/create', requireAuth, async (req, res) => {
     const { asset_name, type, amount } = req.body;
     const totalLiabilities = await Liability.sum('amount', {
         where: {
-            id: req.user.id
+            ownerId: req.user.id
         }
     });
     const totalAssets = await Asset.sum('amount', {
         where: {
-            id: req.user.id
+            ownerId: req.user.id
         }
     });
 
@@ -58,19 +58,11 @@ router.post('/create', requireAuth, async (req, res) => {
     const net = (totalAssets + amount) - totalLiabilities;
 
     if(net >= 0) {
-        const asset = await Asset.create({ownerId: req.user.id ,asset_name, type, amount, net_assets: net,
-            attributes: {
-                exclude: ['net_deficiency']
-            }
-        });
+        const asset = await Asset.create({ownerId: req.user.id ,asset_name, type, amount, net_assets: net});
 
         return res.status(201).json(asset)
     } else {
-        const asset = await Asset.create({ownerId: req.user.id ,asset_name, type, amount, net_deficiency: net,
-            attributes: {
-                exclude: ['net_assets']
-            }
-        });
+        const asset = await Asset.create({ownerId: req.user.id ,asset_name, type, amount, net_deficiency: net});
 
         return res.status(201).json(asset)
     }
@@ -107,12 +99,12 @@ router.put('/:assetId/edit', requireAuth, async (req, res) => {
 
     const totalLiabilities = await Liability.sum('amount', {
         where: {
-            id: req.user.id
+            ownerId: req.user.id
         }
     });
     const totalAssets = await Asset.sum('amount', {
         where: {
-            id: req.user.id
+            ownerId: req.user.id
         }
     });
 
@@ -124,9 +116,6 @@ router.put('/:assetId/edit', requireAuth, async (req, res) => {
         const asset = await Asset.update({ownerId: req.user.id ,asset_name, type, amount, net_assets: net,
             where: {
                 id: assetId
-            },
-            attributes: {
-                exclude: ['net_deficiency']
             }
         });
 
@@ -135,9 +124,6 @@ router.put('/:assetId/edit', requireAuth, async (req, res) => {
         const asset = await Asset.update({ownerId: req.user.id ,asset_name, type, amount, net_deficiency: net,
             where: {
                 id: assetId
-            },
-            attributes: {
-                exclude: ['net_assets']
             }
         });
 

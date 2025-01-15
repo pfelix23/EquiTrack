@@ -37,6 +37,42 @@ module.exports = {
         ownerId: 2,                       
         createdAt: new Date(),
         updatedAt: new Date()
+      },
+      {
+        investment_name: 'Investment 3',
+        type: 'Bonds',
+        amount: 20000.00,
+        ROR: 3.0,
+        length: 7,
+        risk_percentage: 4,
+        projection: 24000.00,
+        ownerId: 3,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        investment_name: 'Investment 4',
+        type: 'Mutual Funds',
+        amount: 15000.00,
+        ROR: 6.0,
+        length: 8,
+        risk_percentage: 5,
+        projection: 21000.00,
+        ownerId: 4,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        investment_name: 'Investment 5',
+        type: 'Cryptocurrency',
+        amount: 10000.00,
+        ROR: 15.0,
+        length: 3,
+        risk_percentage: 20,
+        projection: 15000.00,
+        ownerId: 1,
+        createdAt: new Date(),
+        updatedAt: new Date()
       }
     ], {});
   },
