@@ -8,6 +8,8 @@ import SingleInvestmentPage from './components/SingleInvestmentPage/SingleInvest
 import UserProfilePage from './components/UserProfilePage/UserProfilePage';
 import AssetsPage from './components/AssetsPage/AssetsPage';
 import SingleAssetPage from './components/SingleAssetPage/SingleAssetPage';
+import LiabilitiesPage from './components/LiabilitiesPage/LiabilitiesPage';
+import SingleLiabilityPage from './components/SingleLiabilityPage/SingleLiabilityPage';
 
 function Layout() {
   const dispatch = useDispatch();
@@ -54,6 +56,14 @@ const router = createBrowserRouter([
       {
         path: '/assets/:assetId',
         element: <SingleAssetPage />
+      },
+      {
+        path: '/liabilities',
+        element: <LiabilitiesPage />
+      },
+      {
+        path: '/liabilities/:liabilityId',
+        element: <SingleLiabilityPage />
       }
     ]
   },

@@ -7,7 +7,7 @@ import * as investmentActions from '../../store/investments';
 import './DeleteUserInvestmentModal.css'
 
 
-function DeleteUserInvestmentModal({userId, investmentId}) {
+function DeleteUserInvestmentModal({userId, investmentId, navigate}) {
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
   const dispatch = useDispatch();
@@ -35,6 +35,7 @@ function DeleteUserInvestmentModal({userId, investmentId}) {
     return dispatch(investmentActions.deleteInvestment(investmentId),
     )
    .then(closeModal)
+   .then(navigate('/investments'))
    .catch(async (res) => {
       const data = await res.json();
       if (data && data.errors) {

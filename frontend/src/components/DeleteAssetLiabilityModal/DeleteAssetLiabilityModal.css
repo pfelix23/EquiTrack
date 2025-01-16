@@ -1,0 +1,60 @@
+.delete-asset-button {
+    width: 85%;
+    border-radius: 0%;
+    background-color: grey;
+    color: white;
+    height: 6vh;
+    font-weight: bolder;
+    margin-top: 2%;
+    margin-left: 7%;
+    margin-bottom: 2%;
+
+  }
+
+  .delete-asset-button:hover {
+    cursor: pointer;
+  }
+
+  .keep-asset-button {
+    width: 85%;
+    border-radius: 0%;
+    background-color: #001f5e;
+    color: white;
+    height: 6vh;
+    font-weight: bolder;
+    margin-top: 2%;
+    margin-left: 7%;
+    box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+
+  }
+
+  .keep-asset-button:hover {
+    cursor: pointer;
+    background-color:  #001e5a;
+  }
+
+
+.delete-asset-container {
+    height: fit-content;
+    width: 26vw;
+    height: 39vh;
+    border: solid black 3px;
+    border-radius: 8px;
+}
+
+.delete-asset-button-container {
+    width: 26vw;
+}
+
+.delete-asset-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Roboto';
+    
+}
+
+.confirm-asset-text {
+    margin-left: 9%;
+    font-family: 'Roboto';
+}

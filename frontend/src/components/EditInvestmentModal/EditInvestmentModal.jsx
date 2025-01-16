@@ -41,7 +41,7 @@ function EditInvestmentModal({investment}) {
         setType(investment.type);
         setAmount(investment.amount);
         setLength(investment.length);
-    }, [errors])
+    }, [investment])
 
     
     return (
@@ -90,7 +90,7 @@ function EditInvestmentModal({investment}) {
                     required
                 /> 
                 </label>
-                <button type="submit" className='edit-investment-button'>Edit</button>
+                <button type="submit" className='edit-investment-button'>Update Investment</button>
             </form>
         </div>
     )

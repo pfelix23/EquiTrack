@@ -8,7 +8,7 @@
 
 .single-root-div {
     display: flex;
-    margin-top: 20px;
+    margin-top: 2px;
     background-color: #f3f3f3;
     height: 100vh;
 }
@@ -39,7 +39,7 @@
     flex-direction: column;
     border-radius: 12px;
     margin: 5px;
-    width: 13.1vw;
+    width: 13.3vw;
 }
 
 .single-new-investment-button {
@@ -53,6 +53,7 @@
     font-size: small;
     margin-bottom: 20px;
     margin-top: 5px;
+    border: none;
 }
 
 .single-investment-child-div {
@@ -79,12 +80,6 @@
 #investments:hover {
     cursor: pointer;
     color: #3b5b9b;
-}
-
-.root-div {
-    display: flex;
-    margin-top: 20px;
-    background-color: #f3f3f3;
 }
 
 #single-chart-div {
@@ -123,7 +118,7 @@
 
 .single-investment-edit {
     width: 55px;
-    padding: 2px;
+    padding: 2.5px;
     font-family: "Roboto";
     margin: 2px;
     border: none;
@@ -138,7 +133,7 @@
 
 .single-investment-delete {
     width: 55px;
-    padding: 2px;
+    padding: 2.5px;
     font-family: "Roboto";
     margin: 2px;
     background-color: grey;

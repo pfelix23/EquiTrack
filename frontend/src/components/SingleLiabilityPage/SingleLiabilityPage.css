@@ -1,4 +1,4 @@
-.single-asset-style {
+.single-liability-style {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
@@ -6,14 +6,14 @@
     padding: 10px;
 }
 
-.single-root-asset-div {
+.single-root-liability-div {
     display: flex;
     margin-top: 2px;
     background-color: #f3f3f3;
     height: 100vh;
 }
 
-.single-asset {
+.single-liability {
     width: 40vw;
     height: 40vh;
     display: flex;
@@ -34,15 +34,15 @@
 
 }
 
-.single-asset-parent-div {
+.single-liability-parent-div {
     display: flex;
     flex-direction: column;
     border-radius: 12px;
     margin: 5px;
-    width: 12.3vw;
+    width: 13.2vw;
 }
 
-.single-new-asset-button {
+.single-new-liability-button {
     color: white;
     display: flex;
     justify-content: center;
@@ -56,7 +56,7 @@
     border: none;
 }
 
-.single-asset-child-div {
+.single-liability-child-div {
     display: flex;
     flex-direction: column;
     background-color: white;
@@ -64,7 +64,7 @@
     box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
 }
 
-#assets {
+#liabilitys {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -77,12 +77,12 @@
     font-weight: 450;
 }
 
-#assets:hover {
+#liabilitys:hover {
     cursor: pointer;
     color: #3b5b9b;
 }
 
-#single-asset-div {
+#single-liability-div {
     width: 40vw;
     background-color: #112d66;
     font-family: 'Roboto';
@@ -98,7 +98,7 @@
     color: white;
 }
 
-.single-asset-container {
+.single-liability-container {
     display: flex;
     margin-top: -23%;
 }
@@ -117,7 +117,7 @@
 
 }
 
-.single-asset-edit {
+.single-liability-edit {
     width: 55px;
     padding: 2.5px;
     font-family: "Roboto";
@@ -128,11 +128,11 @@
     font-weight: 400;
 }
 
-.single-asset-edit:hover {
+.single-liability-edit:hover {
     cursor: pointer;
 }
 
-.single-asset-delete {
+.single-liability-delete {
     width: 55px;
     padding: 2.5px;
     font-family: "Roboto";
@@ -143,11 +143,11 @@
     font-weight: 400;
 }
 
-.single-asset-delete:hover {
+.single-liability-delete:hover {
     cursor: pointer;
 }
 
-.single-asset-chart-style {
+.single-liability-chart-style {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;

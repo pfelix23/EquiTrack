@@ -44,10 +44,6 @@ function SingleInvestmentPage() {
         })
     },[errors, closeModal, investmentId]);
 
-    useEffect(() => {
-      if(!investmentId) navigate('/investments')
-    },[closeModal, investmentId])
-
     const dollarData = {
         labels: [investment?.investment_name],
         datasets: [
@@ -57,7 +53,8 @@ function SingleInvestmentPage() {
                 fill: false,
                 tension: 0.1,
                 backgroundColor:['#125943', '#112d66'],
-                barThickness: 80
+                barThickness: 80,
+                borderRadius: 12
             },
             {
                 label: 'Projection',
@@ -65,7 +62,8 @@ function SingleInvestmentPage() {
                 fill: false,
                 tension: 0.1,
                 backgroundColor:['#112d66'],
-                barThickness: 80
+                barThickness: 80,
+                borderRadius: 12
             }
         ]
     };
@@ -80,7 +78,8 @@ function SingleInvestmentPage() {
                 tension: 0.1,
                 backgroundColor: ['#112d66'],
                 grouped: true,
-                barThickness: 80
+                barThickness: 80,
+                borderRadius: 12
             },
             {
                 label: 'Risk Percentage',
@@ -89,7 +88,8 @@ function SingleInvestmentPage() {
                 tension: 0.1,
                 backgroundColor:['#125943', '#112d66'],
                 grouped: true,
-                barThickness: 80
+                barThickness: 80,
+                borderRadius: 12
             },
         ]
     };
@@ -154,7 +154,7 @@ function SingleInvestmentPage() {
 
     const handleDeleteInvestment = (e) => {
       e.preventDefault();
-      setModalContent(<DeleteUserInvestmentModal investmentId={investmentId} closeModal={closeModal}/>)
+      setModalContent(<DeleteUserInvestmentModal investmentId={investmentId} closeModal={closeModal} navigate={navigate}/>)
     }
 
     const handleEditInvestment = (e) => {
@@ -198,7 +198,7 @@ function SingleInvestmentPage() {
                     </div>
                 )}
         </div>
-    )
+    );
 }
 
 export default SingleInvestmentPage;

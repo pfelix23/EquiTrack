@@ -35,7 +35,8 @@ function InvestmentsPage() {
                 data: investments?.map(investment => investment.amount),
                 fill: true,
                 tension: 0.1,
-                backgroundColor:'#125943'
+                backgroundColor:['#125943', '#112D66', '#62B6CB','#CAE9FF','#9B9987'],
+                borderRadius: 12
             }
         ]
     };
@@ -61,7 +62,7 @@ function InvestmentsPage() {
                 data: investments?.map(investment => investment.risk_percentage),
                 fill: false,
                 tension: 0.1,
-                backgroundColor:['#125943', '#112d66']
+                backgroundColor:['#125943', '#112D66', '#62B6CB','#CAE9FF','#9B9987']
             }
         ]
     };
@@ -74,7 +75,7 @@ function InvestmentsPage() {
                 data: investments?.map(investment => investment.projection),
                 fill: false,
                 tension: 0.1,
-                backgroundColor:['#125943', '#112d66']
+                backgroundColor:['#125943', '#112D66', '#62B6CB','#CAE9FF','#9B9987']
             }
         ]
     };
@@ -114,9 +115,8 @@ function InvestmentsPage() {
       };
 
       const handleNewInvestment = () => {
-    
         setModalContent(<NewInvestmentModal closeModal={closeModal}/>)
-      }
+      };
       
     
     return (

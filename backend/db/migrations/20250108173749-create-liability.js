@@ -18,12 +18,6 @@ module.exports = {
       amount: {
         type: Sequelize.DECIMAL
       },
-      net_assets: {
-        type: Sequelize.DECIMAL
-      },
-      net_deficiency: {
-        type: Sequelize.DECIMAL
-      },
       ownerId: {
         type: Sequelize.INTEGER
       },

@@ -21,8 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     asset_name: DataTypes.STRING,
     type: DataTypes.STRING,
     amount: DataTypes.DECIMAL,
-    net_assets: DataTypes.DECIMAL,
-    net_deficiency: DataTypes.DECIMAL,
+    liquid: DataTypes.DECIMAL,
     ownerId: DataTypes.INTEGER,
     liabilityId: DataTypes.INTEGER,
     investmentId: DataTypes.INTEGER

@@ -77,7 +77,7 @@ function Navigation({ isLoaded }) {
           {sessionUser && (
           <>
           <div onClick={() => navigate('/assets')}>Assets</div>
-          <div>Liabilities</div>
+          <div onClick={() => navigate('/liabilities')}>Liabilities</div>
           <div onClick={() => navigate('/investments')}>Investments</div>
           </>)}
           <div onClick={() => navigate('/')}>Home</div>

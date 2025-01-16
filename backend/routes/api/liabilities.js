@@ -17,7 +17,7 @@ router.get('/', requireAuth, async (req, res) => {
 });
 
 router.get('/:liabilityId', requireAuth, async (req, res) => {
-    const liabilityId = req.params.assetId;
+    const liabilityId = req.params.liabilityId;
 
     if(!liabilityId) {
         return res.status(404).json({
@@ -34,17 +34,7 @@ router.get('/:liabilityId', requireAuth, async (req, res) => {
 
 router.post('/create', requireAuth, async (req, res) => {
     const { liability_name, type, amount } = req.body;
-    const totalLiabilities = await Liability.sum('amount', {
-        where: {
-            id: req.user.id
-        }
-    });
-    const totalAssets = await Asset.sum('amount', {
-        where: {
-            id: req.user.id
-        }
-    });
-
+    
     if(!liability_name || !type || !amount) {
         return res.status(400).json({
             message: "Bad Request", 
@@ -55,34 +45,23 @@ router.post('/create', requireAuth, async (req, res) => {
           }
        })
     };
-    const net = (totalAssets + amount) - totalLiabilities;
+    
 
-    if(net >= 0) {
-        const liability = await Liability.create({ownerId: req.user.id, liability_name, type, amount, net_assets: net,
-            attributes: {
-                exclude: ['net_deficiency']
-            }
-        });
+    
+    const liability = await Liability.create({ownerId: req.user.id, liability_name, type, amount,
+    });
 
-        return res.status(201).json(liability)
-    } else {
-        const liability = await Liability.create({ownerId: req.user.id, liability_name, type, amount, net_deficiency: net,
-            attributes: {
-                exclude: ['net_assets']
-            }
-        });
-
-        return res.status(201).json(liability)
-    }
+    return res.status(201).json(liability)
+    
 
 });
 
-router.put('/:assetId/edit', requireAuth, async (req, res) => {
+router.put('/:liabilityId/edit', requireAuth, async (req, res) => {
     const liabilityId = req.params.liabilityId;
     const liability = await Liability.findByPk(liabilityId);
     const { liability_name, type, amount } = req.body;
 
-    if(!liabilityId) {
+    if(!liability) {
         return res.status(404).json({
             message: "Liability couldn't be found"
         })
@@ -105,48 +84,17 @@ router.put('/:assetId/edit', requireAuth, async (req, res) => {
        })
     };
 
-    const totalLiabilities = await Liability.sum('amount', {
-        where: {
-            id: req.user.id
-        }
-    });
-    const totalAssets = await Asset.sum('amount', {
-        where: {
-            id: req.user.id
-        }
-    });
 
-    const newTotalAssets = totalAssets - asset.amount;
+    
+    await Liability.update({ownerId: req.user.id ,liability_name, type, amount},
+       { where: {
+            id: liabilityId
+        }}
+    );
 
-    const net = (newTotalAssets + amount) - totalLiabilities;
+    const newLiability = Liability.findByPk(liabilityId)
 
-    if(net >= 0) {
-            await Liability.update({ownerId: req.user.id ,liability_name, type, amount, net_assets: net,
-                where: {
-                    id: liabilityId
-                },
-                attributes: {
-                    exclude: ['net_deficiency']
-                }
-            });
-
-        const newLiability = Liability.findByPk(liabilityId)
-
-        return res.status(201).json(newLiability);
-    } else {
-            await Liability.update({ownerId: req.user.id ,liability_name, type, amount, net_deficiency: net,
-                where: {
-                    id: liabilityId
-                },
-                attributes: {
-                    exclude: ['net_assets']
-                }
-            });
-
-        const newLiability = Liability.findByPk(liabilityId)
-
-        return res.status(201).json(newLiability);
-    }
+    return res.status(201).json(newLiability);
 
 });
 

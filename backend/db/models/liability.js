@@ -29,12 +29,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DECIMAL,
       allowNull: false
     },
-    net_assets: {
-      type: DataTypes.DECIMAL
-    },
-    net_deficiency: {
-      type: DataTypes.DECIMAL
-    },
     ownerId: {
       type: DataTypes.INTEGER,
       allowNull: false

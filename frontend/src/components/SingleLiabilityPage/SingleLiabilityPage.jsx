@@ -4,26 +4,26 @@ import { useState, useEffect } from "react";
 import { csrfFetch } from "../../store/csrf";
 import { Bar, Line} from 'react-chartjs-2';
 import { useModal } from "../../context/Modal";
-import NewAssetModal from "../NewAssetModal/NewAssetModal";
-import EditAssetModal from "../EditAssetModal/EditAssetModal";
+import NewLiabilityModal from "../NewLiabilityModal/NewLiabilityModal";
+import EditLiabilityModal from "../EditLiabilityModal/EditLiabilityModal";
 import DeleteAssetLiabilityModal from "../DeleteAssetLiabilityModal/DeleteAssetLiabilityModal";
 import { Chart as ChartJS } from "chart.js/auto";
-import './SingleAssetPage.css';
+import './SingleLiabilityPage.css';
 import { useParams } from "react-router-dom";
 
-function SingleAssetPage() {
-    const [asset, setAsset] = useState();
+function SingleLiabilityPage() {
+    const [liability, setLiability] = useState();
     const [assets, setAssets] = useState();
     const [liabilities, setLiabilities] = useState();
     const [errors, setErrors] = useState();
     const { closeModal, setModalContent } = useModal();
-    const { assetId } = useParams();
+    const { liabilityId } = useParams();
     const navigate = useNavigate();
 
     useEffect(() => {
-        csrfFetch(`/api/assets/${assetId}`)
+        csrfFetch(`/api/liabilities/${liabilityId}`)
         .then(res => res.json())
-        .then((data) => setAsset(data))
+        .then((data) => setLiability(data))
         .catch(async (res) => {
             const data = await res.json();
             if(data && data.errors) {
@@ -31,7 +31,7 @@ function SingleAssetPage() {
                 console.error(errors)
             }
         })
-    },[errors, closeModal, assetId])
+    },[errors, closeModal, liabilityId])
 
     useEffect(() => {
         csrfFetch('/api/assets')
@@ -44,7 +44,7 @@ function SingleAssetPage() {
                 console.error(errors)
             }
         })
-    },[errors, closeModal, assetId])
+    },[errors, closeModal, liabilityId])
 
     useEffect(() => {
         csrfFetch('/api/liabilities')
@@ -57,7 +57,7 @@ function SingleAssetPage() {
                 console.error(errors)
             }
         })
-    },[errors, closeModal, assetId]);
+    },[errors, closeModal, liabilityId]);
 
     
     const assetsTotal = assets?.reduce((accumulator, currentValue) => accumulator + currentValue.amount, 0);
@@ -66,12 +66,12 @@ function SingleAssetPage() {
     
     const liquidAssetsTotal = assets?.reduce((accumulator, currentValue) => accumulator + currentValue.liquid, 0);
 
-    const assetData = {
-        labels: [asset?.asset_name],
+    const liabilityData = {
+        labels: [liability?.liability_name],
         datasets: [
             {
-                label: 'Asset Amount',
-                data: [asset?.amount],
+                label: 'Liability Amount',
+                data: [liability?.amount],
                 fill: false,
                 tension: 0.1,
                 backgroundColor:['#125943', '#112d66'],
@@ -91,14 +91,14 @@ function SingleAssetPage() {
     };
 
     const investmentData = {
-        labels: ["Passive", "Moderate", "Aggressive"],
+        labels: ["Ideal Debt to Asset", "Improve Debt to Asset", "Low Liquidity"],
         datasets: [
             {
-                label: 'Investment Allocation',  
+                label: 'Debt Allocation',  
                 data: [
-                    (assetsTotal - liabilitiesTotal > 0 && liquidAssetsTotal > 0 ? liquidAssetsTotal: 5000 ) * 0.10,  
-                    (assetsTotal - liabilitiesTotal > 0 && liquidAssetsTotal > 0 ? liquidAssetsTotal: 5000 ) * 0.30,  
-                    (assetsTotal - liabilitiesTotal > 0 && liquidAssetsTotal > 0 ? liquidAssetsTotal: 5000 ) * 0.50   
+                    (liabilitiesTotal / assetsTotal > .5 && liquidAssetsTotal > 0 ? liquidAssetsTotal: 5000 ) * 0.10,  
+                    (liabilitiesTotal / assetsTotal > 0 && liabilitiesTotal / assetsTotal < .5 && liquidAssetsTotal > 0 ? liquidAssetsTotal: 5000 ) * 0.30,  
+                    (assetsTotal - liabilitiesTotal < 0 && liquidAssetsTotal > 0 ? liquidAssetsTotal: 5000 ) * 0.50   
                 ],
                 fill: false,
                 tension: 0.1,
@@ -127,7 +127,7 @@ function SingleAssetPage() {
           tooltip: {
               callbacks: {
                 label: function (tooltipItem) {
-                  return `${asset.type}: $${tooltipItem.raw.toLocaleString()}`; 
+                  return `${liability.type}: $${tooltipItem.raw.toLocaleString()}`; 
                 },
               },
             },
@@ -168,54 +168,49 @@ function SingleAssetPage() {
       }
     };
 
-    const handleNewAsset = () => {
-        setModalContent(<NewAssetModal closeModal={closeModal}/>)
+    const handleNewLiability = () => {
+        setModalContent(<NewLiabilityModal closeModal={closeModal} />)
     };
 
-    const handleEditAsset = (e) => {
+    const handleEditLiability = (e) => {
         e.preventDefault();
-        setModalContent(<EditAssetModal closeModal={closeModal} asset={asset}/>)
+        setModalContent(<EditLiabilityModal closeModal={closeModal} liability={liability}/>)
     };
 
-    const handleDeleteAsset = (e) => {
+    const handleDeleteLiability = (e) => {
         e.preventDefault();
-        setModalContent(<DeleteAssetLiabilityModal assetId={assetId} closeModal={closeModal} navigate={navigate}/>)
-    };
-
-    const netLabel = () => {
-        if(assetsTotal > liabilitiesTotal) return "Net Asset"
-        else return "Net Deficiency"
-    }
+        setModalContent(<DeleteAssetLiabilityModal liabilityId={liabilityId} closeModal={closeModal} navigate={navigate}/>)
+      }
     
     
     return (
-        <div className="single-root-asset-div">
-            <div className="single-asset-parent-div">
-            <button className="new-asset-button" onClick={handleNewAsset}><FaPlus /> &nbsp;New Asset</button>
-            <div className="asset-child-div">
-                {assets?.map((asset) => {
-                    return(<section id="assets" key={asset.id}> 
-                        <p onClick={() => navigate(`/assets/${asset.id}`)}>{asset.asset_name}</p>
+        <div className="single-root-liability-div">
+            <div className="single-liability-parent-div">
+            <button className="new-liability-button" onClick={handleNewLiability}><FaPlus /> &nbsp;New liability</button>
+            <div className="liability-child-div">
+                {liabilities?.map((liability) => {
+                    return(<section id="liabilities" key={liability.id}> 
+                        <p onClick={() => navigate(`/liabilities/${liability.id}`)}>{liability.liability_name}</p>
                         </section>
                     )
                 })}
                 </div>
             </div>
-            {assets?.length > 0 && (
-                    <div className="single-asset-chart-style">
-                        <h1 className="h1">{asset?.asset_name} Information
+            {liabilities?.length > 0 && (
+                    <div className="single-liability-chart-style">
+                        <h1 className="h1">{liability?.liability_name} Information
                         <div>
-                        <button className="single-asset-edit" onClick={handleEditAsset} >edit</button>
-                        <button className="single-asset-delete" onClick={handleDeleteAsset} >delete</button>
+                        <button className="single-liability-edit" onClick={handleEditLiability} >edit</button>
+                        <button className="single-liability-delete" onClick={handleDeleteLiability} >delete</button>
                         </div>
                         </h1>
-                        <div className="single-asset-container">
-                        <div className="single-asset">
-                        <div id="single-asset-div">{asset?.asset_name} Value &  {netLabel()} Value</div>
-                        <Bar style={{paddingBottom: '10px'}} data={assetData} options={options}/>
+                        <div className="single-liability-container">
+                        <div className="single-liability">
+                        <div id="single-liability-div">{liability?.liability_name} Value & Net Asset Value</div>
+                        <Bar style={{paddingBottom: '10px'}} data={liabilityData} options={options}/>
                         </div>
-                        <div className="single-asset">
-                        <div id="single-asset-div"> Investment Strategies </div>
+                        <div className="single-liability">
+                        <div id="single-liability-div"> Debt Repayment Strategy </div>
                         <Line style={{paddingBottom: '10px'}} data={investmentData} options={lineOptions}/>
                         </div>
                         </div>                   
@@ -225,4 +220,4 @@ function SingleAssetPage() {
     )
 }
 
-export default SingleAssetPage
+export default SingleLiabilityPage

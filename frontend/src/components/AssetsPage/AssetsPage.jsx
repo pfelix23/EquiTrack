@@ -1,8 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { FaPlus } from "react-icons/fa";
 import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { csrfFetch } from "../../store/csrf";
-import { Bar, Line, Doughnut, PolarArea } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 import { useModal } from "../../context/Modal";
 import NewAssetModal from "../NewAssetModal/NewAssetModal";
 import { Chart as ChartJS } from "chart.js/auto";
@@ -10,9 +11,11 @@ import './AssetsPage.css'
 
 function AssetsPage() {
     const [assets, setAssets] = useState();
+    const [liabilities, setLiabilities] = useState();
     const [errors, setErrors] = useState();
     const { closeModal, setModalContent } = useModal();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     useEffect(() => {
         csrfFetch('/api/assets')
@@ -25,7 +28,20 @@ function AssetsPage() {
                 console.error(errors)
             }
         })
-    },[errors, closeModal])
+    },[errors, closeModal, dispatch])
+
+    useEffect(() => {
+        csrfFetch('/api/liabilities')
+        .then(res => res.json())
+        .then((data) => setLiabilities(data.Liabilities))
+        .catch(async (res) => {
+            const data = await res.json();
+            if(data && data.errors) {
+                setErrors(data.errors);
+                console.error(errors)
+            }
+        })
+    },[errors, closeModal, dispatch])
 
     const assetData = {
         labels: assets?.map(asset => asset.asset_name) ?? "Asset",
@@ -51,7 +67,7 @@ function AssetsPage() {
             callbacks: {
               label: function (tooltipItem) {
                 const asset = assets[tooltipItem.dataIndex]; 
-                return `${asset.type}: $${tooltipItem.raw}`; 
+                return `${asset.type}: $${(tooltipItem.raw).toLocaleString()}`; 
               },
             },
           },
@@ -63,23 +79,28 @@ function AssetsPage() {
     }
     
     const assetsTotal = assets?.reduce((accumulator, currentValue) => accumulator + currentValue.amount, 0);
+
+    const liabilitiesTotal = liabilities?.reduce((accumulator, currentValue) => accumulator + currentValue.amount, 0);
+
+    const liquidAssetsTotal = assets?.reduce((accumulator, currentValue) => accumulator + currentValue.liquid, 0);
     
-   const netValue = () => {
-    if(assets[0].net_assets) {
-        return assets[0].net_assets
+    
+    const netValue = () => {
+    if(assetsTotal  > liabilitiesTotal ?? 0) {
+        return assetsTotal - liabilitiesTotal
     } else 
-        return assets[0].net_deficiency
+        return liabilitiesTotal - assetsTotal
     }
 
     const netLabel = () => {
-        if(assets[0].net_assets) return "Net Assets"
+        if(assetsTotal > liabilitiesTotal) return "Net Asset"
         else return "Net Deficiency"
     }
 
     const investmentStrategy = () => {
-        if(assets[0].net_assets && assets[0].net_assets < 10000) {
+        if(assetsTotal - liabilitiesTotal > 0 && assetsTotal - liabilitiesTotal < 10000) {
             return "Moderate"
-        } else if(assets[0].net_assets && assets[0].net_assets > 10000) {
+        } else if(assetsTotal - liabilitiesTotal > 10000) {
             return "Aggressive"
         } else return "Passive"
     }
@@ -99,26 +120,26 @@ function AssetsPage() {
                 </div>
             </div>
             {assets?.length > 0 && (
-                    <div className="chart-style">
-                        <h1 className="h1">Assets Information</h1>
-                        <div>
-                        <div id="asset-div">Asset Summary</div>
+                    <div className="chart-asset-style">
+                        <h1 className="h1-assets">Assets Summary</h1>
+                        <div className="asset-container">
+                        <div id="asset-div">Asset Information</div>
                         <div className="chart-asset-div">
                         <div className="trial-div">
-                            <div>Total Assets</div>
-                            <div >Net Value</div>
-                            <div >{netLabel()}</div>
-                            <div >Asset Types</div>
-                            <div >Investment Strategy Recommendation</div>
-                            <div >Mother</div>
-                            <div >Mother</div>
-                            <div >Mother</div>
+                            <div className="trial-border">Total Assets</div>
+                            <div className="trial-border">Assets Value</div>
+                            <div className="trial-border">{netLabel()} Value</div>
+                            <div className="trial-border">Asset Types</div>
+                            <div className="trial-border">Investment Strategy Recommendation</div>
+                            <div className="trial-border">Liquid Assets</div>
+                            <div className="trial-border" title="Proportion of your assets that are liquid.">Liquidity Ratio</div>
+                            <div className="trial-bottom">Ideal Liquidity Ratio</div>
                         </div>
-                        <div className="trial-div">
-                            <div>{assets.length}</div>
-                            <div >${assetsTotal.toLocaleString()}</div>
-                            <div >${netValue().toLocaleString()}</div>
-                            <div >
+                        <div className="trial-div-1">
+                            <div className="trial-border-1">{assets.length}</div>
+                            <div className="trial-border-1">${assetsTotal.toLocaleString() ?? 0}</div>
+                            <div className="trial-border-1">${netValue().toLocaleString() ?? 0}</div>
+                            <div className="trial-border-1">
                             <select style={{backgroundColor:'#e6e6e6)', color:'black'}}>
                             {assets.map((asset, index) => {
                                 return (<option key={index} value="Types">{asset.type}</option>)
@@ -127,10 +148,10 @@ function AssetsPage() {
                             }
                             </select>
                             </div>
-                            <div >{investmentStrategy()}</div>
-                            <div >Mother</div>
-                            <div >Mother</div>
-                            <div >Mother</div>
+                            <div className="trial-border-1">{investmentStrategy()}</div>
+                            <div className="trial-border-1">${(typeof liquidAssetsTotal === 'number')? liquidAssetsTotal.toLocaleString() : 0}</div>
+                            <div className="trial-border-1">{((liquidAssetsTotal/assetsTotal)*100).toFixed(2)}%</div>
+                            <div className="trial-bottom">20% - 30%</div>
                         </div>
                         </div>
                         </div>

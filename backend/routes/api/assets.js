@@ -1,6 +1,6 @@
 const express = require('express')
 const { requireAuth } = require('../../utils/auth');
-const { Asset, Liability } = require('../../db/models');
+const { Asset } = require('../../db/models');
 
 const router = express.Router()
 
@@ -34,16 +34,6 @@ router.get('/:assetId', requireAuth, async (req, res) => {
 
 router.post('/create', requireAuth, async (req, res) => {
     const { asset_name, type, amount } = req.body;
-    const totalLiabilities = await Liability.sum('amount', {
-        where: {
-            ownerId: req.user.id
-        }
-    });
-    const totalAssets = await Asset.sum('amount', {
-        where: {
-            ownerId: req.user.id
-        }
-    });
 
     if(!asset_name || !type || !amount) {
         return res.status(400).json({
@@ -55,17 +45,19 @@ router.post('/create', requireAuth, async (req, res) => {
           }
        })
     };
-    const net = (totalAssets + amount) - totalLiabilities;
 
-    if(net >= 0) {
-        const asset = await Asset.create({ownerId: req.user.id ,asset_name, type, amount, net_assets: net});
+    if(type === "Cash" || type === "Real-Estate" || type === "Savings" || type === "401K") {
 
-        return res.status(201).json(asset)
-    } else {
-        const asset = await Asset.create({ownerId: req.user.id ,asset_name, type, amount, net_deficiency: net});
+        const asset = await Asset.create({ownerId: req.user.id ,asset_name, type, amount, liquid: amount});
 
         return res.status(201).json(asset)
+
     }
+
+  
+    const asset = await Asset.create({ownerId: req.user.id ,asset_name, type, amount});
+
+    return res.status(201).json(asset)
 
 });
 
@@ -74,7 +66,7 @@ router.put('/:assetId/edit', requireAuth, async (req, res) => {
     const asset = await Asset.findByPk(assetId);
     const { asset_name, type, amount } = req.body;
 
-    if(!assetId) {
+    if(!asset) {
         return res.status(404).json({
             message: "Asset couldn't be found"
         })
@@ -97,39 +89,30 @@ router.put('/:assetId/edit', requireAuth, async (req, res) => {
        })
     };
 
-    const totalLiabilities = await Liability.sum('amount', {
-        where: {
-            ownerId: req.user.id
-        }
-    });
-    const totalAssets = await Asset.sum('amount', {
-        where: {
-            ownerId: req.user.id
-        }
-    });
+    if(type === "Cash" || type === "Real-Estate" || type === "Savings" || type === "401K") {
 
-    const newTotalAssets = totalAssets - asset.amount;
-
-    const net = (newTotalAssets + amount) - totalLiabilities;
-
-    if(net >= 0) {
-        const asset = await Asset.update({ownerId: req.user.id ,asset_name, type, amount, net_assets: net,
-            where: {
+        await Asset.update({ownerId: req.user.id ,asset_name, type, amount, liquid: amount}, 
+           { where: {
                 id: assetId
-            }
-        });
+            }}
+        );
 
-        return res.status(201).json(asset);
-    } else {
-        const asset = await Asset.update({ownerId: req.user.id ,asset_name, type, amount, net_deficiency: net,
-            where: {
-                id: assetId
-            }
-        });
+        const newAsset = await Asset.findByPk(assetId);
 
-        return res.status(201).json(asset);
+        return res.status(201).json(newAsset)
+
     }
+   
+    await Asset.update({ownerId: req.user.id ,asset_name, type, amount},
+        {where: {
+            id: assetId
+        }}
+    );
 
+    const newAsset = await Asset.findByPk(assetId);
+
+    return res.status(201).json(newAsset);
+    
 });
 
 router.delete('/:assetId/delete', requireAuth, async (req, res) => {

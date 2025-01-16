@@ -1,7 +1,7 @@
 import { useModal } from '../../context/Modal';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
-import * as assetsActions from '../../store/asset'
+import * as assetsActions from '../../store/assets'
 import './NewAssetModal.css';
 
 
@@ -9,6 +9,7 @@ function NewAssetModal() {
     const [errors, setErrors] = useState();
     const [asset_name, setName] = useState();
     const [type, setType] = useState();
+    const [liquidType, setLiquidType] = useState();
     const [amount, setAmount] = useState();
     const dispatch = useDispatch();
     const { closeModal } = useModal();
@@ -18,7 +19,7 @@ function NewAssetModal() {
         setErrors({});
         return dispatch(assetsActions.create({
             asset_name,
-            type,
+            type: type || liquidType,
             amount,
         }),
         )
@@ -52,9 +53,24 @@ function NewAssetModal() {
                 id="asset-type" 
                 required
                 value={type}
+                disabled={!!liquidType}
                 onChange={(e) => setType(e.target.value)}
                 >
                 </input>
+                </label>
+                <label className='new-asset-label'>
+                Liquid-Type:&nbsp;
+                <select name="type" 
+                id="asset-type" 
+                value={liquidType}
+                onChange={(e) => {setLiquidType(e.target.value)}}
+                >
+                    <option value="">Select Liquid Type</option>
+                    <option value="Cash">Cash</option>
+                    <option value="Real-Estate">Real-Estate</option>
+                    <option value="Savings">Savings</option>
+                    <option value="401K">401K</option>
+                </select>
                 </label>
                 <label className='new-asset-label'>
                 Amount:&nbsp;
