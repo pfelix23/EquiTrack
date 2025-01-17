@@ -56,6 +56,10 @@ function AssetsPage() {
         ]
     };
 
+    useEffect(() => {
+
+    },[ChartJS])
+
    
     const options = {
         responsive: true,

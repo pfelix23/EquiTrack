@@ -1,8 +1,13 @@
 'use strict';
 
 /** @type {import('sequelize-cli').Migration} */
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;  // define your schema in options object
+}
 module.exports = {
   async up (queryInterface, Sequelize) {
+    options.tableName = 'Liabilities'
     await queryInterface.bulkInsert('Liabilities', [
   {
     liability_name: 'Mortgage Loan',
@@ -73,5 +78,8 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
+    options.tableName = 'Liabilities';
+    const Op = Sequelize.Op;
+    return queryInterface.bulkDelete(options);
   }
 };

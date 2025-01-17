@@ -180,7 +180,11 @@ function SingleLiabilityPage() {
     const handleDeleteLiability = (e) => {
         e.preventDefault();
         setModalContent(<DeleteAssetLiabilityModal liabilityId={liabilityId} closeModal={closeModal} navigate={navigate}/>)
-      }
+    };
+
+    useEffect(() => {
+
+    },[ChartJS])
     
     
     return (

@@ -117,6 +117,10 @@ function InvestmentsPage() {
       const handleNewInvestment = () => {
         setModalContent(<NewInvestmentModal closeModal={closeModal}/>)
       };
+
+      useEffect(() => {
+
+      },[ChartJS])
       
     
     return (

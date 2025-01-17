@@ -23,7 +23,7 @@ function DeleteAssetLiabilityModal({assetId, liabilityId, navigate}) {
       const data = await res.json();
       if (data && data.errors) {
         setErrors(data.errors);
-        console.log(errors);
+        console.error(errors);
       }
     });
   };
@@ -38,7 +38,7 @@ function DeleteAssetLiabilityModal({assetId, liabilityId, navigate}) {
       const data = await res.json();
       if (data && data.errors) {
         setErrors(data.errors);
-        console.log(errors);
+        console.error(errors);
       }
     });
   };

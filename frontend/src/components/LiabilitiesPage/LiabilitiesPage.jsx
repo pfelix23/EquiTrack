@@ -104,7 +104,11 @@ function LiabilitiesPage() {
         } else if(assetsTotal - liabilitiesTotal < 0 && liquidAssetsTotal > 0) {
             return "Aggressive"
         } else return "Passive"
-    }
+    };
+
+    useEffect(() => {
+
+    },[ChartJS])
     
     return (
         <div className="root-liability-div">

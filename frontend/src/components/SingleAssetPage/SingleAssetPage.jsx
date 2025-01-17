@@ -185,7 +185,11 @@ function SingleAssetPage() {
     const netLabel = () => {
         if(assetsTotal > liabilitiesTotal) return "Net Asset"
         else return "Net Deficiency"
-    }
+    };
+
+    useEffect(() => {
+
+    },[ChartJS])
     
     
     return (
