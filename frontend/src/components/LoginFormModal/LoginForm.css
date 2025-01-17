@@ -1,0 +1,60 @@
+.login-button {
+    width: 85%;
+    border-radius: 0%;
+    background-color: #001f5e;
+    color: white;
+    height: 6vh;
+    font-weight: bolder;
+    margin: 4%;
+    box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+
+}
+
+.login-button:hover {
+cursor: pointer;
+background-color:  #001e5a;
+}
+
+
+.login-label {
+    height: fit-content;
+    width: 16.5vw;
+    font-family: "Roboto";
+    margin: 10px 25px;
+    display: flex;
+    flex-direction: column;    
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-button-container {
+    width: fit-content;
+}
+
+.login-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Roboto';
+    
+}
+
+.login-container {
+    border: solid black 3px;
+    border-radius: 8px;
+}
+
+.demo-user {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Roboto";
+    color: rgb(38, 101, 126);
+    text-decoration: underline 2px;
+    height: 2vh;
+}
