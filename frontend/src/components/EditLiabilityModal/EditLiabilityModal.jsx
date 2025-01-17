@@ -39,7 +39,7 @@ function EditLiabilityModal({liability}) {
         setName(liability.liability_name);
         setType(liability.type);
         setAmount(liability.amount);
-    }, [errors])
+    }, [errors, liability])
 
     
     return (

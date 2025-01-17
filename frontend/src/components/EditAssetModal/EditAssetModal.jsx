@@ -8,7 +8,6 @@ function EditAssetModal({asset}) {
     const [errors, setErrors] = useState();
     const [asset_name, setName] = useState();
     const [type, setType] = useState();
-    const [liquidType, setLiquidType] = useState();
     const [amount, setAmount] = useState();
     const { closeModal } = useModal();
 
@@ -18,7 +17,7 @@ function EditAssetModal({asset}) {
             method: 'PUT',
             body: JSON.stringify({
                 asset_name,
-                type: type || liquidType,
+                type,
                 amount, 
             }) 
         })
@@ -64,15 +63,14 @@ function EditAssetModal({asset}) {
                     value={type}
                     onChange={(e) => setType(e.target.value)}
                     required
-                    disabled={!!liquidType}
                 />
                 </label>
                 <label className='edit-asset-label'>
                 Liquid-Type:&nbsp;
                 <select name="type" 
                 id="asset-type" 
-                value={liquidType}
-                onChange={(e) => {setLiquidType(e.target.value)}}
+                value={type}
+                onChange={(e) => {setType(e.target.value)}}
                 >
                     <option value="">Select Liquid Type</option>
                     <option value="Cash">Cash</option>

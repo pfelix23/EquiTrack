@@ -210,13 +210,17 @@ function SingleAssetPage() {
                         </div>
                         </h1>
                         <div className="single-asset-container">
-                        <div className="single-asset">
+                        <div >
                         <div id="single-asset-div">{asset?.asset_name} Value &  {netLabel()} Value</div>
+                        <div className="single-asset-chart">
                         <Bar style={{paddingBottom: '10px'}} data={assetData} options={options}/>
                         </div>
-                        <div className="single-asset">
+                        </div>
+                        <div >
                         <div id="single-asset-div"> Investment Strategies </div>
+                        <div className="single-asset-chart">
                         <Line style={{paddingBottom: '10px'}} data={investmentData} options={lineOptions}/>
+                        </div>
                         </div>
                         </div>                   
                     </div>

@@ -74,7 +74,7 @@ function AssetsPage() {
         },
       };
 
-    const handleNewAsset = (e) => {
+    const handleNewAsset = () => {
         setModalContent(<NewAssetModal closeModal={closeModal}/>)
     }
     
@@ -126,14 +126,14 @@ function AssetsPage() {
                         <div id="asset-div">Asset Information</div>
                         <div className="chart-asset-div">
                         <div className="trial-div">
-                            <div className="trial-border">Total Assets</div>
-                            <div className="trial-border">Assets Value</div>
-                            <div className="trial-border">{netLabel()} Value</div>
-                            <div className="trial-border">Asset Types</div>
-                            <div className="trial-border">Investment Strategy Recommendation</div>
-                            <div className="trial-border">Liquid Assets</div>
+                            <div className="trial-border" title="Total Number of Assets">Total Assets</div>
+                            <div className="trial-border" title="Value of all Assets">Assets Value</div>
+                            <div className="trial-border" title="Value of Assets minus Liabilities">{netLabel()} Value</div>
+                            <div className="trial-border" title="All Types of Entered Assets">Asset Types</div>
+                            <div className="trial-border" title="Recommended Investment Plan">Investment Strategy Recommendation</div>
+                            <div className="trial-border" title="Value of all Liquid Assets">Liquid Assets</div>
                             <div className="trial-border" title="Proportion of your assets that are liquid.">Liquidity Ratio</div>
-                            <div className="trial-bottom">Ideal Liquidity Ratio</div>
+                            <div className="trial-bottom" title="Recommended Liquidity Ratio">Ideal Liquidity Ratio</div>
                         </div>
                         <div className="trial-div-1">
                             <div className="trial-border-1">{assets.length}</div>

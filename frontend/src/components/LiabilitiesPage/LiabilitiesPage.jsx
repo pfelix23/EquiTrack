@@ -75,7 +75,7 @@ function LiabilitiesPage() {
         },
       };
 
-    const handleNewLiability = (e) => {
+    const handleNewLiability = () => {
         setModalContent(<NewLiabilityModal closeModal={closeModal}/>)
     }
     
@@ -98,14 +98,13 @@ function LiabilitiesPage() {
         else return "Net Deficiency"
     }
 
-    const investmentStrategy = () => {
-        if(assetsTotal - liabilitiesTotal > 0 && assetsTotal - liabilitiesTotal < 10000) {
+    const debtRepaymentStrategy = () => {
+        if(liabilitiesTotal / assetsTotal > 0 && liabilitiesTotal / assetsTotal > .1 && liabilitiesTotal / assetsTotal < .5 && liquidAssetsTotal > 0) {
             return "Moderate"
-        } else if(assetsTotal - liabilitiesTotal > 10000) {
+        } else if(assetsTotal - liabilitiesTotal < 0 && liquidAssetsTotal > 0) {
             return "Aggressive"
         } else return "Passive"
     }
-      
     
     return (
         <div className="root-liability-div">
@@ -127,14 +126,14 @@ function LiabilitiesPage() {
                         <div id="liability-div">Liability Information</div>
                         <div className="chart-liability-div">
                         <div className="liability-trial-div">
-                            <div className="liability-trial-border">Total Liabilities</div>
-                            <div className="liability-trial-border">Liabilities Value</div>
-                            <div className="liability-trial-border">{netLabel()} Value</div>
-                            <div className="liability-trial-border">liability Types</div>
-                            <div className="liability-trial-border">Debt Repayment Strategy</div>
-                            <div className="liability-trial-border">Liquid Assets</div>
-                            <div className="liability-trial-border">Debt to Asset Ratio</div>
-                            <div className="liability-trial-bottom">Ideal Debt Ratio</div>
+                            <div className="liability-trial-border" title="Total Number of Liabilities">Total Liabilities</div>
+                            <div className="liability-trial-border" title="Value of all Liabilities">Liabilities Value</div>
+                            <div className="liability-trial-border" title="Value of Assets minus Liabilities">{netLabel()} Value</div>
+                            <div className="liability-trial-border" title="All Types of Entered Liabilities">liability Types</div>
+                            <div className="liability-trial-border" title="Recommended Debt Repayment Plan">Debt Repayment Strategy</div>
+                            <div className="liability-trial-border" title="Value of all Liquid Assets">Liquid Assets</div>
+                            <div className="liability-trial-border" title="Value of Liabilities divided by Assets">Debt to Asset Ratio</div>
+                            <div className="liability-trial-bottom" title="Recommended Debt Ratio">Ideal Debt Ratio</div>
                         </div>
                         <div className="liability-trial-div-1">
                             <div className="liability-trial-border-1">{liabilities.length}</div>
@@ -149,7 +148,7 @@ function LiabilitiesPage() {
                             }
                             </select>
                             </div>
-                            <div className="liability-trial-border-1">{investmentStrategy()}</div>
+                            <div className="liability-trial-border-1">{debtRepaymentStrategy()}</div>
                             <div className="liability-trial-border-1">${(typeof liquidAssetsTotal === 'number')? liquidAssetsTotal.toLocaleString() : 0}</div>
                             <div className="liability-trial-border-1">{((liabilitiesTotal/assetsTotal).toFixed(2)*100)}%</div>
                             <div className="liability-trial-bottom">10% - 50%</div>

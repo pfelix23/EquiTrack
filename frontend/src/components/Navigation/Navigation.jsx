@@ -37,20 +37,20 @@ function Navigation({ isLoaded }) {
 
 
   const sessionLinks = sessionUser ? (
-    <div id='Modals'>
+    <nav id='Modals'>
       <div id="a-tags">
       <a href="https://www.linkedin.com/in/peter-felix-3b038a174/"><TfiLinkedin style={{height:'19px', width:'19px'}} />
       </a>
       <a href="https://github.com/pfelix23"><IoLogoGithub style={{height:'19px', width:'19px'}} />
       </a>
-      <a href=""><BsFilePdf  style={{height:'19px', width:'19px'}}/>
+      <a href="https://drive.google.com/file/d/1tYruP88tYD3urpg4p0zSVEkiVO1S_K_1/view?usp=drive_link"><BsFilePdf  style={{height:'19px', width:'19px'}}/>
       </a>
       </div>
       <div id="button">
       <button id="logout-button" onClick={logout}>Logout</button>
       <button id='profile-button' onClick={() => navigate('/user')}>Profile</button>
       </div>
-    </div>
+    </nav>
   ) : (
     <div id='Modals'>
       <div id="a-tags">
@@ -72,7 +72,7 @@ function Navigation({ isLoaded }) {
     <div>
       {isLoaded && sessionLinks}
       <div className='additional_nav'>
-        <img onClick={() => navigate('/')} className='logo' src="/logo_2.png" alt="EquiTrack" />
+        <img onClick={() => navigate('/')} className='logo' src="logo-final.png" alt="EquiTrack" />
         <div className={className()}>
           {sessionUser && (
           <>

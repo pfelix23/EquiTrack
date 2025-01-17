@@ -21,7 +21,7 @@ function UserProfilePage () {
     const [username, setUsername] = useState();
     const [email, setEmail] = useState();
     const { closeModal, setModalContent } = useModal();
-    const user = useSelector(state => state.session.user);
+    const user = useSelector(state => state.session.user, (prevUser, nextUser) => prevUser?.id === nextUser?.id);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     
@@ -36,7 +36,8 @@ function UserProfilePage () {
                 console.error(errors)
             }
         })
-    },[errors, closeModal]);
+    },[errors, user]);
+    
     
     useEffect(() => {
         if(user) {
@@ -45,7 +46,7 @@ function UserProfilePage () {
             setEmail(user?.email)
             setUsername(user?.username)
         } else navigate('/')
-    }, [closeModal, navigate, user])
+    }, [navigate, user])
     
     useEffect(() => {
         csrfFetch('/api/assets')
@@ -58,7 +59,7 @@ function UserProfilePage () {
                 console.error(errors)
             }
         })
-    },[errors, closeModal]);
+    },[errors, user]);
 
     useEffect(() => {
         csrfFetch('/api/liabilities')
@@ -71,7 +72,7 @@ function UserProfilePage () {
                 console.error(errors)
             }
         })
-    },[errors, closeModal]);
+    },[errors, user]);
 
     const investmentsTotal = investments?.reduce((accumulator, currentValue) => accumulator + currentValue.amount, 0) ?? 0;
     const assetsTotal = assets?.reduce((accumulator, currentValue) => accumulator + currentValue.amount, 0) ?? 0;

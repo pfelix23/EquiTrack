@@ -113,7 +113,6 @@ function SingleInvestmentPage() {
           tooltip: {
               callbacks: {
                 label: function (tooltipItem) {
-                  const investment = investments[tooltipItem.dataIndex]; 
                   return `${investment.type}: $${tooltipItem.raw.toLocaleString()}`; 
                 },
               },
@@ -139,7 +138,6 @@ function SingleInvestmentPage() {
           tooltip: {
               callbacks: {
                 label: function (tooltipItem) {
-                  const investment = investments[tooltipItem.dataIndex]; 
                   return `${investment.type}: ${tooltipItem.raw}%`; 
                 },
               },
@@ -186,13 +184,17 @@ function SingleInvestmentPage() {
                         </div>
                       </h1>
                         <div className="single-chart-container">
-                        <div className="single-chart">
+                        <div >
                         <div id="single-chart-div">{investment.investment_name} Amount & Projections</div>
+                        <div className="single-investment-chart">
                         <Bar style={{paddingBottom: '10px'}} data={dollarData} options={options}/>
                         </div>
-                        <div className="single-chart">
+                        </div>
+                        <div >
                         <div id="single-chart-div">{investment.investment_name} Monthly Return & Risk-Percentage</div>
+                        <div className="single-investment-chart">
                         <Bar style={{paddingBottom: '10px'}} data={percentageData} options={percentageOptions}/>
+                        </div>
                         </div>
                         </div>                        
                     </div>

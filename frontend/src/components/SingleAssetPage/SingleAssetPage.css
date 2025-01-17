@@ -13,9 +13,9 @@
     height: 100vh;
 }
 
-.single-asset {
+.single-asset-chart {
     width: 40vw;
-    height: 40vh;
+    height: 40.2vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -26,12 +26,6 @@
     border-left: #112d66 solid 1px;
     border-right: #112d66 solid 1px;
     border-bottom: #112d66 solid 1px;
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-top: 5px;
-
 }
 
 .single-asset-parent-div {
@@ -101,6 +95,7 @@
 .single-asset-container {
     display: flex;
     margin-top: -23%;
+    gap: 20px
 }
 
 .h1 {

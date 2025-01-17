@@ -205,13 +205,17 @@ function SingleLiabilityPage() {
                         </div>
                         </h1>
                         <div className="single-liability-container">
-                        <div className="single-liability">
+                        <div >
                         <div id="single-liability-div">{liability?.liability_name} Value & Net Asset Value</div>
+                        <div className="single-liability-chart">
                         <Bar style={{paddingBottom: '10px'}} data={liabilityData} options={options}/>
                         </div>
-                        <div className="single-liability">
+                        </div>
+                        <div >
                         <div id="single-liability-div"> Debt Repayment Strategy </div>
+                        <div className="single-liability-chart">
                         <Line style={{paddingBottom: '10px'}} data={investmentData} options={lineOptions}/>
+                        </div>
                         </div>
                         </div>                   
                     </div>

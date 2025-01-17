@@ -10,6 +10,7 @@ import AssetsPage from './components/AssetsPage/AssetsPage';
 import SingleAssetPage from './components/SingleAssetPage/SingleAssetPage';
 import LiabilitiesPage from './components/LiabilitiesPage/LiabilitiesPage';
 import SingleLiabilityPage from './components/SingleLiabilityPage/SingleLiabilityPage';
+import LandingPage from './components/LandingPage/LandingPage';
 
 function Layout() {
   const dispatch = useDispatch();
@@ -35,7 +36,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <h1></h1>
+        element: <LandingPage />
       },
       {
         path: '/investments',

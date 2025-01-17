@@ -22,7 +22,7 @@ background-color:  #001e5a;
     font-family: "Roboto";
     margin: 10px 25px;
     display: flex;
-    
+    flex-direction: column;    
 }
 
 .create-liability-form {

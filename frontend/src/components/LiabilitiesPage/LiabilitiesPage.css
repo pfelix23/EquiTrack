@@ -9,7 +9,7 @@
 
 .chart-liability-div {
     width: 40vw;
-    height: 40vh;
+    height: 40.2vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -108,6 +108,7 @@
     margin-top: 17.3px;
     font-family: 'Roboto';
     padding-left: 4px;
+    cursor: default;
 }
 
 .liability-trial-bottom {
@@ -115,6 +116,7 @@
     margin-top: 17.3px;
     font-family: 'Roboto';
     padding-left: 4px;
+    cursor: default;
 }
 
 .liability-trial-div-1 {

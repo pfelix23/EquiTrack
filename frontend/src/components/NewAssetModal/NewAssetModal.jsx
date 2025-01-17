@@ -9,7 +9,6 @@ function NewAssetModal() {
     const [errors, setErrors] = useState();
     const [asset_name, setName] = useState();
     const [type, setType] = useState();
-    const [liquidType, setLiquidType] = useState();
     const [amount, setAmount] = useState();
     const dispatch = useDispatch();
     const { closeModal } = useModal();
@@ -19,7 +18,7 @@ function NewAssetModal() {
         setErrors({});
         return dispatch(assetsActions.create({
             asset_name,
-            type: type || liquidType,
+            type,
             amount,
         }),
         )
@@ -53,7 +52,6 @@ function NewAssetModal() {
                 id="asset-type" 
                 required
                 value={type}
-                disabled={!!liquidType}
                 onChange={(e) => setType(e.target.value)}
                 >
                 </input>
@@ -62,8 +60,8 @@ function NewAssetModal() {
                 Liquid-Type:&nbsp;
                 <select name="type" 
                 id="asset-type" 
-                value={liquidType}
-                onChange={(e) => {setLiquidType(e.target.value)}}
+                value={type}
+                onChange={(e) => {setType(e.target.value)}}
                 >
                     <option value="">Select Liquid Type</option>
                     <option value="Cash">Cash</option>

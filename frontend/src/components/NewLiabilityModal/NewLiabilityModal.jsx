@@ -1,10 +1,10 @@
 import { useModal } from '../../context/Modal';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { csrfFetch } from '../../store/csrf';
 import './NewLiabilityModal.css';
 
 
-function NewLiabilityModal({}) {
+function NewLiabilityModal() {
     const [errors, setErrors] = useState();
     const [liability_name, setName] = useState();
     const [type, setType] = useState();

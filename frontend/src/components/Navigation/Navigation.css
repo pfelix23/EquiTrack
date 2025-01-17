@@ -125,7 +125,12 @@
 
 .logo {
     height: 10vh;
-    width: 10vw;
+    width: 11vw;
+    margin-left: 20px;
+}
+
+.logo:hover {
+    cursor: pointer;
 }
 
 .nav-2 {
@@ -162,3 +167,4 @@
 .nav-3 > div:hover {
     cursor: pointer;
 }
+
