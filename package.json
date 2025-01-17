@@ -13,6 +13,10 @@
     "start": "npm start --prefix backend",
     "build": "npm run build --prefix backend"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://https://github.com/pfelix23/EquiTrack"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC"
