@@ -75,9 +75,9 @@ function UserProfilePage () {
         })
     },[errors, user]);
 
-    const investmentsTotal = investments?.reduce((accumulator, currentValue) => accumulator + currentValue.amount, 0) ?? 0;
-    const assetsTotal = assets?.reduce((accumulator, currentValue) => accumulator + currentValue.amount, 0) ?? 0;
-    const liabilitiesTotal = liabilities?.reduce((accumulator, currentValue) => accumulator + currentValue.amount, 0) ?? 0;
+    const investmentsTotal = investments?.reduce((accumulator, currentValue) => accumulator + currentValue.amount, 0) ;
+    const assetsTotal = assets?.reduce((accumulator, currentValue) => accumulator + currentValue.amount, 0) ;
+    const liabilitiesTotal = liabilities?.reduce((accumulator, currentValue) => accumulator + currentValue.amount, 0) ;
 
     const netLabelValue = () => {
         if(!assets || assets?.length === 0) return `No Assets Available`
@@ -216,11 +216,11 @@ function UserProfilePage () {
                     </div>
                 </label>
                 <label htmlFor="">Total Investments: {investments?.length}</label>
-                <label htmlFor="">Investments Value: ${investmentsTotal ?? 0}</label>
+                <label htmlFor="">Investments Value: ${investmentsTotal }</label>
                 <label htmlFor="">Total Assets: {assets?.length}</label>
-                <label htmlFor="">Assets Value: ${assetsTotal ?? 0}</label>
+                <label htmlFor="">Assets Value: ${assetsTotal }</label>
                 <label htmlFor="">Total Liabilities: {liabilities?.length}</label>
-                <label htmlFor="">Liabilities Value: ${liabilitiesTotal ?? 0}</label>
+                <label htmlFor="">Liabilities Value: ${liabilitiesTotal }</label>
                 <label htmlFor="">{netLabelValue()}</label> 
                 <button id='delete-button' onClick={handleDeleteUser}>Delete Account</button>
             </form>

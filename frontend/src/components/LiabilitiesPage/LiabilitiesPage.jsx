@@ -87,7 +87,7 @@ function LiabilitiesPage() {
     
 
     const netValue = () => {
-    if(assetsTotal  > liabilitiesTotal ?? 0) {
+    if(assetsTotal  > liabilitiesTotal ) {
         return assetsTotal - liabilitiesTotal
     } else 
         return liabilitiesTotal - assetsTotal
@@ -141,8 +141,8 @@ function LiabilitiesPage() {
                         </div>
                         <div className="liability-trial-div-1">
                             <div className="liability-trial-border-1">{liabilities.length}</div>
-                            <div className="liability-trial-border-1">${(liabilitiesTotal) ?? 0}</div>
-                            <div className="liability-trial-border-1">${netValue() ?? 0}</div>
+                            <div className="liability-trial-border-1">${(liabilitiesTotal) }</div>
+                            <div className="liability-trial-border-1">${netValue() }</div>
                             <div className="liability-trial-border-1">
                             <select style={{backgroundColor:'#e6e6e6)', color:'black'}}>
                             {liabilities.map((liability, index) => {
