@@ -58,7 +58,7 @@ function Navigation({ isLoaded }) {
       </a>
       <a href="https://github.com/pfelix23"><IoLogoGithub style={{height:'19px', width:'19px'}} />
       </a>
-      <a href=""><BsFilePdf  style={{height:'19px', width:'19px'}}/>
+      <a href="https://drive.google.com/file/d/1tYruP88tYD3urpg4p0zSVEkiVO1S_K_1/view?usp=drive_link"><BsFilePdf  style={{height:'19px', width:'19px'}}/>
       </a>
       </div>
       <div id="buttons">
@@ -81,9 +81,9 @@ function Navigation({ isLoaded }) {
           <div onClick={() => navigate('/investments')}>Investments</div>
           </>)}
           <div onClick={() => navigate('/')}>Home</div>
-          <div>Company</div>
-          <div>Mission</div>
-          <div>Contact</div>
+          <div onClick={() => alert("Feature Coming Soon")}>Company</div>
+          <div onClick={() => alert("Feature Coming Soon")}>Mission</div>
+          <a href='https://www.linkedin.com/in/peter-felix-3b038a174/' className='contact'>Contact</a>
         </div>
       </div>
     </div>

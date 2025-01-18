@@ -81,8 +81,8 @@ function UserProfilePage () {
 
     const netLabelValue = () => {
         if(!assets || assets?.length === 0) return `No Assets Available`
-        else if(assetsTotal - liabilitiesTotal < 0) return `Net Deficiency: $${(liabilitiesTotal-assetsTotal).toLocaleString()}`
-        else return `Net Assets: $${(assetsTotal - liabilitiesTotal).toLocaleString()}`
+        else if(assetsTotal - liabilitiesTotal < 0) return `Net Deficiency: $${(liabilitiesTotal-assetsTotal)}`
+        else return `Net Assets: $${(assetsTotal - liabilitiesTotal)}`
     }
 
     const handleEditClick = (e) => {
@@ -216,11 +216,11 @@ function UserProfilePage () {
                     </div>
                 </label>
                 <label htmlFor="">Total Investments: {investments?.length}</label>
-                <label htmlFor="">Investments Value: ${investmentsTotal.toLocaleString() ?? 0}</label>
+                <label htmlFor="">Investments Value: ${investmentsTotal ?? 0}</label>
                 <label htmlFor="">Total Assets: {assets?.length}</label>
-                <label htmlFor="">Assets Value: ${assetsTotal.toLocaleString() ?? 0}</label>
+                <label htmlFor="">Assets Value: ${assetsTotal ?? 0}</label>
                 <label htmlFor="">Total Liabilities: {liabilities?.length}</label>
-                <label htmlFor="">Liabilities Value: ${liabilitiesTotal.toLocaleString() ?? 0}</label>
+                <label htmlFor="">Liabilities Value: ${liabilitiesTotal ?? 0}</label>
                 <label htmlFor="">{netLabelValue()}</label> 
                 <button id='delete-button' onClick={handleDeleteUser}>Delete Account</button>
             </form>

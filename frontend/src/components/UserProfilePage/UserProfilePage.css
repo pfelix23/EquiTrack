@@ -11,7 +11,7 @@
     flex-direction: column;
     height: auto; 
     max-height: 100vh;
-    width: 33vw;
+    width: 34vw;
     justify-content: center;
     align-items: center;
     border-radius: 10px;
@@ -36,7 +36,7 @@
 #userForm-container > form > label {
     display: flex;
     flex-direction: column;
-    padding: 10px;
+    padding: 9.8px;
     font-family: 'Roboto';
     font-weight: bolder;
     width: 45%;
