@@ -68,7 +68,7 @@ function LiabilitiesPage() {
             callbacks: {
               label: function (tooltipItem) {
                 const liability = liabilities[tooltipItem.dataIndex]; 
-                return `${liability.type}: $${(tooltipItem.raw).toLocaleString()}`; 
+                return `${liability.type}: $${(tooltipItem.raw)}`; 
               },
             },
           },
@@ -141,8 +141,8 @@ function LiabilitiesPage() {
                         </div>
                         <div className="liability-trial-div-1">
                             <div className="liability-trial-border-1">{liabilities.length}</div>
-                            <div className="liability-trial-border-1">${(liabilitiesTotal).toLocaleString() ?? 0}</div>
-                            <div className="liability-trial-border-1">${netValue().toLocaleString() ?? 0}</div>
+                            <div className="liability-trial-border-1">${(liabilitiesTotal) ?? 0}</div>
+                            <div className="liability-trial-border-1">${netValue() ?? 0}</div>
                             <div className="liability-trial-border-1">
                             <select style={{backgroundColor:'#e6e6e6)', color:'black'}}>
                             {liabilities.map((liability, index) => {
@@ -153,7 +153,7 @@ function LiabilitiesPage() {
                             </select>
                             </div>
                             <div className="liability-trial-border-1">{debtRepaymentStrategy()}</div>
-                            <div className="liability-trial-border-1">${(typeof liquidAssetsTotal === 'number')? liquidAssetsTotal.toLocaleString() : 0}</div>
+                            <div className="liability-trial-border-1">${(typeof liquidAssetsTotal === 'number')? liquidAssetsTotal : 0}</div>
                             <div className="liability-trial-border-1">{((liabilitiesTotal/assetsTotal).toFixed(2)*100)}%</div>
                             <div className="liability-trial-bottom">10% - 50%</div>
                         </div>

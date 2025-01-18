@@ -71,7 +71,7 @@ function AssetsPage() {
             callbacks: {
               label: function (tooltipItem) {
                 const asset = assets[tooltipItem.dataIndex]; 
-                return `${asset.type}: $${(tooltipItem.raw).toLocaleString()}`; 
+                return `${asset.type}: $${(tooltipItem.raw)}`; 
               },
             },
           },
@@ -141,8 +141,8 @@ function AssetsPage() {
                         </div>
                         <div className="trial-div-1">
                             <div className="trial-border-1">{assets.length}</div>
-                            <div className="trial-border-1">${assetsTotal.toLocaleString() ?? 0}</div>
-                            <div className="trial-border-1">${netValue().toLocaleString() ?? 0}</div>
+                            <div className="trial-border-1">${assetsTotal ?? 0}</div>
+                            <div className="trial-border-1">${netValue() ?? 0}</div>
                             <div className="trial-border-1">
                             <select style={{backgroundColor:'#e6e6e6)', color:'black'}}>
                             {assets.map((asset, index) => {
@@ -153,7 +153,7 @@ function AssetsPage() {
                             </select>
                             </div>
                             <div className="trial-border-1">{investmentStrategy()}</div>
-                            <div className="trial-border-1">${(typeof liquidAssetsTotal === 'number')? liquidAssetsTotal.toLocaleString() : 0}</div>
+                            <div className="trial-border-1">${(typeof liquidAssetsTotal === 'number')? liquidAssetsTotal : 0}</div>
                             <div className="trial-border-1">{((liquidAssetsTotal/assetsTotal)*100).toFixed(2)}%</div>
                             <div className="trial-bottom">20% - 30%</div>
                         </div>

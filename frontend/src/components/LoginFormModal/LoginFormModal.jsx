@@ -53,7 +53,7 @@ function LoginFormModal() {
       <h1 className='login-text'>Log In</h1>
       <form onSubmit={handleSubmit} className='login-form'>
         <label className='login-label'>
-          Username or Email
+          Username or Email:
           <input
             type="text"
             value={credential}
@@ -62,7 +62,7 @@ function LoginFormModal() {
           />
         </label>
         <label className='login-label'>
-          Password
+          Password:
           <input
             type="password"
             value={password}

@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from 'react';
 import { useModal } from '../../context/Modal';
 import { csrfFetch } from '../../store/csrf';
-import * as usersActions from '../../store/users'
+import * as usersActions from '../../store/users';
+import * as sessionActions from '../../store/session';
 import { useNavigate } from 'react-router-dom';
 import DeleteUserInvestmentModal from '../DeleteUserInvestmentModal/DeleteUserInvestmentModal';
 
@@ -93,6 +94,7 @@ function UserProfilePage () {
                 username,
                 email
             }))
+            .then(() => dispatch(sessionActions.restoreUser()))
             .then(() => navigate('/user'))
             .catch( async (res) => {
                 const data = await res.json();

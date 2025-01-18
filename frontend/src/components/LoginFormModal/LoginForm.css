@@ -58,3 +58,7 @@ background-color:  #001e5a;
     text-decoration: underline 2px;
     height: 2vh;
 }
+
+.demo-user:hover {
+    cursor: pointer;
+}
