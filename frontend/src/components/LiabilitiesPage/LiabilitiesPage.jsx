@@ -79,11 +79,11 @@ function LiabilitiesPage() {
         setModalContent(<NewLiabilityModal closeModal={closeModal}/>)
     }
     
-    const assetsTotal = assets?.reduce((accumulator, currentValue) => accumulator + currentValue.amount, 0);
+    const assetsTotal = assets?.reduce((accumulator, currentValue) => accumulator + Number(currentValue.amount), 0);
 
-    const liabilitiesTotal = liabilities?.reduce((accumulator, currentValue) => accumulator + currentValue.amount, 0);
+    const liabilitiesTotal = liabilities?.reduce((accumulator, currentValue) => accumulator + Number(currentValue.amount), 0);
 
-    const liquidAssetsTotal = assets?.reduce((accumulator, currentValue) => accumulator + currentValue.liquid, 0);
+    const liquidAssetsTotal = assets?.reduce((accumulator, currentValue) => accumulator + Number(currentValue.liquid), 0);
     
 
     const netValue = () => {
@@ -141,8 +141,8 @@ function LiabilitiesPage() {
                         </div>
                         <div className="liability-trial-div-1">
                             <div className="liability-trial-border-1">{liabilities.length}</div>
-                            <div className="liability-trial-border-1">${(liabilitiesTotal) }</div>
-                            <div className="liability-trial-border-1">${netValue() }</div>
+                            <div className="liability-trial-border-1">${liabilitiesTotal.toLocaleString() }</div>
+                            <div className="liability-trial-border-1">${netValue().toLocaleString() }</div>
                             <div className="liability-trial-border-1">
                             <select style={{backgroundColor:'#e6e6e6)', color:'black'}}>
                             {liabilities.map((liability, index) => {
@@ -153,7 +153,7 @@ function LiabilitiesPage() {
                             </select>
                             </div>
                             <div className="liability-trial-border-1">{debtRepaymentStrategy()}</div>
-                            <div className="liability-trial-border-1">${(typeof liquidAssetsTotal === 'number')? liquidAssetsTotal : 0}</div>
+                            <div className="liability-trial-border-1">${(typeof liquidAssetsTotal === 'number')? liquidAssetsTotal.toLocaleString() : 0}</div>
                             <div className="liability-trial-border-1">{((liabilitiesTotal/assetsTotal).toFixed(2)*100)}%</div>
                             <div className="liability-trial-bottom">10% - 50%</div>
                         </div>

@@ -74,3 +74,44 @@
 #delete-button:hover {
     cursor: pointer;
 }
+
+@media (max-width: 768px) {
+    #userForm-container > form {
+        width: 60vw; 
+    }
+
+    #userForm-container > form > label {
+        width: 80%; 
+    }
+
+    #delete-button {
+        width: 80%; 
+    }
+
+    .edit-button {
+        font-size: 14px; 
+    }
+}
+
+
+@media (max-width: 480px) {
+    #userForm-container > form {
+        width: 90vw; 
+    }
+
+    #userForm-container > form > label {
+        width: 100%; 
+    }
+
+    #delete-button {
+        width: 100%; 
+    }
+
+    .edit-button {
+        font-size: 12px; 
+    }
+
+    #userForm-container > form {
+        padding: 10px;
+    }
+}

@@ -5,6 +5,7 @@
     gap: 20px;
     justify-content: center;
     padding: 10px;
+    overflow: hidden;
 }
 
 .chart-asset-div {
@@ -93,6 +94,12 @@
     margin-top: -50%;
 }
 
+@media (max-width: 770px) {
+    #asset-div {
+        margin-top: 1px;
+    }
+}
+
 .trial-div {
     border: solid rgb(185, 185, 185) 1px;
     width: 50%;
@@ -104,9 +111,9 @@
 }
 
 .trial-border{
-    margin-bottom: 17.2px;
+    margin-bottom: 14.2px;
     border-bottom: solid rgb(185, 185, 185) 1px;
-    margin-top: 17.3px;
+    margin-top: 14.3px;
     font-family: 'Roboto';
     padding-left: 4px;
     cursor: default;
@@ -114,7 +121,7 @@
 
 .trial-bottom {
     margin-bottom: 0px;
-    margin-top: 17.3px;
+    margin-top: 14.3px;
     font-family: 'Roboto';
     padding-left: 4px;
     cursor: default;
@@ -149,9 +156,9 @@
 }
 
 .trial-border-1 {
-    margin-bottom: 17.1px;
+    margin-bottom: 14.1px;
     border-bottom: solid rgb(185, 185, 185) 1px;
-    margin-top: 17.2px;
+    margin-top: 14.2px;
     font-family: 'Roboto';
     padding-left: 4px;
 }
@@ -184,3 +191,4 @@
     border-bottom-left-radius: -10px;
 
 }
+

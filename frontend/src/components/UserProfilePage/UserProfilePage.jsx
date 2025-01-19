@@ -75,14 +75,14 @@ function UserProfilePage () {
         })
     },[errors, user]);
 
-    const investmentsTotal = investments?.reduce((accumulator, currentValue) => accumulator + currentValue.amount, 0) ;
-    const assetsTotal = assets?.reduce((accumulator, currentValue) => accumulator + currentValue.amount, 0) ;
-    const liabilitiesTotal = liabilities?.reduce((accumulator, currentValue) => accumulator + currentValue.amount, 0) ;
+    const investmentsTotal = investments?.reduce((accumulator, currentValue) => accumulator + Number(currentValue.amount), 0) ;
+    const assetsTotal = assets?.reduce((accumulator, currentValue) => accumulator + Number(currentValue.amount), 0) ;
+    const liabilitiesTotal = liabilities?.reduce((accumulator, currentValue) => accumulator + Number(currentValue.amount), 0) ;
 
     const netLabelValue = () => {
         if(!assets || assets?.length === 0) return `No Assets Available`
-        else if(assetsTotal - liabilitiesTotal < 0) return `Net Deficiency: $${(liabilitiesTotal-assetsTotal)}`
-        else return `Net Assets: $${(assetsTotal - liabilitiesTotal)}`
+        else if(assetsTotal - liabilitiesTotal < 0) return `Net Deficiency: $${(liabilitiesTotal-assetsTotal).toLocaleString()}`
+        else return `Net Assets: $${(assetsTotal - liabilitiesTotal).toLocaleString()}`
     }
 
     const handleEditClick = (e) => {
@@ -216,11 +216,11 @@ function UserProfilePage () {
                     </div>
                 </label>
                 <label htmlFor="">Total Investments: {investments?.length}</label>
-                <label htmlFor="">Investments Value: ${investmentsTotal }</label>
+                <label htmlFor="">Investments Value: ${Number(investmentsTotal).toLocaleString()}</label>
                 <label htmlFor="">Total Assets: {assets?.length}</label>
-                <label htmlFor="">Assets Value: ${assetsTotal }</label>
+                <label htmlFor="">Assets Value: ${Number(assetsTotal).toLocaleString() }</label>
                 <label htmlFor="">Total Liabilities: {liabilities?.length}</label>
-                <label htmlFor="">Liabilities Value: ${liabilitiesTotal }</label>
+                <label htmlFor="">Liabilities Value: ${Number(liabilitiesTotal).toLocaleString() }</label>
                 <label htmlFor="">{netLabelValue()}</label> 
                 <button id='delete-button' onClick={handleDeleteUser}>Delete Account</button>
             </form>

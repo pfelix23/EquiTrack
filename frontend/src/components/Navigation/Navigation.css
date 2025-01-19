@@ -180,3 +180,19 @@
 .contact:hover {
     cursor: pointer;
 }
+
+@media (max-width: 721px) {
+    #hidden {
+        opacity: 0;
+    }
+
+    .nav-2 {
+        display: flex;
+        margin-left: 105px;
+    }
+
+    .nav-3 {
+        display: flex;
+        margin-left: 105px;
+    }
+}

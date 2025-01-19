@@ -60,11 +60,11 @@ function SingleAssetPage() {
     },[errors, closeModal, assetId]);
 
     
-    const assetsTotal = assets?.reduce((accumulator, currentValue) => accumulator + currentValue.amount, 0);
+    const assetsTotal = assets?.reduce((accumulator, currentValue) => accumulator + Number(currentValue.amount), 0);
 
-    const liabilitiesTotal = liabilities?.reduce((accumulator, currentValue) => accumulator + currentValue.amount, 0);
+    const liabilitiesTotal = liabilities?.reduce((accumulator, currentValue) => accumulator + Number(currentValue.amount), 0);
     
-    const liquidAssetsTotal = assets?.reduce((accumulator, currentValue) => accumulator + currentValue.liquid, 0);
+    const liquidAssetsTotal = assets?.reduce((accumulator, currentValue) => accumulator + Number(currentValue.liquid), 0);
 
     const assetData = {
         labels: [asset?.asset_name],
@@ -215,7 +215,7 @@ function SingleAssetPage() {
                         </h1>
                         <div className="single-asset-container">
                         <div >
-                        <div id="single-asset-div">{asset?.asset_name} Value &  {netLabel()} Value</div>
+                        <div id="single-asset-div">{asset?.asset_name} Value & {netLabel()} Value</div>
                         <div className="single-asset-chart">
                         <Bar style={{paddingBottom: '10px'}} data={assetData} options={options}/>
                         </div>

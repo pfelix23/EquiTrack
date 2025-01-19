@@ -60,11 +60,11 @@ function SingleLiabilityPage() {
     },[errors, closeModal, liabilityId]);
 
     
-    const assetsTotal = assets?.reduce((accumulator, currentValue) => accumulator + currentValue.amount, 0);
+    const assetsTotal = assets?.reduce((accumulator, currentValue) => accumulator + Number(currentValue.amount), 0);
 
-    const liabilitiesTotal = liabilities?.reduce((accumulator, currentValue) => accumulator + currentValue.amount, 0);
+    const liabilitiesTotal = liabilities?.reduce((accumulator, currentValue) => accumulator + Number(currentValue.amount), 0);
     
-    const liquidAssetsTotal = assets?.reduce((accumulator, currentValue) => accumulator + currentValue.liquid, 0);
+    const liquidAssetsTotal = assets?.reduce((accumulator, currentValue) => accumulator + Number(currentValue.liquid), 0);
 
     const liabilityData = {
         labels: [liability?.liability_name],

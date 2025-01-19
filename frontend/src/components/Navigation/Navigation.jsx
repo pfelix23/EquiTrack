@@ -76,14 +76,14 @@ function Navigation({ isLoaded }) {
         <div className={className()}>
           {sessionUser && (
           <>
-          <div onClick={() => navigate('/assets')}>Assets</div>
-          <div onClick={() => navigate('/liabilities')}>Liabilities</div>
-          <div onClick={() => navigate('/investments')}>Investments</div>
+          <div id='centered' onClick={() => navigate('/assets')}>Assets</div>
+          <div id='centered' onClick={() => navigate('/liabilities')}>Liabilities</div>
+          <div id='centered' onClick={() => navigate('/investments')}>Investments</div>
           </>)}
-          <div onClick={() => navigate('/')}>Home</div>
-          <div onClick={() => alert("Feature Coming Soon")}>Company</div>
-          <div onClick={() => alert("Feature Coming Soon")}>Mission</div>
-          <a href='https://www.linkedin.com/in/peter-felix-3b038a174/' className='contact'>Contact</a>
+          <div id='centered' onClick={() => navigate('/')}>Home</div>
+          <div id='hidden' onClick={() => alert("Feature Coming Soon")}>Company</div>
+          <div id='hidden' onClick={() => alert("Feature Coming Soon")}>Mission</div>
+          <a id='hidden' href='https://www.linkedin.com/in/peter-felix-3b038a174/' className='contact'>Contact</a>
         </div>
       </div>
     </div>
