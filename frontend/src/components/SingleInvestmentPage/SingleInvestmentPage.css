@@ -23,9 +23,9 @@
     padding: 5px;
     box-sizing: border-box;
     flex-direction: column;
-    border-left: #112d66 solid 1px;
-    border-right: #112d66 solid 1px;
-    border-bottom: #112d66 solid 1px;
+    border-left: #A7B0CA solid 1px;
+    border-right: #A7B0CA solid 1px;
+    border-bottom: #A7B0CA solid 1px;
 }
 .single-investment-parent-div {
     display: flex;
