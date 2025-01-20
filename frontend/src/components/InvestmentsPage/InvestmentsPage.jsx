@@ -1,18 +1,20 @@
 import { useNavigate } from "react-router-dom";
 import { FaPlus } from "react-icons/fa";
 import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { csrfFetch } from "../../store/csrf";
 import { Bar, Line, Doughnut, PolarArea } from 'react-chartjs-2';
 import { useModal } from "../../context/Modal";
 import NewInvestmentModal from "../NewInvestmentModal/NewInvestmentModal";
 import { Chart as ChartJS } from "chart.js/auto";
-import './InvestmentsPage.css'
+import './InvestmentsPage.css';
 
 function InvestmentsPage() {
     const [investments, setInvestments] = useState();
     const [errors, setErrors] = useState();
     const { closeModal, setModalContent } = useModal();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     useEffect(() => {
         csrfFetch('/api/investments')
@@ -25,7 +27,7 @@ function InvestmentsPage() {
                 console.error(errors)
             }
         })
-    },[errors, closeModal])
+    },[errors, closeModal, dispatch])
 
     const investmentData = {
         labels: investments?.map(investment => investment.investment_name),

@@ -133,7 +133,7 @@ function LiabilitiesPage() {
                             <div className="liability-trial-border" title="Total Number of Liabilities">Total Liabilities</div>
                             <div className="liability-trial-border" title="Value of all Liabilities">Liabilities Value</div>
                             <div className="liability-trial-border" title="Value of Assets minus Liabilities">{netLabel()} Value</div>
-                            <div className="liability-trial-border" title="All Types of Entered Liabilities">liability Types</div>
+                            <div className="liability-trial-border" title="All Types of Entered Liabilities">Liability Types</div>
                             <div className="liability-trial-border" title="Recommended Debt Repayment Plan">Debt Repayment Strategy</div>
                             <div className="liability-trial-border" title="Value of all Liquid Assets">Liquid Assets</div>
                             <div className="liability-trial-border" title="Value of Liabilities divided by Assets">Debt to Asset Ratio</div>
@@ -154,7 +154,7 @@ function LiabilitiesPage() {
                             </div>
                             <div className="liability-trial-border-1">{debtRepaymentStrategy()}</div>
                             <div className="liability-trial-border-1">${(typeof liquidAssetsTotal === 'number')? liquidAssetsTotal.toLocaleString() : 0}</div>
-                            <div className="liability-trial-border-1">{((liabilitiesTotal/assetsTotal).toFixed(2)*100)}%</div>
+                            <div className="liability-trial-border-1">{((liabilitiesTotal/assetsTotal)*100).toFixed(2)}%</div>
                             <div className="liability-trial-bottom">10% - 50%</div>
                         </div>
                         </div>

@@ -34,6 +34,7 @@ function DeleteAssetLiabilityModal({assetId, liabilityId, navigate}) {
     return dispatch(liabilityActions.deleteLiability(liabilityId),
     )
    .then(closeModal)
+   .then(navigate('/liabilities'))
    .catch(async (res) => {
       const data = await res.json();
       if (data && data.errors) {
