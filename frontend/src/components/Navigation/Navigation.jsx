@@ -39,11 +39,11 @@ function Navigation({ isLoaded }) {
   const sessionLinks = sessionUser ? (
     <nav id='Modals'>
       <div id="a-tags">
-      <a href="https://www.linkedin.com/in/peter-felix-3b038a174/"><TfiLinkedin style={{height:'19px', width:'19px'}} />
+      <a href="https://www.linkedin.com/in/peter-felix-3b038a174/" target="_blank" rel="noreferrer"><TfiLinkedin style={{height:'19px', width:'19px'}} />
       </a>
-      <a href="https://github.com/pfelix23"><IoLogoGithub style={{height:'19px', width:'19px'}} />
+      <a href="https://github.com/pfelix23" target="_blank" rel="noreferrer"><IoLogoGithub style={{height:'19px', width:'19px'}} />
       </a>
-      <a href="https://drive.google.com/file/d/1FJM9AIfETrhirIktEJ94B9iAkGLQO0ie/view?usp=sharing"><BsFilePdf  style={{height:'19px', width:'19px'}}/>
+      <a href="https://drive.google.com/file/d/1FJM9AIfETrhirIktEJ94B9iAkGLQO0ie/view?usp=sharing" target="_blank" rel="noreferrer"><BsFilePdf  style={{height:'19px', width:'19px'}}/>
       </a>
       </div>
       <div id="button">
