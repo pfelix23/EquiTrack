@@ -43,7 +43,7 @@ function Navigation({ isLoaded }) {
       </a>
       <a href="https://github.com/pfelix23"><IoLogoGithub style={{height:'19px', width:'19px'}} />
       </a>
-      <a href="https://drive.google.com/file/d/1z4FOwfbJ3dH8B06NjFpNnDz6QzYIdwWW/view?usp=sharing"><BsFilePdf  style={{height:'19px', width:'19px'}}/>
+      <a href="https://drive.google.com/file/d/1FJM9AIfETrhirIktEJ94B9iAkGLQO0ie/view?usp=sharing"><BsFilePdf  style={{height:'19px', width:'19px'}}/>
       </a>
       </div>
       <div id="button">
