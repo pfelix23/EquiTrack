@@ -85,6 +85,7 @@ function Navigation({ isLoaded }) {
           <div id='hidden' onClick={() => alert("Feature Coming Soon")}>Company</div>
           <div id='hidden' onClick={() => alert("Feature Coming Soon")}>Mission</div>
           <AiOutlineMenu className='lines'/>
+          <div className='drop-down'></div>
           <a id='hidden' href='https://www.linkedin.com/in/peter-felix-3b038a174/' className='contact'>Contact</a>
         </div>
       </div>

@@ -78,5 +78,30 @@
     cursor: pointer;
     background-color: #125943;
 }
-
+@media(max-width:440px) {
+    #h2-landing {
+        width: 94%;
+    }
+    .landing-container{
+        width: 95vw;
+    }
+    #landing-logo{
+        width: 80%;
+    }
+    #p-tag{
+        width: 94%;
+    }
+    .container{
+        display: flex;
+        flex-direction: column;
+    }
+    .image-container {
+        width: 95%;
+    }
+    .image, .first-image, .second-image {
+        margin-top: 15px;
+        width: 95%;
+        height: 65%;
+    }
+}
 

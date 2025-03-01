@@ -199,11 +199,14 @@
 
 @media (max-width: 440px) {
     .logo{
-        width: 19vw;
+        width: 25vw;
         height: 9.5vh;
     }
     .lines:hover {
         cursor: pointer;
+    }
+    .lines {
+        margin-left: -28px;
     }
     .home{
         display: none;
@@ -211,6 +214,14 @@
     .additional_nav {
         display: flex;
         justify-content: space-between;
+    }
+    .drop-down{
+        border: solid black;
+        width: 50px;
+        height: 30px;
+        background-color: #125943;
+        position: absolute;
+        margin-top: 50px;
     }
 }
 

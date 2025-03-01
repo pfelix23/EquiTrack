@@ -24,7 +24,7 @@ function LandingPage() {
     return (
         <div>
             <div className='container'>
-                <div>
+                <div className='landing-container'>
                 <img id='landing-logo' src="Peter-Logo.png" alt="Logo"/>
                 <h2 id='h2-landing'>Track the Dollars, Predict the Cents.</h2>
                 <p id='p-tag'>At EquiTrack, our mission is to empower individuals and businesses to make informed financial decisions by providing a comprehensive platform to track investments, assets, and liabilities. We strive to simplify complex financial data and offer personalized investment suggestions, helping our users achieve greater financial health and security. With real-time insights, intuitive tools, and expert guidance, EquiTrack aims to be the trusted partner in your financial journey, helping you stay on track toward your financial goals.</p>
