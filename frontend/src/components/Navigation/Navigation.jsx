@@ -6,6 +6,7 @@ import { useModal } from '../../context/Modal';
 import { TfiLinkedin } from "react-icons/tfi";
 import { IoLogoGithub } from "react-icons/io5";
 import { BsFilePdf } from "react-icons/bs";
+import { AiOutlineMenu } from "react-icons/ai";
 import * as sessionActions from '../../store/session'
 import './Navigation.css'
 
@@ -80,9 +81,10 @@ function Navigation({ isLoaded }) {
           <div id='centered' onClick={() => navigate('/liabilities')}>Liabilities</div>
           <div id='centered' onClick={() => navigate('/investments')}>Investments</div>
           </>)}
-          <div id='centered' onClick={() => navigate('/')}>Home</div>
+          <div id='centered' className='home' onClick={() => navigate('/')}>Home</div>
           <div id='hidden' onClick={() => alert("Feature Coming Soon")}>Company</div>
           <div id='hidden' onClick={() => alert("Feature Coming Soon")}>Mission</div>
+          <AiOutlineMenu className='lines'/>
           <a id='hidden' href='https://www.linkedin.com/in/peter-felix-3b038a174/' className='contact'>Contact</a>
         </div>
       </div>

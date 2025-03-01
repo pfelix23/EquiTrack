@@ -196,3 +196,26 @@
         margin-left: 105px;
     }
 }
+
+@media (max-width: 440px) {
+    .logo{
+        width: 19vw;
+        height: 9.5vh;
+    }
+    .lines:hover {
+        cursor: pointer;
+    }
+    .home{
+        display: none;
+    }
+    .additional_nav {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+@media (min-width: 441px) {
+    .lines {
+        display: none;
+    }
+}
