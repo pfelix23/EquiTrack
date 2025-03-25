@@ -81,15 +81,21 @@
 @media(max-width:440px) {
     #h2-landing {
         width: 94%;
+        margin-left: -1px;
     }
     .landing-container{
         width: 95vw;
     }
     #landing-logo{
         width: 80%;
+        margin-left: -1px;
     }
     #p-tag{
         width: 94%;
+        margin-left: -1px;
+    }
+    #button-landing{
+        margin-left: -1px;
     }
     .container{
         display: flex;

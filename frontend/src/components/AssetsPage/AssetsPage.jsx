@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { FaPlus } from "react-icons/fa";
+import { TbAlignJustified } from "react-icons/tb";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { csrfFetch } from "../../store/csrf";
@@ -14,6 +15,7 @@ function AssetsPage() {
     const [liabilities, setLiabilities] = useState();
     const [errors, setErrors] = useState();
     const { closeModal, setModalContent } = useModal();
+    const [isActive, setIsActive] = useState('hidden');
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -108,11 +110,15 @@ function AssetsPage() {
             return "Aggressive"
         } else return "Passive"
     }
+
+    const switchView = () => {
+        setIsActive(prevState => prevState === 'hidden' ? 'active' : 'hidden');
+    }
       
     
     return (
         <div className="root-asset-div">
-            <div className="asset-parent-div">
+            <div className={`asset-parent-div ${isActive === 'hidden'? 'hidden' : 'active'}`}>
             <button className="new-asset-button" onClick={handleNewAsset}><FaPlus /> &nbsp;New Asset</button>
             <div className="asset-child-div">
                 {assets?.map((asset) => {
@@ -125,7 +131,7 @@ function AssetsPage() {
             </div>
             {assets?.length > 0 && (
                     <div className="chart-asset-style">
-                        <h1 className="h1-assets">Assets Summary</h1>
+                        <h1 className="h1-assets">Assets Summary <TbAlignJustified className="mobile-button" onClick={switchView} /></h1>
                         <div className="asset-container">
                         <div id="asset-div">Asset Information</div>
                         <div className="chart-asset-div">
@@ -134,7 +140,7 @@ function AssetsPage() {
                             <div className="trial-border" title="Value of all Assets">Assets Value</div>
                             <div className="trial-border" title="Value of Assets minus Liabilities">{netLabel()} Value</div>
                             <div className="trial-border" title="All Types of Entered Assets">Asset Types</div>
-                            <div className="trial-border" title="Recommended Investment Plan">Investment Strategy Recommendation</div>
+                            <div className="trial-border" title="Recommended Investment Plan">Investment Strategy</div>
                             <div className="trial-border" title="Value of all Liquid Assets">Liquid Assets</div>
                             <div className="trial-border" title="Proportion of your assets that are liquid.">Liquidity Ratio</div>
                             <div className="trial-bottom" title="Recommended Liquidity Ratio">Ideal Liquidity Ratio</div>
@@ -159,7 +165,7 @@ function AssetsPage() {
                         </div>
                         </div>
                         </div>
-                        <div>
+                        <div className="asset-container">
                         <div id="asset-div">Asset Values</div>
                         <div className="assets-chart">
                         <Line data={assetData} options={options} />

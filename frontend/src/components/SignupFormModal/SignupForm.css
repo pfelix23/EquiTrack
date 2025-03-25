@@ -52,3 +52,16 @@ background-color:  #001e5a;
 .new-user-label > input {
     width: 97%;
 }
+
+@media (max-width: 440px) {
+    .new-user-container {
+        width: 55vw;  
+        border: none;      
+    }
+    .new-user-label {
+        width: 84%;
+    }
+    .new-user-text {
+        margin-bottom: -1%;
+    }
+}

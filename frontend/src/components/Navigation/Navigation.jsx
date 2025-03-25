@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
+import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LoginFormModal from '..//LoginFormModal/LoginFormModal';
 import SignupFormModal from '../SignupFormModal/SignupFormModal';
@@ -14,7 +15,9 @@ function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
   const navigate = useNavigate();
   const { closeModal, setModalContent } = useModal();
+  const [dropdownVisible, setDropdownVisible] = useState(false);
   const dispatch = useDispatch();
+  const dropdownRef = useRef();
   
   const handleLogin = () => {
     setModalContent(<LoginFormModal closeModal={closeModal} /> )
@@ -36,6 +39,22 @@ function Navigation({ isLoaded }) {
     } else return 'nav-3'
   }
 
+  const toggleDropdown = () => {
+    setDropdownVisible(!dropdownVisible);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setDropdownVisible(false);
+      }
+    };
+    
+    document.addEventListener('click', handleClickOutside);
+    
+    return () => document.removeEventListener('click', handleClickOutside);
+    
+  }, []);
 
   const sessionLinks = sessionUser ? (
     <nav id='Modals'>
@@ -84,8 +103,46 @@ function Navigation({ isLoaded }) {
           <div id='centered' className='home' onClick={() => navigate('/')}>Home</div>
           <div id='hidden' onClick={() => alert("Feature Coming Soon")}>Company</div>
           <div id='hidden' onClick={() => alert("Feature Coming Soon")}>Mission</div>
-          <AiOutlineMenu className='lines'/>
-          <div className='drop-down'></div>
+          <div className='nav-item' ref={dropdownRef}>
+          <AiOutlineMenu className='lines' onClick={toggleDropdown}/>
+          {dropdownVisible && (
+            <div className="dropdown-menu">
+              {!sessionUser && (
+                <div >
+                  <div className='dropdown' onClick={() => navigate('/')}>
+                    Home
+                  </div>
+                  <div className='dropdown' onClick={() => alert("Feature Coming Soon")}>
+                    Company
+                  </div>
+                  <div className='dropdown' onClick={() => alert("Feature Coming Soon")}>
+                    Mission
+                  </div>
+                  <a href='https://www.linkedin.com/in/peter-felix-3b038a174/' style={{textDecoration:'none', color:'black'}}>
+                  <div className='dropdown'>
+                    Contact
+                  </div>
+                  </a>
+                </div>
+              )}
+              {sessionUser && (
+                <div >
+                <div className='dropdown' onClick={() => navigate('/')}>
+                  Home
+                </div>
+                <div className='dropdown' onClick={() => navigate('/assets')}>Assets</div>
+                <div className='dropdown' onClick={() => navigate('/liabilities')}>Liabilities</div>
+                <div className='dropdown' onClick={() => navigate('/investments')}>Investments</div>
+                <a href='https://www.linkedin.com/in/peter-felix-3b038a174/' style={{textDecoration:'none', color:'black'}}>
+                <div className='dropdown'>
+                  Contact
+                </div>
+                </a>
+              </div>
+              )}
+            </div>
+          )} 
+        </div>
           <a id='hidden' href='https://www.linkedin.com/in/peter-felix-3b038a174/' className='contact'>Contact</a>
         </div>
       </div>
