@@ -49,3 +49,13 @@
     border-radius: 8px;
 }
 
+@media (max-width: 440px) {
+    .new-asset-container {
+        width: 55vw;  
+        border: none;      
+    }
+    .new-asset-label {
+        width: 84%;
+    }
+}
+

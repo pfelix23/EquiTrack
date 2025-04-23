@@ -49,3 +49,12 @@ background-color:  #001e5a;
     border-radius: 8px;
 }
 
+@media (max-width: 440px) {
+    .edit-asset-container {
+        width: 55vw;  
+        border: none;      
+    }
+    .edit-asset-label {
+        width: 84%;
+    }
+}

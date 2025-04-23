@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { FaPlus } from "react-icons/fa";
+import { TbAlignJustified } from "react-icons/tb";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { csrfFetch } from "../../store/csrf";
@@ -13,6 +14,7 @@ import './SingleInvestmentPage.css'
 function SingleInvestmentPage() {
     const [investment, setInvestment] = useState();
     const [investments, setInvestments] = useState();
+    const [isActive, setIsActive] = useState('hidden');
     const [errors, setErrors] = useState();
     const { setModalContent, closeModal } = useModal();
     const { investmentId } = useParams();
@@ -160,11 +162,15 @@ function SingleInvestmentPage() {
       setModalContent(<EditInvestmentModal closeModal={closeModal} investment={investment}/>)
     }
 
+    const switchView = () => {
+      setIsActive(prevState => prevState === 'hidden' ? 'active' : 'hidden');
+  }
+
 
 
     return (
         <div className="single-root-div">
-            <div className="single-investment-parent-div">
+            <div className={`single-investment-parent-div ${isActive === 'hidden'? 'hidden' : 'active'}`}>
             <div className="new-investment-button" onClick={handleNewInvestment}><FaPlus /> &nbsp;New Investment </div>
             <div className="single-investment-child-div">
                 {investments?.map((investment) => {
@@ -177,13 +183,17 @@ function SingleInvestmentPage() {
             </div>
             {investment?.length > 0 && (
                     <div className="single-chart-style">
-                      <h1 className="h1">{investment.investment_name} Information
+                      <h1  className="h1-single-asset">{investment?.investment_name} Information <div className="mobile-asset-div"><TbAlignJustified className="mobile-button" onClick={switchView} /></div>
                         <div>
                         <button className="single-investment-edit" onClick={handleEditInvestment}>edit</button>
                         <button className="single-investment-delete" onClick={handleDeleteInvestment}>delete</button>
                         </div>
                       </h1>
                         <div className="single-chart-container">
+                        <div>
+                        <button className="single-investment-edit-mobile" onClick={handleEditInvestment} >edit</button>
+                        <button className="single-investment-delete-mobile" onClick={handleDeleteInvestment} >delete</button>
+                        </div>
                         <div >
                         <div id="single-chart-div">{investment.investment_name} Amount & Projections</div>
                         <div className="single-investment-chart">

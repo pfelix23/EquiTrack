@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { FaPlus } from "react-icons/fa";
+import { TbAlignJustified } from "react-icons/tb";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { csrfFetch } from "../../store/csrf";
@@ -11,6 +12,7 @@ import './InvestmentsPage.css';
 
 function InvestmentsPage() {
     const [investments, setInvestments] = useState();
+    const [isActive, setIsActive] = useState('hidden');
     const [errors, setErrors] = useState();
     const { closeModal, setModalContent } = useModal();
     const navigate = useNavigate();
@@ -123,11 +125,15 @@ function InvestmentsPage() {
       useEffect(() => {
 
       },[ChartJS])
+
+      const switchView = () => {
+        setIsActive(prevState => prevState === 'hidden' ? 'active' : 'hidden');
+      }
       
     
     return (
         <div className="root-div">
-            <div className="investment-parent-div">
+            <div className={`investment-parent-div ${isActive === 'hidden'? 'hidden' : 'active'}`}>
             <button className="new-investment-button" onClick={handleNewInvestment}><FaPlus /> &nbsp;New Investment</button>
             <div className="investment-child-div">
                 {investments?.map((investment) => {
@@ -140,25 +146,28 @@ function InvestmentsPage() {
             </div>
             {investments?.length > 0 && (
                     <div className="chart-style">
-                        <div>
+                      <h1 className="h1-investments"><div className="mobile-asset-div">Investments Summary <TbAlignJustified className="mobile-button" onClick={switchView} />
+                        <button className="mobile-new-investment-button" onClick={handleNewInvestment}><FaPlus /> &nbsp;New Investment</button></div>
+                        </h1>
+                        <div className="chart-papa-smurf">
                         <div id="chart-div">Investment Amount</div>
                         <div className="chart">
                         <Bar data={investmentData} options={options}/>
                         </div>
                         </div>
-                        <div>
+                        <div className="chart-papa-smurf">
                         <div id="chart-div"> Monthly ROR</div>
                         <div className="chart">
                         <Line data={RORData} options={optionsPercentage} />
                         </div>
                         </div>
-                        <div>
+                        <div className="chart-papa-smurf">
                         <div id="chart-div">Investment Projection</div>
                         <div className="chart">
                         <Doughnut data={projectionData} options={options} />
                         </div>
                         </div>
-                        <div>
+                        <div className="chart-papa-smurf">
                         <div id="chart-div">Risk Percentage</div>
                         <div className="chart">
                         <PolarArea data={riskPercentageData} options={optionsPercentage} />

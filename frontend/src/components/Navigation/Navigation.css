@@ -249,7 +249,7 @@
     .dropdown:hover{
         background-color: #A7B0CA;
     }
-    #Contact {
+    .contact {
         text-decoration: none;
         color: black;
         border-bottom: none;

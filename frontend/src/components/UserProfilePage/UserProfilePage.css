@@ -115,3 +115,25 @@
         padding: 10px;
     }
 }
+
+@media (max-width: 440px) {
+    #userForm-container > form {
+        width: 70vw; 
+    }
+
+    #userForm-container > form > label {
+        width: 70%; 
+    }
+
+    #delete-button {
+        width: 70%; 
+    }
+
+    .edit-button {
+        font-size: 12px; 
+    }
+
+    #userForm-container > form {
+        padding: 10px;
+    }
+}

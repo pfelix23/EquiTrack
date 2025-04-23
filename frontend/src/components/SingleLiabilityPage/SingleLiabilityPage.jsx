@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { FaPlus } from "react-icons/fa";
+import { TbAlignJustified } from "react-icons/tb";
 import { useState, useEffect } from "react";
 import { csrfFetch } from "../../store/csrf";
 import { Bar, Line} from 'react-chartjs-2';
@@ -15,6 +16,7 @@ function SingleLiabilityPage() {
     const [liability, setLiability] = useState();
     const [assets, setAssets] = useState();
     const [liabilities, setLiabilities] = useState();
+    const [isActive, setIsActive] = useState('hidden');
     const [errors, setErrors] = useState();
     const { closeModal, setModalContent } = useModal();
     const { liabilityId } = useParams();
@@ -185,11 +187,15 @@ function SingleLiabilityPage() {
     useEffect(() => {
 
     },[ChartJS])
+
+    const switchView = () => {
+        setIsActive(prevState => prevState === 'hidden' ? 'active' : 'hidden');
+    }
     
     
     return (
         <div className="single-root-liability-div">
-            <div className="single-liability-parent-div">
+            <div className={`liability-parent-div ${isActive === 'hidden'? 'hidden' : 'active'}`}>
             <button className="new-liability-button" onClick={handleNewLiability}><FaPlus /> &nbsp;New liability</button>
             <div className="liability-child-div">
                 {liabilities?.map((liability) => {
@@ -202,13 +208,18 @@ function SingleLiabilityPage() {
             </div>
             {liabilities?.length > 0 && (
                     <div className="single-liability-chart-style">
-                        <h1 className="h1">{liability?.liability_name} Information
+                        <h1 className="h1-single-liability">{liability?.liability_name} Information
+                            <div className="mobile-liability-div"><TbAlignJustified className="mobile-button" onClick={switchView} /></div>
                         <div>
                         <button className="single-liability-edit" onClick={handleEditLiability} >edit</button>
                         <button className="single-liability-delete" onClick={handleDeleteLiability} >delete</button>
                         </div>
                         </h1>
                         <div className="single-liability-container">
+                        <div>
+                        <button className="single-liability-edit-mobile" onClick={handleEditLiability} >edit</button>
+                        <button className="single-liability-delete-mobile" onClick={handleDeleteLiability} >delete</button>
+                        </div>
                         <div >
                         <div id="single-liability-div">{liability?.liability_name} Value & Net Asset Value</div>
                         <div className="single-liability-chart">

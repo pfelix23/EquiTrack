@@ -58,3 +58,15 @@
     margin-left: 9%;
     font-family: 'Roboto';
 }
+
+@media (max-width: 440px) {
+  .delete-account-container {
+      width: 55vw;  
+      border: none;      
+  }
+  .delete-account-button-container {
+    width: 100%;
+
+}
+}
+

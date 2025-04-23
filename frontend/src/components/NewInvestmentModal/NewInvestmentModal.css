@@ -49,3 +49,13 @@
     border-radius: 8px;
 }
 
+@media (max-width: 440px) {
+  .new-investment-container {
+      width: 55vw;  
+      border: none;      
+  }
+  .new-investment-label {
+      width: 84%;
+  }
+}
+

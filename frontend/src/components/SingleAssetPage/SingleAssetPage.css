@@ -98,7 +98,7 @@
     gap: 20px
 }
 
-.h1 {
+.h1-single-asset {
     width: 92.9%;
     display: flex;
     justify-content: space-between;
@@ -141,6 +141,35 @@
 .single-asset-delete:hover {
     cursor: pointer;
 }
+.single-asset-edit-mobile {
+    width: 55px;
+    padding: 2.5px;
+    font-family: "Roboto";
+    margin: 2px;
+    border: none;
+    background-color: #001f5e;
+    color: white;
+    font-weight: 400;
+}
+
+.single-asset-edit-mobile:hover {
+    cursor: pointer;
+}
+
+.single-asset-delete-mobile {
+    width: 55px;
+    padding: 2.5px;
+    font-family: "Roboto";
+    margin: 2px;
+    background-color: grey;
+    border: none;
+    color: white;
+    font-weight: 400;
+}
+
+.single-asset-delete-mobile:hover {
+    cursor: pointer;
+}
 
 .single-asset-chart-style {
     display: flex;
@@ -149,3 +178,51 @@
     justify-content: center;
     padding: 10px;
 }
+
+@media (max-width: 440px) {
+    .single-asset-container {
+        width: 85%;  
+        height: fit-content;
+        flex-direction: column;
+        padding-top: 50px;
+        padding-bottom: 10px;
+    }
+    .single-asset-chart {
+        width: 100%;
+    }
+    #single-asset-div {
+        width: 100%;
+    }
+    .single-asset-edit {
+        display: none;
+    }
+    .single-asset-delete {
+        display: none;
+    }
+    .single-asset-edit-mobile {
+        width: 48.8%;
+        margin-top: 12px;
+    }
+    .single-asset-delete-mobile {
+        width: 48.8%;
+        margin-top: 12px;
+    }
+    .h1-single-asset {
+        border-bottom: none;
+        width: 84%;
+    }
+    .single-root-asset-div {
+        height: 100%;
+    }
+}
+
+@media(min-width: 441px) {
+    .single-asset-edit-mobile {
+        display: none;
+    }
+    .single-asset-delete-mobile {
+        display: none;
+    }
+}
+
+

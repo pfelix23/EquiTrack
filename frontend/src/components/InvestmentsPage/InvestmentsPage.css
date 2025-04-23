@@ -92,3 +92,64 @@
     border-top-right-radius: 10px;
     height: 27px;
 }
+
+@media(max-width: 440px) {
+    .investment-parent-div.active {
+        position: absolute;
+        z-index: 9999;
+        width: fit-content;
+        margin-left: 346px;
+        margin-top: 72px;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; 
+    }
+    .investment-parent-div.hidden {
+        display: none;
+    }
+
+    .mobile-new-investment-button {
+        border-bottom: solid black ;
+        width: 100%;
+        color: white;
+        background-color: #112d66;
+        height: 25px;
+        font-family: 'Roboto';
+        font-size: small;
+    }
+    .new-investment-button {
+        display: none;
+    }
+
+    .h1-investments {
+        width: 86.8%;
+        border-bottom: none;
+        font-family: 'Roboto';
+        margin-top: -3px;
+    }
+
+    #investments {
+        padding-left: 3px;
+        padding-right: 3px;
+    }
+
+    .chart-papa-smurf{
+        width: 86.8%;
+    }
+    .chart {
+        width: 100%;
+    }
+
+    #chart-div {
+        width: 100%;
+    }
+
+
+}
+
+@media(min-width: 441px) {
+    .mobile-button {
+        display: none;
+    }
+    .mobile-new-investment-button {
+        display: none;
+    }
+}

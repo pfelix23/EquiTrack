@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { FaPlus } from "react-icons/fa";
+import { TbAlignJustified } from "react-icons/tb";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { csrfFetch } from "../../store/csrf";
@@ -14,6 +15,7 @@ function LiabilitiesPage() {
     const [liabilities, setLiabilities] = useState();
     const [errors, setErrors] = useState();
     const { closeModal, setModalContent } = useModal();
+    const [isActive, setIsActive] = useState('hidden');
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -109,10 +111,14 @@ function LiabilitiesPage() {
     useEffect(() => {
 
     },[ChartJS])
+
+    const switchView = () => {
+        setIsActive(prevState => prevState === 'hidden' ? 'active' : 'hidden');
+    }
     
     return (
         <div className="root-liability-div">
-            <div className="liability-parent-div">
+            <div className={`liability-parent-div ${isActive === 'hidden'? 'hidden' : 'active'}`}>
             <button className="new-liability-button" onClick={handleNewLiability}><FaPlus /> &nbsp;New Liability</button>
             <div className="liability-child-div">
                 {liabilities?.map((liability) => {
@@ -125,7 +131,8 @@ function LiabilitiesPage() {
             </div>
             {liabilities?.length > 0 && (
                     <div className="chart-liability-style">
-                        <h1 className="h1-liabilities">Liabilities Summary</h1>
+                        <h1 className="h1-liabilities"><div className="mobile-liability-div">Liabilities Summary <TbAlignJustified className="mobile-liability-button" onClick={switchView} />
+                        <button className="mobile-new-liability-button" onClick={handleNewLiability}><FaPlus /> &nbsp;New Liability</button></div></h1>
                         <div className="liability-container">
                         <div id="liability-div">Liability Information</div>
                         <div className="chart-liability-div">
@@ -134,7 +141,7 @@ function LiabilitiesPage() {
                             <div className="liability-trial-border" title="Value of all Liabilities">Liabilities Value</div>
                             <div className="liability-trial-border" title="Value of Assets minus Liabilities">{netLabel()} Value</div>
                             <div className="liability-trial-border" title="All Types of Entered Liabilities">Liability Types</div>
-                            <div className="liability-trial-border" title="Recommended Debt Repayment Plan">Debt Repayment Strategy</div>
+                            <div className="liability-trial-border" title="Recommended Debt Repayment Plan">Debt Strategy</div>
                             <div className="liability-trial-border" title="Value of all Liquid Assets">Liquid Assets</div>
                             <div className="liability-trial-border" title="Value of Liabilities divided by Assets">Debt to Asset Ratio</div>
                             <div className="liability-trial-bottom" title="Recommended Debt Ratio">Ideal Debt Ratio</div>
@@ -159,7 +166,7 @@ function LiabilitiesPage() {
                         </div>
                         </div>
                         </div>
-                        <div>
+                        <div className="liability-container">
                         <div id="liability-div">Liability Values</div>
                         <div className="liabilities-chart">
                         <Line data={liabilityData} options={options} />

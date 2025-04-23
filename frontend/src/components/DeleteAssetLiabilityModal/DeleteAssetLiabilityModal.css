@@ -58,3 +58,13 @@
     margin-left: 9%;
     font-family: 'Roboto';
 }
+
+@media (max-width: 440px) {
+  .delete-asset-container {
+      width: 55vw;  
+      border: none;      
+  }
+  .delete-asset-button-container {
+      width: 100%;
+  }
+}

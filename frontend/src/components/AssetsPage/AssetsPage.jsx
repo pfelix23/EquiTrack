@@ -131,7 +131,9 @@ function AssetsPage() {
             </div>
             {assets?.length > 0 && (
                     <div className="chart-asset-style">
-                        <h1 className="h1-assets">Assets Summary <TbAlignJustified className="mobile-button" onClick={switchView} /></h1>
+                        <h1 className="h1-assets"><div className="mobile-asset-div">Assets Summary <TbAlignJustified className="mobile-button" onClick={switchView} />
+                        <button className="mobile-new-asset-button" onClick={handleNewAsset}><FaPlus /> &nbsp;New Asset</button></div>
+                        </h1>
                         <div className="asset-container">
                         <div id="asset-div">Asset Information</div>
                         <div className="chart-asset-div">

@@ -127,12 +127,12 @@ function Navigation({ isLoaded }) {
               )}
               {sessionUser && (
                 <div >
-                <div className='dropdown' onClick={() => navigate('/')}>
+                <div className='dropdown' onClick={() => {navigate('/'); toggleDropdown()}}>
                   Home
                 </div>
-                <div className='dropdown' onClick={() => navigate('/assets')}>Assets</div>
-                <div className='dropdown' onClick={() => navigate('/liabilities')}>Liabilities</div>
-                <div className='dropdown' onClick={() => navigate('/investments')}>Investments</div>
+                <div className='dropdown' onClick={() => {navigate('/assets'); toggleDropdown()}}>Assets</div>
+                <div className='dropdown' onClick={() => {navigate('/liabilities'); toggleDropdown()}}>Liabilities</div>
+                <div className='dropdown' onClick={() => {navigate('/investments'); toggleDropdown()}}>Investments</div>
                 <a href='https://www.linkedin.com/in/peter-felix-3b038a174/' style={{textDecoration:'none', color:'black'}}>
                 <div className='dropdown'>
                   Contact

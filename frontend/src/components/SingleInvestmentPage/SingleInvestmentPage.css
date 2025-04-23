@@ -139,3 +139,82 @@
 .single-investment-delete:hover {
     cursor: pointer;
 }
+
+.single-investment-edit-mobile {
+    width: 55px;
+    padding: 2.5px;
+    font-family: "Roboto";
+    margin: 2px;
+    border: none;
+    background-color: #001f5e;
+    color: white;
+    font-weight: 400;
+}
+
+.single-investment-edit-mobile:hover {
+    cursor: pointer;
+}
+
+.single-investment-delete-mobile {
+    width: 55px;
+    padding: 2.5px;
+    font-family: "Roboto";
+    margin: 2px;
+    background-color: grey;
+    border: none;
+    color: white;
+    font-weight: 400;
+}
+
+.single-investment-delete-mobile:hover {
+    cursor: pointer;
+}
+
+@media (max-width: 440px) {
+    .single-chart-container {
+        width: 85%;  
+        height: fit-content;
+        flex-direction: column;
+        padding-top: 50px;
+        padding-bottom: 10px;
+    }
+    .single-investment-chart {
+        width: 100%;
+    }
+    #single-chart-div {
+        width: 100%;
+    }
+    .single-investment-edit {
+        display: none;
+    }
+    .single-investment-delete {
+        display: none;
+    }
+    .single-investment-edit-mobile {
+        width: 48.8%;
+        margin-top: 15px;
+    }
+    .single-investment-delete-mobile {
+        width: 48.8%;
+        margin-top: 15px;
+    }
+    .h1-single-investment {
+        border-bottom: none;
+        width: 84%;
+    }
+    .single-root-investment-div {
+        height: 100%;
+    }
+    .single-investment-parent-div.hidden {
+        display: none;
+    }
+}
+
+@media(min-width: 441px) {
+    .single-investment-edit-mobile {
+        display: none;
+    }
+    .single-investment-delete-mobile {
+        display: none;
+    }
+}

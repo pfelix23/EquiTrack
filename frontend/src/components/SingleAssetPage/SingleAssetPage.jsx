@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { FaPlus } from "react-icons/fa";
+import { TbAlignJustified } from "react-icons/tb";
 import { useState, useEffect } from "react";
 import { csrfFetch } from "../../store/csrf";
 import { Bar, Line} from 'react-chartjs-2';
@@ -15,6 +16,7 @@ function SingleAssetPage() {
     const [asset, setAsset] = useState();
     const [assets, setAssets] = useState();
     const [liabilities, setLiabilities] = useState();
+    const [isActive, setIsActive] = useState('hidden');
     const [errors, setErrors] = useState();
     const { closeModal, setModalContent } = useModal();
     const { assetId } = useParams();
@@ -190,11 +192,15 @@ function SingleAssetPage() {
     useEffect(() => {
 
     },[ChartJS])
+
+    const switchView = () => {
+        setIsActive(prevState => prevState === 'hidden' ? 'active' : 'hidden');
+    }
     
     
     return (
         <div className="single-root-asset-div">
-            <div className="single-asset-parent-div">
+            <div className={`asset-parent-div ${isActive === 'hidden'? 'hidden' : 'active'}`}>
             <button className="new-asset-button" onClick={handleNewAsset}><FaPlus /> &nbsp;New Asset</button>
             <div className="asset-child-div">
                 {assets?.map((asset) => {
@@ -207,13 +213,17 @@ function SingleAssetPage() {
             </div>
             {assets?.length > 0 && (
                     <div className="single-asset-chart-style">
-                        <h1 className="h1">{asset?.asset_name} Information
+                        <h1 className="h1-single-asset">{asset?.asset_name} Information <div className="mobile-asset-div"><TbAlignJustified className="mobile-button" onClick={switchView} /></div>
                         <div>
                         <button className="single-asset-edit" onClick={handleEditAsset} >edit</button>
                         <button className="single-asset-delete" onClick={handleDeleteAsset} >delete</button>
                         </div>
                         </h1>
                         <div className="single-asset-container">
+                        <div>
+                        <button className="single-asset-edit-mobile" onClick={handleEditAsset} >edit</button>
+                        <button className="single-asset-delete-mobile" onClick={handleDeleteAsset} >delete</button>
+                        </div>
                         <div >
                         <div id="single-asset-div">{asset?.asset_name} Value & {netLabel()} Value</div>
                         <div className="single-asset-chart">
