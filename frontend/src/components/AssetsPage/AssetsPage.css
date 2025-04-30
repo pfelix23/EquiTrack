@@ -133,7 +133,7 @@
     height: 100%;
     max-height: 100%;
     background-color: #e6e6e6;
-    cursor: default;
+    overflow-y: scroll;
 }
 .trial-div::-webkit-scrollbar-track,
 .trial-div-1::-webkit-scrollbar-track,
