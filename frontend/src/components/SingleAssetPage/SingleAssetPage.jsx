@@ -215,8 +215,8 @@ function SingleAssetPage() {
                     <div className="single-asset-chart-style">
                         <h1 className="h1-single-asset">{asset?.asset_name} Information <div className="mobile-asset-div"><TbAlignJustified className="mobile-button" onClick={switchView} /></div>
                         <div>
-                        <button className="single-asset-edit" onClick={handleEditAsset} >edit</button>
-                        <button className="single-asset-delete" onClick={handleDeleteAsset} >delete</button>
+                        <button className="single-asset-edit" onClick={handleEditAsset}>edit</button>
+                        <button className="single-asset-delete" onClick={handleDeleteAsset}>delete</button>
                         </div>
                         </h1>
                         <div className="single-asset-container">
