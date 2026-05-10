@@ -205,6 +205,14 @@
     .single-root-investment-div {
         height: 100%;
     }
+    .single-investment-parent-div.active {
+        position: absolute;
+        z-index: 9999;
+        width: fit-content;
+        margin-left: 306px;
+        margin-top: 48px;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; 
+    }
     .single-investment-parent-div.hidden {
         display: none;
     }

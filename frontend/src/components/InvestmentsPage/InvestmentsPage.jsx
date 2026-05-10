@@ -50,7 +50,9 @@ function InvestmentsPage() {
         datasets: [
             {
                 label: 'ROR',
-                data: investments?.map(investment => investment.ROR),
+                data: investments?.map(investment => {
+                  return Number(parseFloat((investment.dailyRate / 12).toFixed(5)))      
+                }),
                 fill: false,
                 tension: 0.1,
                 backgroundColor:'#125943'
@@ -76,7 +78,14 @@ function InvestmentsPage() {
         datasets: [
             {
                 label: 'Projections',
-                data: investments?.map(investment => investment.projection),
+                data: investments?.map(investment => {
+                 return Number(
+                  ( 
+                    investment.amount *
+                    (investment.dailyRate / 12) * 
+                    parseInt(investment.length)).toFixed(2)
+                )      
+                }),
                 fill: false,
                 tension: 0.1,
                 backgroundColor:['#125943', '#112D66', '#62B6CB','#CAE9FF','#9B9987']

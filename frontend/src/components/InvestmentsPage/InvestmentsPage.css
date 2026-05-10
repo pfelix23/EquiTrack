@@ -98,8 +98,8 @@
         position: absolute;
         z-index: 9999;
         width: fit-content;
-        margin-left: 346px;
-        margin-top: 72px;
+        margin-left: relative;
+        margin-top: 80px;
         box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; 
     }
     .investment-parent-div.hidden {

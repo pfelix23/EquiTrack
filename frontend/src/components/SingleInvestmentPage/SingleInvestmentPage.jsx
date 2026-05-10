@@ -60,7 +60,8 @@ function SingleInvestmentPage() {
             },
             {
                 label: 'Projection',
-                data: [investment?.projection],
+                data: [Number((investment?.amount * (investment?.dailyRate / 12) * parseInt(investment?.length))).toFixed(2)
+                ],
                 fill: false,
                 tension: 0.1,
                 backgroundColor:['#112d66'],
@@ -75,7 +76,7 @@ function SingleInvestmentPage() {
         datasets: [
             {
                 label: 'Monthly Return',
-                data: [investment?.ROR],
+                data: [Number(parseFloat((investment?.dailyRate / 12).toFixed(5)))],
                 fill: false,
                 tension: 0.1,
                 backgroundColor: ['#112d66'],
