@@ -24,7 +24,8 @@ module.exports = {
         type: Sequelize.DECIMAL
       },
       ROR: {
-        type: Sequelize.DECIMAL
+        type: Sequelize.DECIMAL,
+        allowNull: true
       },
       length: {
         type: Sequelize.STRING
@@ -33,10 +34,16 @@ module.exports = {
         type: Sequelize.DECIMAL
       },
       projection: {
-        type: Sequelize.DECIMAL
+        type: Sequelize.DECIMAL,
+        allowNull: true
       },
       ownerId: {
         type: Sequelize.INTEGER
+      },
+      dailyRate: {
+        type: Sequelize.DECIMAL(4,3),
+        allowNull: false,
+        defaultValue: 0
       },
       createdAt: {
         allowNull: false,

@@ -20,64 +20,48 @@ module.exports = {
     await queryInterface.bulkInsert(options, [
       {
         investment_name: 'Investment 1', 
-        type: 'Stocks',                   
-        amount: 10000.00,                 
-        ROR: 5.5,                         
+        type: 'S&P 500',                   
+        amount: 100000.00,                 
+        dailyRate: .118,                         
         length: 5,                        
-        risk_percentage: 10,              
-        projection: 15000.00,             
+        risk_percentage: .0175,                           
         ownerId: 1,                        
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         investment_name: 'Investment 2',
-        type: 'Real Estate',
+        type: 'Real-Estate',
         amount: 50000.00,
-        ROR: 7.0,
+        dailyRate: .105,
         length: 10,
-        risk_percentage: 8,
-        projection: 80000.00,
+        risk_percentage: .075,
         ownerId: 2,                       
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         investment_name: 'Investment 3',
-        type: 'Bonds',
+        type: 'Bond',
         amount: 20000.00,
-        ROR: 3.0,
+        dailyRate: .037,
         length: 7,
-        risk_percentage: 4,
-        projection: 24000.00,
+        risk_percentage: .04,
         ownerId: 3,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         investment_name: 'Investment 4',
-        type: 'Mutual Funds',
-        amount: 15000.00,
-        ROR: 6.0,
+        type: 'US Small-Cap',
+        amount: 75000.00,
+        dailyRate: .099,
         length: 8,
-        risk_percentage: 5,
-        projection: 21000.00,
+        risk_percentage: .017,
         ownerId: 4,
         createdAt: new Date(),
         updatedAt: new Date()
       },
-      {
-        investment_name: 'Investment 5',
-        type: 'Cryptocurrency',
-        amount: 10000.00,
-        ROR: 15.0,
-        length: 3,
-        risk_percentage: 20,
-        projection: 15000.00,
-        ownerId: 1,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      }
     ], {});
   },
 

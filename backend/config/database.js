@@ -24,3 +24,4 @@ module.exports = {
     }
   }
 };
+console.log("SQLITE FILE:", config.dbFile);

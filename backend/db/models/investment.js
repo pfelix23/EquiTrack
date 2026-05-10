@@ -29,14 +29,25 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DECIMAL,
       allowNull: false
     },
-    ROR: DataTypes.DECIMAL,
+    ROR: {
+      type:DataTypes.DECIMAL,
+      allowNull: true
+    },
     length: {
       type: DataTypes.INTEGER,
       allowNull: false
     },
     risk_percentage: DataTypes.DECIMAL,
-    projection: DataTypes.DECIMAL,
-    ownerId: DataTypes.INTEGER
+    projection: {
+      type: DataTypes.DECIMAL,
+      allowNull: true
+    },
+    ownerId: DataTypes.INTEGER,
+    dailyRate: {
+        type: DataTypes.DECIMAL(4,3),
+        allowNull: false,
+        defaultValue: 0
+      },
   }, {
     sequelize,
     modelName: 'Investment',

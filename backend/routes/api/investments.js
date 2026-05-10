@@ -1,6 +1,7 @@
 const express = require('express');
 const { requireAuth } = require('../../utils/auth');
-const { Investment } = require('../../db/models')
+const { Investment } = require('../../db/models');
+const investmentTypes = require ('../investmentTypes');
 
 const router = express.Router();
 
@@ -47,21 +48,33 @@ router.post('/create', requireAuth, async (req, res) => {
         })
     };
 
-    let investment;
+    const selected = investmentTypes[type]
+
+    if(!selected) {
+        return res.status(400).json({
+            message: "Invalid Investment Type"
+        })
+    }
+
+    const rate = selected.rates [
+         Math.floor(Math.random() * selected.rates.length)
+    ]
     
     
-    if(type === 'S&P 500')
-        investment = await Investment.create({ownerId: parseInt(req.user.id), investment_name, type, amount, length, risk_percentage: 17.5, projection: ((amount*(.118 / 12)) * parseInt(length)).toFixed(2), ROR: parseFloat((.118 / 12).toFixed(5))});
+    const investment = await Investment.create({
+        ownerId: parseInt(req.user.id), 
+        investment_name, 
+        type, 
+        amount, 
+        length, 
+        risk_percentage: selected.risk, 
+        dailyRate: rate,
+        // projection: (
+        //     (amount*(rate / 12)) * parseInt(length)
+        // ).toFixed(2), 
+        // ROR: parseFloat((rate / 12).toFixed(5))
+    });
         
-    else if (type ==='US Small-Cap')
-        investment = await Investment.create({ownerId: parseInt(req.user.id), investment_name, type, amount, length, risk_percentage: 17, projection: ((amount*(.094 / 12)) * parseInt(length)).toFixed(2) , ROR: parseFloat((.094 / 12).toFixed(5))});
-        
-    else if (type ==='Real-Estate')
-        investment = await Investment.create({ownerId: parseInt(req.user.id), investment_name, type, amount, length, risk_percentage: 7.5, projection: ((amount*(.10 / 12)) * parseInt(length)).toFixed(2) , ROR: parseFloat((.10 / 12).toFixed(5))});
-        
-    else if (type ==='Bond')
-        investment = await Investment.create({ownerId: parseInt(req.user.id), investment_name, type, amount, length, risk_percentage: 4, projection: ((amount*(.03 / 12)) * parseInt(length)).toFixed(2) , ROR: parseFloat((.03 / 12).toFixed(5))});
-            
     return res.status(201).json(investment)
 })
 
@@ -95,24 +108,19 @@ router.put('/:investmentId/edit', requireAuth, async (req, res) => {
     };
 
     let risk_percentage, projection, ROR;
+
+    const selected = investmentTypes[type]
+
+    const rate = selected.rates [
+         Math.floor(Math.random() * selected.rates.length)
+    ]
     
-    if(type === 'S&P 500') {
-        risk_percentage = 17.5;
-        projection = ((amount*(.118 / 12)) * parseInt(length)).toFixed(2);
-        ROR = parseFloat((.118 / 12).toFixed(5));
-    } else if (type ==='US Small-Cap') {
-        risk_percentage = 17; 
-        projection = ((amount*(.094 / 12)) * parseInt(length)).toFixed(2);
-        ROR = parseFloat((.094 / 12).toFixed(5));
-    } else if (type ==='Real-Estate') {
-        risk_percentage = 7.5; 
-        projection = ((amount*(.10 / 12)) * parseInt(length)).toFixed(2);
-        ROR = parseFloat((.10 / 12).toFixed(5));
-    } else if (type ==='Bond') {
-        risk_percentage = 4; 
-        projection = ((amount*(.03 / 12)) * parseInt(length)).toFixed(2);
-        ROR = parseFloat((.03 / 12).toFixed(5))
-    } else {
+    if(type) {
+        risk_percentage = selected.risk;
+        // projection = ((amount*(rate / 12)) * parseInt(length)).toFixed(2);
+        // ROR = parseFloat((rate / 12).toFixed(5));
+
+     } else {
         return res.status(400).json({
             message: 'Bad Request',
             errors: {
